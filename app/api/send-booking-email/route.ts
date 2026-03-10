@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import type { Transporter, SentMessageInfo } from 'nodemailer';
 
 export async function POST(request: NextRequest) {
   try {
@@ -143,7 +144,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Enhanced email options with proper headers
-    const mailOptions = {
+    const mailOptions: nodemailer.SendMailOptions = {
       from: {
         name: 'Musasa Travel',
         address: process.env.SMTP_FROM || 'enquiries@musasatravel.com'
@@ -160,10 +161,7 @@ export async function POST(request: NextRequest) {
         'List-Unsubscribe': '<mailto:unsubscribe@musasatravel.com>',
         'Organization': 'Musasa Travel',
         'Content-Type': 'text/html; charset=UTF-8'
-      },
-      // Add priority and importance
-      priority: 'normal',
-      importance: 'normal'
+      }
     };
 
     // Send email
