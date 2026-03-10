@@ -1,0 +1,23 @@
+@use '../abstract' as *;
+/******* Utility Classes ********/
+.justify-center{
+  justify-content: center;
+}
+.h-full{
+height: 100%;
+}
+.fw-400{
+  font-weight: normal;
+}
+.fw-500{
+  font-weight: 500; 
+}
+.fw-600{
+  font-weight: 600;
+}
+
+
+/******* Utility Text Colors ********/
+
+
+/******* Utility Background Colors ********/

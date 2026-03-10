@@ -1,0 +1,84 @@
+@use "../abstract" as *;
+/*======= Base Class ========*/
+:root {
+    @each $k, $v in $css-color-vars {
+        --#{$k}: #{$v};
+        --#{$k}-rgb: #{to-rgb($v)};
+    }
+    // @each $k,$v in $css-other-vars{
+    //   --#{$k}:#{$v};
+    // }
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    overflow-x: hidden;
+}
+
+body {
+    font-size: 1rem;
+    line-height: 1.67;
+}
+span,
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+    padding-left: initial;
+}
+
+
+
+.btn-reset {
+    border: 0;
+    background: 0;
+    outline: none;
+    &:focus {
+        box-shadow: none;
+        outline: 0;
+        border: 0;
+    }
+}
+
+.preloader-wrapp {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    .bar {
+        position: absolute;
+        width: 33.333%;
+        background-color: #111;
+        height: 100%;
+        left: 0;
+        transition: 0.5s;
+        &:nth-child(2) {
+            left: 33.333%;
+        }
+        &:nth-child(3) {
+            left: calc(33.333% * 2);
+        }
+    }
+    .loaded & {
+        pointer-events: none;
+        .bar {
+            width: 0;
+        }
+    }
+}
+
+.anchor-color-reset {
+    color: inherit;
+    &:hover {
+        color: inherit;
+    }
+}
