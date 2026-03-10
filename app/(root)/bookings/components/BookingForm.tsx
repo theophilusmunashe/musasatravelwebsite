@@ -280,7 +280,7 @@ export default function BookingForm({ onDataChange }: BookingFormProps) {
           <Check className="w-8 h-8 text-green-600" />
         </div>
         <h3 className="text-2xl font-bold text-gray-900 mb-4">
-          We've received your request!
+          We&apos;ve received your request!
         </h3>
         <p className="text-gray-600 mb-6">
           Our Vic Falls team is currently checking live availability under our canopy. Expect a confirmation in 5 minutes on your email.

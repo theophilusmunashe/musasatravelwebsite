@@ -55,7 +55,7 @@ export default function WhatsAppButton() {
             {/* Message */}
             <div className="p-4">
               <p className="text-gray-700 text-sm mb-4">
-                Hello! 👋 Welcome to Musasa Travel. I'm here to help you plan your perfect African adventure. How can I assist you today?
+                Hello! 👋 Welcome to Musasa Travel. I&apos;m here to help you plan your perfect African adventure. How can I assist you today?
               </p>
               
               <div className="space-y-2">

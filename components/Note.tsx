@@ -33,10 +33,10 @@ export default function Note() {
          is legendary for its sprawling shade and deep, resilient roots. 
          We founded Musasa Travel & Tours on that same principle. 
          Based in Victoria Falls, Zimbabwe, we act as your global 
-         canopy—offering a "covering" of safety, luxury, and seamless 
+         canopy—offering a &quot;covering&quot; of safety, luxury, and seamless 
          logistics no matter where you fly. While our heart is rooted 
          in African soil, our reach spans continents, connecting you to
-          the world’s most breathtaking destinations with the stability 
+          the world&apos;s most breathtaking destinations with the stability 
           of a local expert.                 
            </p>
 <br>
