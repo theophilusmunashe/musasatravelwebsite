@@ -1,7 +1,15 @@
 import React from "react";
+import type { Metadata } from "next";
 import Header from "../projects/components/Header";
 import { client } from "../../../sanity/lib/client";
 import PortableBody from "../../../components/portable";
+
+export const metadata: Metadata = {
+  title: "Terms & Conditions",
+  description:
+    "Review the terms and conditions governing the use of Musasa Travel & Tours services, bookings, and website.",
+  robots: { index: true, follow: false },
+};
 
 async function getData() {
   const query = `

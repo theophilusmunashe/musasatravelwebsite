@@ -13,18 +13,15 @@ import {
   Shield,
   Clock,
   TreePine,
-  Camera,
-  Binoculars,
   Mountain,
   Globe,
   Filter,
-  Eye,
 } from "lucide-react";
 import { useCartStore } from "@/lib/cartStore";
 import toast from "react-hot-toast";
 
 /* ─── Types ──────────────────────────────────────────────────────────── */
-type Specialty = "all" | "wildlife" | "adventure" | "culture" | "photography" | "birding";
+type Specialty = "all" | "wildlife" | "adventure" | "culture";
 
 interface Guide {
   id: string;
@@ -36,8 +33,6 @@ interface Guide {
   languages: string[];
   rating: number;
   reviews: number;
-  price: string;
-  priceNum: number;
   badge?: string;
   certifications: string[];
   highlights: string[];
@@ -47,8 +42,8 @@ interface Guide {
 /* ─── Data ───────────────────────────────────────────────────────────── */
 const GUIDES: Guide[] = [
   {
-    id: "guide-tendai",
-    name: "Tendai Moyo",
+    id: "guide-sloven",
+    name: "Sloven",
     role: "Senior Wildlife Naturalist",
     specialty: "wildlife",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80",
@@ -56,16 +51,14 @@ const GUIDES: Guide[] = [
     languages: ["English", "Shona", "Ndebele", "Zulu"],
     rating: 5.0,
     reviews: 412,
-    price: "From $90/day",
-    priceNum: 90,
     badge: "Top Rated",
-    certifications: ["ZPWMA Licensed", "FGASA Level 3", "First Aid Wilderness"],
+    certifications: ["ZIMPARKS Licensed", "FGASA Level 3", "First Aid Wilderness"],
     highlights: ["Expert tracker", "Big Five specialist", "Hwange & Chobe expert", "Published naturalist"],
     bio: "With 14 years working across Zimbabwe and Botswana's finest reserves, Tendai is widely regarded as one of the finest wildlife naturalists in southern Africa. His tracking ability is extraordinary — he can read a game trail like a book, identifying not just the species but the age, sex, emotional state, and direction of travel of every animal that passed. His encyclopaedic knowledge of animal behaviour transforms a standard game drive into a masterclass in African ecology. Tendai's patient, unhurried guiding style allows wildlife encounters to unfold naturally and without pressure, creating experiences of genuine depth. He has been published in three African wildlife journals and mentors young Zimbabwean guides through a local conservation programme.",
   },
   {
-    id: "guide-farai",
-    name: "Farai Sibanda",
+    id: "guide-simba",
+    name: "Simba",
     role: "Adventure & Adrenaline Specialist",
     specialty: "adventure",
     image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80",
@@ -73,15 +66,13 @@ const GUIDES: Guide[] = [
     languages: ["English", "Ndebele", "Afrikaans"],
     rating: 4.9,
     reviews: 287,
-    price: "From $80/day",
-    priceNum: 80,
     certifications: ["Swift Water Rescue", "Rafting Guide Level 4", "First Aid Wilderness"],
     highlights: ["White water rafting expert", "Bungee & gorge guide", "Microlight certified", "Canopy & zip-line"],
     bio: "Farai grew up on the banks of the Zambezi and has spent his entire adult life guiding travellers through its most dramatic experiences. As a certified Swift Water Rescue technician and internationally qualified white water guide, he has led thousands of guests down the Grade 5 rapids of the Batoka Gorge without a single safety incident — a testament to his technical skill and unwavering attention to safety. Beyond the water, Farai guides bungee jump groups from the Victoria Falls Bridge, microlight flights, and gorge swing experiences. His infectious enthusiasm and calm under pressure create an atmosphere of total confidence that allows guests to push their personal limits and discover reservoirs of courage they didn't know they had.",
   },
   {
-    id: "guide-nomvula",
-    name: "Nomvula Dube",
+    id: "guide-anesu",
+    name: "Anesu",
     role: "Cultural Heritage Specialist",
     specialty: "culture",
     image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80",
@@ -89,62 +80,10 @@ const GUIDES: Guide[] = [
     languages: ["English", "Ndebele", "Shona", "Tonga", "Zulu"],
     rating: 4.9,
     reviews: 334,
-    price: "From $75/day",
-    priceNum: 75,
     badge: "Cultural Expert",
     certifications: ["Cultural Heritage Guide", "Community Tourism Cert.", "Traditional Arts Facilitator"],
     highlights: ["Five languages spoken", "Village ceremony access", "Traditional cooking guide", "Oral history storyteller"],
     bio: "Nomvula is the rare guide who can genuinely bridge cultures — her warm, open personality and fluency in five languages (including the rare Tonga language of the Zambezi valley's original inhabitants) allow her to facilitate authentic connections between travellers and communities that simply cannot be replicated. Born in a village 30 kilometres from Victoria Falls, she grew up participating in the traditional ceremonies, crafts, and foodways that she now shares with travellers. Her village tours reach places and people that no other guide can access — private ceremonies, elders who share oral history passed down for 20 generations, and craft masters who demonstrate techniques on the verge of extinction. Nomvula's passion is cultural preservation through authentic cultural tourism.",
-  },
-  {
-    id: "guide-james",
-    name: "James Mpofu",
-    role: "Master Birding Guide",
-    specialty: "birding",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80",
-    experience: "17 years",
-    languages: ["English", "Shona"],
-    rating: 5.0,
-    reviews: 198,
-    price: "From $85/day",
-    priceNum: 85,
-    badge: "Specialist",
-    certifications: ["BirdLife Zimbabwe", "SAOS Advanced Birding", "Species Reporting Authority"],
-    highlights: ["750+ species identified", "Rare species specialist", "Sunrise walk expert", "Published bird lists"],
-    bio: "James is one of Zimbabwe's most celebrated birding guides and has been instrumental in developing Victoria Falls as a world-class birding destination. Over 17 years he has personally identified more than 750 bird species in the greater Victoria Falls region — including 12 species considered very rare for the area — and his ability to identify birds by call alone in dense riverine forest is considered extraordinary even by professional ornithologists. His morning birding walks along the Zambezi leave before dawn and routinely deliver sightings of 40–60 species in three hours, including the iconic African fish eagle, Pel's fishing owl, African skimmer, and the dazzling malachite kingfisher. James corresponds with BirdLife International and contributes to global species monitoring databases.",
-  },
-  {
-    id: "guide-chiedza",
-    name: "Chiedza Mutasa",
-    role: "Photography & Visual Storytelling",
-    specialty: "photography",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&q=80",
-    experience: "7 years",
-    languages: ["English", "Shona", "French"],
-    rating: 4.8,
-    reviews: 156,
-    price: "From $95/day",
-    priceNum: 95,
-    certifications: ["Professional Photography", "Drone Pilot License", "Wildlife Ethics in Photography"],
-    highlights: ["Wildlife photo coaching", "Golden hour positioning", "Drone footage operator", "Published photographer"],
-    bio: "Chiedza combines exceptional guiding skills with a deep understanding of light, composition, and the art of capturing Africa's beauty. Her photographs have been published in National Geographic Traveller, Conde Nast Traveller, and multiple wildlife photography journals. As your photography guide, she positions you in the right place at the right time — whether that's the precise angle of light on the falls at 7am, the perfect distance for a lion portrait at golden hour, or the choreography of a hippo yawn at sunset. She coaches guests on camera technique from beginner to advanced level, operates a licensed drone for aerial footage, and understands animal behaviour well enough to anticipate photographic moments before they happen.",
-  },
-  {
-    id: "guide-solomon",
-    name: "Solomon Ncube",
-    role: "Wilderness Tracking Expert",
-    specialty: "wildlife",
-    image: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=600&q=80",
-    experience: "20 years",
-    languages: ["English", "Ndebele", "Tswana"],
-    rating: 5.0,
-    reviews: 521,
-    price: "From $100/day",
-    priceNum: 100,
-    badge: "Master Guide",
-    certifications: ["FGASA Trails Guide", "Dangerous Game Certified", "Anti-Poaching Unit Graduate"],
-    highlights: ["20 years in the bush", "Big Five walking safaris", "Night tracking specialist", "Wilderness survival training"],
-    bio: "In 20 years of professional guiding, Solomon has led over 3,000 walking safaris across southern Africa's most challenging and rewarding wilderness areas — including over 400 encounters with lion, elephant, and buffalo on foot. His calm authority in dangerous situations, developed over two decades of working with the most challenging megafauna on earth, is legendary among his peers and immediately reassuring to guests. Solomon's tracking ability goes far beyond reading footprints — he tracks by scent disturbance, broken branches, bird alarm calls, dung temperature, and dozens of other subtle environmental cues that tell him exactly where the lions spent last night and where they're heading this morning. He is considered one of the ten finest walking safari guides in all of Africa.",
   },
 ];
 
@@ -153,8 +92,6 @@ const SPECIALTIES: { id: Specialty; label: string; icon: React.ReactNode }[] = [
   { id: "wildlife", label: "Wildlife", icon: <TreePine className="w-4 h-4" /> },
   { id: "adventure", label: "Adventure", icon: <Mountain className="w-4 h-4" /> },
   { id: "culture", label: "Culture", icon: <Globe className="w-4 h-4" /> },
-  { id: "photography", label: "Photography", icon: <Camera className="w-4 h-4" /> },
-  { id: "birding", label: "Birding", icon: <Eye className="w-4 h-4" /> },
 ];
 
 /* ─── Animations ─────────────────────────────────────────────────────── */
@@ -166,7 +103,7 @@ function Hero({ activeSpec, setActiveSpec }: { activeSpec: Specialty; setActiveS
   return (
     <section className="relative min-h-[92vh] flex flex-col justify-end overflow-hidden">
       <div className="absolute inset-0">
-        <Image src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1800&q=85" alt="Expert tour guide in the African bush" fill priority className="object-cover" sizes="100vw" unoptimized />
+        <Image src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=1800&q=85" alt="African guide leading guests through the bush" fill priority className="object-cover" sizes="100vw" unoptimized />
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/45 to-black/90" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
       </div>
@@ -185,7 +122,7 @@ function Hero({ activeSpec, setActiveSpec }: { activeSpec: Specialty; setActiveS
         </motion.p>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.6 }} className="flex flex-wrap gap-8 mb-12">
-          {[{ value: "6", label: "Expert Guides" }, { value: "20+", label: "Years Max Experience" }, { value: "100%", label: "Certified & Licensed" }, { value: "4.9★", label: "Average Rating" }].map((s) => (
+          {[{ value: "3", label: "Expert Guides" }, { value: "14+", label: "Years Max Experience" }, { value: "100%", label: "Certified & Licensed" }, { value: "4.9★", label: "Average Rating" }].map((s) => (
             <div key={s.label}>
               <div className="text-2xl font-black text-amber-400">{s.value}</div>
               <div className="text-white/50 text-xs uppercase tracking-wider">{s.label}</div>
@@ -223,7 +160,7 @@ function GuideCard({ guide }: { guide: Guide }) {
   const isInCart = items.some((i) => i.id === guide.id);
 
   const handleAdd = () => {
-    addItem({ id: guide.id, name: guide.name, category: "guide", price: guide.price, priceNum: guide.priceNum, image: guide.image, description: guide.role });
+    addItem({ id: guide.id, name: guide.name, category: "guide", price: "Price on request", priceNum: 0, image: guide.image, description: guide.role });
     setAdded(true);
     setTimeout(() => setAdded(false), 2500);
     toast.success(`${guide.name} added to your trip!`, { icon: "🧭", style: { background: "#1a1a1a", color: "#fff", border: "1px solid #F59E0B", borderRadius: "12px" } });
@@ -278,14 +215,10 @@ function GuideCard({ guide }: { guide: Guide }) {
           ))}
         </div>
 
-        <div className="flex items-center justify-between pt-4 border-t border-white/10">
-          <div>
-            <p className="text-white/40 text-xs mb-0.5">Guide rate</p>
-            <p className="text-white font-bold text-lg">{guide.price}</p>
-          </div>
-          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleAdd}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 ${added || isInCart ? "bg-green-500/20 text-green-400 border border-green-500/30" : "bg-amber-500 hover:bg-amber-400 text-black"}`}>
-            {added || isInCart ? <><Check className="w-4 h-4" /><span>Added</span></> : <><ShoppingBag className="w-4 h-4" /><span>Book Guide</span></>}
+        <div className="pt-4 border-t border-white/10">
+          <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.96 }} onClick={handleAdd}
+            className={`w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${added || isInCart ? "bg-green-500/20 text-green-400 border border-green-500/30" : "bg-amber-500 hover:bg-amber-400 text-black"}`}>
+            {added || isInCart ? <><Check className="w-4 h-4" /><span>Added to Trip</span></> : <><ShoppingBag className="w-4 h-4" /><span>Book Guide — Get a Quote</span></>}
           </motion.button>
         </div>
       </div>

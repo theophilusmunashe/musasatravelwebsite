@@ -16,12 +16,36 @@ import Service from "../../components/Services";
 import Cta from "../../components/Collab";
 
 export const metadata: Metadata = {
-  title: "Home Page - Musasa Travel & Tours",
+  title: "Musasa Travel & Tours — Rooted in Africa, Reaching the World",
   description:
-    "Musasa Travel & Tours is a Victoria Falls based travel company that specializes in curated journeys across Africa and beyond. Experience luxury travel with expert local guidance.",
+    "Musasa Travel & Tours is a Victoria Falls-based travel company specialising in world-class African experiences — luxury safaris, custom itineraries, expert guides, and seamless transfers across Zimbabwe, Botswana, Zambia and beyond.",
   keywords: [
-    "musasa travel, victoria falls tours, africa travel, zimbabwe tours, luxury travel, curated journeys, safari tours, cape town travel, namibia tours, mozambique travel, zambia safaris, botswana travel, mauritius vacations, dubai travel",
+    "musasa travel",
+    "victoria falls tours",
+    "africa travel",
+    "zimbabwe tours",
+    "luxury safari",
+    "custom itinerary africa",
+    "safari tours",
+    "cape town travel",
+    "namibia tours",
+    "mozambique travel",
+    "zambia safaris",
+    "botswana safari",
+    "mauritius holidays",
+    "travel agency victoria falls",
+    "southern africa travel",
   ],
+  openGraph: {
+    title: "Musasa Travel & Tours — Rooted in Africa, Reaching the World",
+    description:
+      "World-class African experiences — luxury safaris, custom itineraries, expert guides and seamless transfers.",
+    url: "/",
+    type: "website",
+  },
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default async function Home() {

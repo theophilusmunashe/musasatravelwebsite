@@ -2,9 +2,26 @@ import PackagesClient from "./components/PackagesClient";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Packages - Musasa Travel",
+  title: "African Travel Packages",
   description:
-    "Eight hand-crafted travel packages spanning Victoria Falls, Cape Town, Namibia, Botswana, Mozambique, and Mauritius. Every detail included, nothing left to chance.",
+    "Eight hand-crafted African travel packages spanning Victoria Falls, Cape Town, Namibia, Botswana, Mozambique and Mauritius — curated by Musasa Travel & Tours. Every detail included, nothing left to chance.",
+  keywords: [
+    "africa travel packages",
+    "victoria falls travel package",
+    "cape town tour package",
+    "namibia desert safari package",
+    "botswana safari package",
+    "mozambique beach package",
+    "mauritius holiday package",
+    "hwange safari package",
+    "musasa travel packages",
+  ],
+  openGraph: {
+    title: "African Travel Packages | Musasa Travel & Tours",
+    description:
+      "Eight curated African packages — Victoria Falls, Cape Town, Namibia, Botswana, Mozambique and Mauritius.",
+    url: "/packages",
+  },
 };
 
 export default function PackagesPage() {

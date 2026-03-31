@@ -13,8 +13,24 @@ import FormComponent from "../../../components/FormComponent";
 import Header from "../projects/components/Header";
 
 export const metadata: Metadata = {
-  title: "Services - Capture",
-  description: "Elevating Interiors With Precision",
+  title: "Our Services",
+  description:
+    "Explore the full range of Musasa Travel & Tours services — curated safari activities, luxury accommodation, custom itineraries, expert tour guides, and seamless shuttle transfers across Zimbabwe, Botswana, Zambia and beyond.",
+  keywords: [
+    "musasa travel services",
+    "africa safari services",
+    "victoria falls activities",
+    "zimbabwe accommodation",
+    "custom african itinerary",
+    "tour guides victoria falls",
+    "shuttle transfers africa",
+  ],
+  openGraph: {
+    title: "Our Services | Musasa Travel & Tours",
+    description:
+      "Safaris, luxury accommodation, custom itineraries, expert guides and transfers across Southern Africa.",
+    url: "/services",
+  },
 };
 
 const categoryquery = groq`

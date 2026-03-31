@@ -51,11 +51,11 @@ interface Activity {
 const ACTIVITIES: Activity[] = [
   {
     id: "victoria-falls-tour",
-    name: "Victoria Falls Walking Tour",
+    name: "Victoria Falls Rainforest Tour",
     tagline: "The Smoke That Thunders",
     category: "adventure",
     image:
-      "https://images.unsplash.com/photo-1549366021-9f761d450615?w=900&q=80",
+      "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774991992/image_1774991979373_pvrvtp.jpg",
     gallery: [
       "https://images.unsplash.com/photo-1549366021-9f761d450615?w=400&q=80",
     ],
@@ -82,7 +82,7 @@ const ACTIVITIES: Activity[] = [
     tagline: "Grade 5 Adrenaline",
     category: "adventure",
     image:
-      "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=900&q=80",
+      "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774992071/image_1774992059545_mpalwz.jpg",
     gallery: [],
     duration: "Full day",
     groupSize: "6–12",
@@ -107,7 +107,7 @@ const ACTIVITIES: Activity[] = [
     tagline: "Aerial Masterpiece",
     category: "aerial",
     image:
-      "https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=900&q=80",
+      "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774992136/image_1774992128033_prvubv.jpg",
     gallery: [],
     duration: "13 minutes",
     groupSize: "1–6",
@@ -132,7 +132,7 @@ const ACTIVITIES: Activity[] = [
     tagline: "111 Metres of Pure Fear",
     category: "adventure",
     image:
-      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900&q=80",
+      "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774992219/image_1774992209601_tiqsqy.jpg",
     gallery: [],
     duration: "2 hours",
     groupSize: "1–1",
@@ -230,7 +230,7 @@ const ACTIVITIES: Activity[] = [
     tagline: "Africa's Golden Hour on the River",
     category: "water",
     image:
-      "https://images.unsplash.com/photo-1489824904134-891ab64532f1?w=900&q=80",
+      "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774992316/image_1774992304643_y5jdze.jpg",
     gallery: [],
     duration: "2 hours",
     groupSize: "4–40",
@@ -255,7 +255,7 @@ const ACTIVITIES: Activity[] = [
     tagline: "Living Stories of Zimbabwe",
     category: "culture",
     image:
-      "https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=900&q=80",
+      "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774992501/image_1774992393481_kdmmsp.jpg",
     gallery: [],
     duration: "3 hours",
     groupSize: "2–20",
@@ -279,7 +279,7 @@ const ACTIVITIES: Activity[] = [
     tagline: "Open-Air Aerial Adventure",
     category: "aerial",
     image:
-      "https://images.unsplash.com/photo-1474302770737-173ee21bab63?w=900&q=80",
+      "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774992500/image_1774992419689_zquz9r.jpg",
     gallery: [],
     duration: "15–30 minutes",
     groupSize: "1–2",
@@ -303,7 +303,7 @@ const ACTIVITIES: Activity[] = [
     tagline: "Paddle Through Untouched Wilderness",
     category: "water",
     image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80",
+      "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774992500/image_1774992451212_owlcf5.jpg",
     gallery: [],
     duration: "3 hours",
     groupSize: "2–12",
@@ -327,7 +327,7 @@ const ACTIVITIES: Activity[] = [
     tagline: "Zimbabwe's Untouched Wilderness",
     category: "wildlife",
     image:
-      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&q=80",
+      "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774992499/image_1774992481223_j3z7jl.jpg",
     gallery: [],
     duration: "Full day",
     groupSize: "2–8",

@@ -1,13 +1,15 @@
 import { withNextVideo } from "next-video/process";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      "s.yimg.com",
-      "i.insider.com",
-      "cdn.sanity.io",
-      "images.pexels.com",
-      "res.cloudinary.com",
+    remotePatterns: [
+      { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "res.cloudinary.com" },
+      { protocol: "https", hostname: "cdn.sanity.io" },
+      { protocol: "https", hostname: "images.pexels.com" },
+      { protocol: "https", hostname: "s.yimg.com" },
+      { protocol: "https", hostname: "i.insider.com" },
     ],
   },
 };
