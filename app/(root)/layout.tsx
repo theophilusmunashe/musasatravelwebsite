@@ -14,6 +14,9 @@ import { groq } from "next-sanity";
 
 import { Toaster } from "react-hot-toast";
 import Preloader from "../../components/preloader";
+import CartDrawer from "../../components/CartDrawer";
+import FloatingCart from "../../components/FloatingCart";
+import WhatsAppButton from "./bookings/components/WhatsAppButton";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -84,6 +87,9 @@ export default async function RootLayout({
 
         {children}
         <Footer />
+        <CartDrawer />
+        <FloatingCart />
+        <WhatsAppButton />
         <Toaster position="top-right" />
       </body>
     </html>

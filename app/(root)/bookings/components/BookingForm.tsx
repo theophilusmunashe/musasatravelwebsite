@@ -1,7 +1,9 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, Users, MapPin, Clock, ChevronRight, Check } from "lucide-react";
+import { Calendar, Users, MapPin, Clock, ChevronRight, Check, ShoppingBag, MessageCircle } from "lucide-react";
+import { useCartStore } from "@/lib/cartStore";
+import { WA_NUMBER, buildWhatsAppMessage } from "./WhatsAppButton";
 
 interface FormData {
   service: string;
@@ -34,12 +36,23 @@ interface BookingFormProps {
 
 export default function BookingForm({ onDataChange }: BookingFormProps) {
   const [currentStep, setCurrentStep] = useState(0);
+  const cartItems = useCartStore((s) => s.items);
+
+  // Pre-fill activities from the cart store
+  const cartActivityNames = cartItems
+    .filter((i) => i.category === "activity")
+    .map((i) => i.name);
+
+  const cartAccommodation = cartItems.find((i) => i.category === "accommodation");
+  const cartTransfer = cartItems.find((i) => i.category === "transfer");
+  const cartGuide = cartItems.find((i) => i.category === "guide");
+
   const [formData, setFormData] = useState<FormData>({
-    service: "",
-    accommodation: "",
-    activities: [],
-    tourGuide: "",
-    transfers: "",
+    service: cartActivityNames.length > 0 ? "Activities" : "",
+    accommodation: cartAccommodation ? cartAccommodation.name : "",
+    activities: cartActivityNames,
+    tourGuide: cartGuide ? "Yes - Expert Guide" : "",
+    transfers: cartTransfer ? "Yes - Round trip" : "",
     startDate: "",
     endDate: "",
     travelers: "",
@@ -50,6 +63,7 @@ export default function BookingForm({ onDataChange }: BookingFormProps) {
     specialRequests: "",
   });
 
+  const clearCart = useCartStore((s) => s.clearCart);
   const [showSuccess, setShowSuccess] = useState(false);
 
   const fields: FieldConfig[] = [
@@ -165,20 +179,10 @@ export default function BookingForm({ onDataChange }: BookingFormProps) {
   };
 
   const handleSubmit = async () => {
-    // Send email function
-    try {
-      const response = await fetch('/api/send-booking-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-      
-      if (response.ok) {
-        setShowSuccess(true);
-      }
-    } catch (error) {
-      console.error('Error sending booking:', error);
-    }
+    const msg = buildWhatsAppMessage(cartItems, formData);
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
+    clearCart();
+    setShowSuccess(true);
   };
 
   const renderField = (field: FieldConfig) => {
@@ -190,38 +194,35 @@ export default function BookingForm({ onDataChange }: BookingFormProps) {
           <select
             value={value}
             onChange={(e) => updateFormData(field.id, e.target.value)}
-            className="w-full px-4 py-3 border border-yellow-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent bg-white"
+            className="w-full px-4 py-3 border border-white/15 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-white/5 text-white [&>option]:bg-[#1a1a1a] [&>option]:text-white"
           >
             <option value="">Select an option</option>
             {field.options?.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
+              <option key={option} value={option}>{option}</option>
             ))}
           </select>
         );
 
       case "multiselect":
         return (
-          <div className="space-y-2">
-            {field.options?.map((option) => (
-              <label key={option} className="flex items-center space-x-3 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={(value as string[]).includes(option)}
-                  onChange={(e) => {
-                    const currentValues = value as string[];
-                    if (e.target.checked) {
-                      updateFormData(field.id, [...currentValues, option]);
-                    } else {
-                      updateFormData(field.id, currentValues.filter(v => v !== option));
-                    }
-                  }}
-                  className="w-5 h-5 text-amber-600 border-amber-300 rounded focus:ring-amber-500"
-                />
-                <span className="text-gray-700">{option}</span>
-              </label>
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {field.options?.map((option) => {
+              const checked = (value as string[]).includes(option);
+              return (
+                <label key={option} className={`flex items-center gap-3 px-4 py-3 rounded-xl border cursor-pointer transition-all duration-200 ${checked ? "border-amber-500/60 bg-amber-500/10" : "border-white/10 bg-white/5 hover:border-white/20"}`}>
+                  <input
+                    type="checkbox"
+                    checked={checked}
+                    onChange={(e) => {
+                      const currentValues = value as string[];
+                      updateFormData(field.id, e.target.checked ? [...currentValues, option] : currentValues.filter(v => v !== option));
+                    }}
+                    className="w-4 h-4 accent-amber-500"
+                  />
+                  <span className={`text-sm ${checked ? "text-amber-300" : "text-white/70"}`}>{option}</span>
+                </label>
+              );
+            })}
           </div>
         );
 
@@ -231,7 +232,7 @@ export default function BookingForm({ onDataChange }: BookingFormProps) {
             type="date"
             value={value}
             onChange={(e) => updateFormData(field.id, e.target.value)}
-            className="w-full px-4 py-3 border border-yellow-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent bg-white"
+            className="w-full px-4 py-3 border border-white/15 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-white/5 text-white [color-scheme:dark]"
           />
         );
 
@@ -241,7 +242,7 @@ export default function BookingForm({ onDataChange }: BookingFormProps) {
             type="number"
             value={value}
             onChange={(e) => updateFormData(field.id, e.target.value)}
-            className="w-full px-4 py-3 border border-yellow-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent bg-white"
+            className="w-full px-4 py-3 border border-white/15 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-white/5 text-white"
           />
         );
 
@@ -252,7 +253,7 @@ export default function BookingForm({ onDataChange }: BookingFormProps) {
             onChange={(e) => updateFormData(field.id, e.target.value)}
             placeholder={field.placeholder}
             rows={4}
-            className="w-full px-4 py-3 border border-yellow-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent bg-white resize-none"
+            className="w-full px-4 py-3 border border-white/15 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-white/5 text-white placeholder-white/30 resize-none"
           />
         );
 
@@ -263,52 +264,79 @@ export default function BookingForm({ onDataChange }: BookingFormProps) {
             value={value}
             onChange={(e) => updateFormData(field.id, e.target.value)}
             placeholder={field.placeholder}
-            className="w-full px-4 py-3 border border-yellow-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent bg-white"
+            className="w-full px-4 py-3 border border-white/15 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 bg-white/5 text-white placeholder-white/30"
           />
         );
     }
   };
 
   if (showSuccess) {
+    const msg = buildWhatsAppMessage(cartItems, formData);
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="bg-white rounded-2xl shadow-xl p-8 text-center"
+        className="bg-[#111] border border-white/10 rounded-2xl p-8 text-center"
       >
-        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <Check className="w-8 h-8 text-green-600" />
+        <div className="w-16 h-16 bg-[#25D366]/20 border border-[#25D366]/30 rounded-full flex items-center justify-center mx-auto mb-6">
+          <Check className="w-8 h-8 text-[#25D366]" />
         </div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-4">
-          We&apos;ve received your request!
+        <h3 className="text-2xl font-bold text-white mb-3">
+          Your booking has been sent!
         </h3>
-        <p className="text-gray-600 mb-6">
-          Our Vic Falls team is currently checking live availability under our canopy. Expect a confirmation in 5 minutes on your email.
+        <p className="text-white/60 mb-6 leading-relaxed">
+          Your trip selection was sent directly to our team via WhatsApp. We typically confirm within minutes during business hours.
         </p>
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-          <p className="text-sm text-yellow-800">
-            A confirmation email has been sent to {formData.email}
+        <div className="bg-[#25D366]/10 border border-[#25D366]/30 rounded-xl p-4 mb-4">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <MessageCircle className="w-4 h-4 text-[#25D366]" />
+            <p className="text-sm font-semibold text-[#25D366]">Sent to +263 77 609 3268</p>
+          </div>
+          <p className="text-white/40 text-xs">
+            If WhatsApp didn&apos;t open automatically, tap the button below to resend.
           </p>
         </div>
+        <button
+          onClick={() => window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank")}
+          className="w-full bg-[#25D366] hover:bg-[#20bb5a] text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-colors"
+        >
+          <MessageCircle className="w-5 h-5" />
+          <span>Resend on WhatsApp</span>
+        </button>
       </motion.div>
     );
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl p-8">
+    <div className="bg-[#111] border border-white/10 rounded-2xl p-6 md:p-8">
+      {/* Cart pre-fill notice */}
+      {cartItems.length > 0 && (
+        <div className="mb-6 bg-amber-500/10 border border-amber-500/30 rounded-xl p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <ShoppingBag className="w-4 h-4 text-amber-400" />
+            <span className="text-sm font-semibold text-amber-300">
+              {cartItems.length} item{cartItems.length !== 1 ? "s" : ""} pre-loaded from your trip selection
+            </span>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {cartItems.map((item) => (
+              <span key={item.id} className="bg-amber-500/20 text-amber-300 text-xs px-2.5 py-1 rounded-full">
+                {item.name}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className="mb-8">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-3xl font-bold text-gray-900">Create Your Booking</h2>
-          <span className="text-lg font-bold text-yellow-600">Custom Quote</span>
-          <span className="text-sm text-gray-500">
-            Step {currentStep + 1} of {fields.length}
-          </span>
+          <h2 className="text-2xl font-bold text-white">Create Your Booking</h2>
+          <span className="text-sm text-white/40">Step {currentStep + 1} of {fields.length}</span>
         </div>
-        
         {/* Progress Bar */}
-        <div className="w-full bg-gray-200 rounded-full h-2">
+        <div className="w-full bg-white/10 rounded-full h-1.5">
           <motion.div
-            className="bg-yellow-500 h-2 rounded-full"
+            className="bg-amber-500 h-1.5 rounded-full"
             initial={{ width: 0 }}
             animate={{ width: `${((currentStep + 1) / fields.length) * 100}%` }}
             transition={{ duration: 0.3 }}
@@ -326,10 +354,10 @@ export default function BookingForm({ onDataChange }: BookingFormProps) {
         >
           <div className="mb-6">
             <div className="flex items-center space-x-3 mb-4">
-              <div className="p-3 bg-yellow-100 rounded-lg text-yellow-600">
+              <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-xl text-amber-400">
                 {fields[currentStep].icon}
               </div>
-              <span className="text-lg font-semibold text-yellow-900">
+              <span className="text-base font-semibold text-white">
                 {fields[currentStep].label}
               </span>
             </div>
@@ -340,7 +368,7 @@ export default function BookingForm({ onDataChange }: BookingFormProps) {
             <button
               onClick={prevStep}
               disabled={currentStep === 0}
-              className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="px-6 py-3 border border-white/15 rounded-xl text-white/60 hover:border-white/30 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
             >
               Previous
             </button>
@@ -348,7 +376,7 @@ export default function BookingForm({ onDataChange }: BookingFormProps) {
             {currentStep === fields.length - 1 ? (
               <button
                 onClick={handleSubmit}
-                className="px-8 py-3 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors flex items-center space-x-2"
+                className="px-8 py-3 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-xl transition-colors flex items-center space-x-2"
               >
                 <span>Check Availability</span>
                 <ChevronRight className="w-5 h-5" />
@@ -357,7 +385,7 @@ export default function BookingForm({ onDataChange }: BookingFormProps) {
               <button
                 onClick={nextStep}
                 disabled={!formData[fields[currentStep].id]}
-                className="px-6 py-3 bg-amber-500 text-white rounded-lg hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center space-x-2"
+                className="px-6 py-3 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-xl disabled:opacity-40 disabled:cursor-not-allowed transition-colors flex items-center space-x-2"
               >
                 <span>Next</span>
                 <ChevronRight className="w-5 h-5" />

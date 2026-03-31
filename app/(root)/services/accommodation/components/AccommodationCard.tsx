@@ -17,7 +17,7 @@ export default function AccommodationCard({ data }: any) {
   return (
     <div className="project-card d-block h-96 relative">
       <Link
-        href={`/packages/${data?.slug?.current}`}
+        href={`/services/accommodation/${data?.slug?.current}`}
         className="block h-full"
       >
         <div className="project-card__image relative">

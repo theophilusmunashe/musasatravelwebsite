@@ -93,27 +93,27 @@ export default function BookingCart({ formData }: BookingCartProps) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-2xl shadow-xl p-6"
+      className="bg-[#111] border border-white/10 rounded-2xl p-6"
     >
       <div className="mb-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-2">Your Selection</h3>
-        <p className="text-sm text-gray-600">Review your booking details</p>
+        <h3 className="text-xl font-bold text-white mb-1">Your Selection</h3>
+        <p className="text-sm text-white/40">Review your booking details</p>
       </div>
 
       {/* Date Summary */}
       {formData?.startDate && formData?.endDate && (
-        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6">
+        <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 mb-6">
           <div className="flex items-center space-x-2 mb-2">
-            <Calendar className="w-4 h-4 text-amber-600" />
-            <span className="text-sm font-semibold text-amber-800">Travel Dates</span>
+            <Calendar className="w-4 h-4 text-amber-400" />
+            <span className="text-sm font-semibold text-amber-300">Travel Dates</span>
           </div>
-          <p className="text-sm text-amber-700">
-            {new Date(formData.startDate).toLocaleDateString()} - {new Date(formData.endDate).toLocaleDateString()}
+          <p className="text-sm text-amber-200">
+            {new Date(formData.startDate).toLocaleDateString()} – {new Date(formData.endDate).toLocaleDateString()}
           </p>
           {formData.travelers && (
             <div className="flex items-center space-x-2 mt-2">
-              <Users className="w-4 h-4 text-amber-600" />
-              <span className="text-sm text-amber-700">{formData.travelers} {parseInt(formData.travelers) === 1 ? 'Traveler' : 'Travelers'}</span>
+              <Users className="w-4 h-4 text-amber-400" />
+              <span className="text-sm text-amber-200">{formData.travelers} {parseInt(formData.travelers) === 1 ? 'Traveller' : 'Travellers'}</span>
             </div>
           )}
         </div>
@@ -123,16 +123,12 @@ export default function BookingCart({ formData }: BookingCartProps) {
       <div className="space-y-3 mb-6">
         <AnimatePresence>
           {cartItems.length === 0 ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-8"
-            >
-              <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <MapPin className="w-6 h-6 text-gray-400" />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-8">
+              <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-3">
+                <MapPin className="w-6 h-6 text-white/20" />
               </div>
-              <p className="text-gray-500 text-sm">Your cart is empty</p>
-              <p className="text-gray-400 text-xs mt-1">Start adding services to see them here</p>
+              <p className="text-white/40 text-sm">Your cart is empty</p>
+              <p className="text-white/25 text-xs mt-1">Start adding services to see them here</p>
             </motion.div>
           ) : (
             cartItems.map((item) => (
@@ -141,42 +137,31 @@ export default function BookingCart({ formData }: BookingCartProps) {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="bg-gray-50 rounded-lg p-3"
+                className="bg-white/5 border border-white/10 rounded-xl p-3"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3 flex-1">
-                    <div className="p-2 bg-amber-100 rounded text-amber-600">
+                    <div className="p-2 bg-amber-500/10 border border-amber-500/20 rounded-lg text-amber-400">
                       {item.icon}
                     </div>
                     <div className="flex-1">
-                      <h4 className="text-sm font-medium text-gray-900">{item.name}</h4>
-                      <p className="text-xs text-gray-600">{item.price}</p>
+                      <h4 className="text-sm font-medium text-white">{item.name}</h4>
+                      <p className="text-xs text-amber-400">{item.price}</p>
                     </div>
                   </div>
-                  
                   <div className="flex items-center space-x-2">
                     {item.quantity > 1 && (
-                      <div className="flex items-center space-x-1 bg-white rounded border border-gray-200">
-                        <button
-                          onClick={() => updateQuantity(item.id, -1)}
-                          className="p-1 hover:bg-gray-100 rounded-l"
-                        >
-                          <Minus className="w-3 h-3" />
+                      <div className="flex items-center space-x-1 bg-white/10 rounded-lg border border-white/15">
+                        <button onClick={() => updateQuantity(item.id, -1)} className="p-1 hover:bg-white/10 rounded-l-lg">
+                          <Minus className="w-3 h-3 text-white" />
                         </button>
-                        <span className="px-2 text-sm font-medium">{item.quantity}</span>
-                        <button
-                          onClick={() => updateQuantity(item.id, 1)}
-                          className="p-1 hover:bg-gray-100 rounded-r"
-                        >
-                          <Plus className="w-3 h-3" />
+                        <span className="px-2 text-sm font-medium text-white">{item.quantity}</span>
+                        <button onClick={() => updateQuantity(item.id, 1)} className="p-1 hover:bg-white/10 rounded-r-lg">
+                          <Plus className="w-3 h-3 text-white" />
                         </button>
                       </div>
                     )}
-                    
-                    <button
-                      onClick={() => removeItem(item.id)}
-                      className="p-1 hover:bg-gray-200 rounded text-gray-400 hover:text-gray-600"
-                    >
+                    <button onClick={() => removeItem(item.id)} className="p-1 hover:bg-red-500/20 rounded text-white/30 hover:text-red-400 transition-colors">
                       <X className="w-4 h-4" />
                     </button>
                   </div>
@@ -189,44 +174,32 @@ export default function BookingCart({ formData }: BookingCartProps) {
 
       {/* Contact Info Summary */}
       {formData?.firstName && formData?.lastName && (
-        <div className="border-t pt-4">
-          <h4 className="text-sm font-semibold text-gray-700 mb-3">Contact Information</h4>
+        <div className="border-t border-white/10 pt-4">
+          <h4 className="text-sm font-semibold text-white/60 mb-3">Contact Information</h4>
           <div className="space-y-2 text-sm">
-            <p className="text-gray-600">
-              <span className="font-medium">Name:</span> {formData.firstName} {formData.lastName}
-            </p>
-            {formData.email && (
-              <p className="text-gray-600">
-                <span className="font-medium">Email:</span> {formData.email}
-              </p>
-            )}
-            {formData.phone && (
-              <p className="text-gray-600">
-                <span className="font-medium">Phone:</span> {formData.phone}
-              </p>
-            )}
+            <p className="text-white/50"><span className="text-white/70 font-medium">Name:</span> {formData.firstName} {formData.lastName}</p>
+            {formData.email && <p className="text-white/50"><span className="text-white/70 font-medium">Email:</span> {formData.email}</p>}
+            {formData.phone && <p className="text-white/50"><span className="text-white/70 font-medium">Phone:</span> {formData.phone}</p>}
           </div>
         </div>
       )}
 
       {/* Special Requests */}
       {formData?.specialRequests && (
-        <div className="border-t pt-4 mt-4">
-          <h4 className="text-sm font-semibold text-gray-700 mb-2">Special Requests</h4>
-          <p className="text-sm text-gray-600 italic">{formData.specialRequests}</p>
+        <div className="border-t border-white/10 pt-4 mt-4">
+          <h4 className="text-sm font-semibold text-white/60 mb-2">Special Requests</h4>
+          <p className="text-sm text-white/40 italic">{formData.specialRequests}</p>
         </div>
       )}
 
       {/* Total */}
       {cartItems.length > 0 && (
-        <div className="border-t pt-4 mt-4">
+        <div className="border-t border-white/10 pt-4 mt-4">
           <div className="flex justify-between items-center">
-            <span className="text-lg font-semibold text-gray-900">Estimated Total</span>
-            <span className="text-lg font-bold text-amber-600">Custom Quote</span>
+            <span className="text-base font-semibold text-white">Estimated Total</span>
+            <span className="text-lg font-bold text-amber-400">Custom Quote</span>
           </div>
-          <p className="text-xs text-gray-500 mt-1">
-            Final price will be confirmed after availability check
-          </p>
+          <p className="text-xs text-white/30 mt-1">Final price confirmed after availability check</p>
         </div>
       )}
     </motion.div>

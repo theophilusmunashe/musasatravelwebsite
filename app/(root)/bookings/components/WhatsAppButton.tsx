@@ -2,105 +2,143 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X } from "lucide-react";
 import { useState } from "react";
+import { useCartStore } from "@/lib/cartStore";
+
+export const WA_NUMBER = "263776093268";
+export const WA_RAW = "+263 77 609 3268";
+
+/** Build a full WhatsApp booking message from cart items + optional form data */
+export function buildWhatsAppMessage(cartItems: ReturnType<typeof useCartStore.getState>["items"], formData?: Record<string, any>): string {
+  const lines: string[] = [];
+
+  lines.push("🌍 *NEW BOOKING REQUEST – MUSASA TRAVEL*");
+  lines.push("━━━━━━━━━━━━━━━━━━━━━━");
+
+  if (formData?.firstName || formData?.lastName) {
+    lines.push(`👤 *Guest:* ${formData.firstName ?? ""} ${formData.lastName ?? ""}`.trim());
+  }
+  if (formData?.email) lines.push(`📧 *Email:* ${formData.email}`);
+  if (formData?.phone) lines.push(`📱 *Phone:* ${formData.phone}`);
+  if (formData?.startDate && formData?.endDate) {
+    lines.push(`📅 *Dates:* ${new Date(formData.startDate).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })} → ${new Date(formData.endDate).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}`);
+  }
+  if (formData?.travelers) lines.push(`👥 *Travellers:* ${formData.travelers}`);
+
+  if (cartItems.length > 0) {
+    lines.push("");
+    lines.push("🛒 *SELECTED ITEMS:*");
+    cartItems.forEach((item) => {
+      const qty = item.quantity > 1 ? ` (×${item.quantity})` : "";
+      const typeEmoji = item.category === "accommodation" ? "🏨" : item.category === "guide" ? "🧭" : item.category === "transfer" ? "🚗" : item.category === "meal" ? "🍽️" : "✅";
+      lines.push(`${typeEmoji} ${item.name}${qty} — ${item.price}`);
+    });
+  }
+
+  if (formData?.specialRequests) {
+    lines.push("");
+    lines.push(`💬 *Special Requests:* ${formData.specialRequests}`);
+  }
+
+  lines.push("");
+  lines.push("Please confirm availability. Thank you! 🙏");
+
+  return lines.join("\n");
+}
 
 export default function WhatsAppButton() {
   const [isOpen, setIsOpen] = useState(false);
+  const cartItems = useCartStore((s) => s.items);
+  const hasCart = cartItems.length > 0;
 
-  const whatsappNumber = "+27781234567"; // Replace with actual WhatsApp number
-  const message = encodeURIComponent("Hi! I'd like to inquire about booking a trip with Musasa Travel.");
+  const quickLinks = [
+    { emoji: "🏨", text: "Accommodation options", msg: "Hi! I'd like to know about accommodation options at Musasa Travel." },
+    { emoji: "🎯", text: "Activities & Tours", msg: "Hi! I'd like to know about activities and tours available." },
+    { emoji: "📅", text: "Help with booking", msg: "Hi! I need help completing a booking with Musasa Travel." },
+    { emoji: "💰", text: "Get a custom quote", msg: "Hi! I'd like a custom travel quote from Musasa Travel." },
+  ];
+
+  const openWa = (msg: string) =>
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
+
+  const openCartBooking = () => {
+    const msg = buildWhatsAppMessage(cartItems);
+    openWa(msg);
+    setIsOpen(false);
+  };
 
   return (
     <>
-      {/* WhatsApp Button */}
-      <motion.a
-        href={`https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${message}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-colors"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={() => setIsOpen(false)}
+      {/* Floating WhatsApp bubble — bottom LEFT so it doesn't clash with cart (bottom right) */}
+      <motion.button
+        onClick={() => setIsOpen((o) => !o)}
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.95 }}
+        className="fixed bottom-8 left-6 z-50 flex items-center gap-2.5 bg-[#25D366] hover:bg-[#20bb5a] text-white font-bold px-4 py-3.5 rounded-full shadow-2xl shadow-green-500/30 transition-colors"
+        aria-label="Chat on WhatsApp"
       >
-        <MessageCircle className="w-6 h-6" />
-      </motion.a>
+        <MessageCircle className="w-5 h-5" />
+        <span className="text-sm">WhatsApp</span>
+        {hasCart && (
+          <span className="bg-white text-green-600 text-xs font-black w-5 h-5 rounded-full flex items-center justify-center">
+            {cartItems.length}
+          </span>
+        )}
+      </motion.button>
 
-      {/* Chat Popup */}
+      {/* Chat popup */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            initial={{ opacity: 0, y: 16, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className="fixed bottom-24 right-6 z-50 w-80 bg-white rounded-2xl shadow-2xl overflow-hidden"
+            exit={{ opacity: 0, y: 16, scale: 0.95 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed bottom-24 left-6 z-50 w-80 bg-[#111] border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
           >
             {/* Header */}
-            <div className="bg-green-500 text-white p-4 flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+            <div className="bg-[#25D366] text-white px-5 py-4 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center">
                   <MessageCircle className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-semibold">Musasa Travel</h3>
-                  <p className="text-xs text-green-100">Typically replies instantly</p>
+                  <p className="font-bold text-sm leading-none">Musasa Travel</p>
+                  <p className="text-white/70 text-xs mt-0.5">{WA_RAW} · Instant reply</p>
                 </div>
               </div>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-white/20 rounded"
-              >
+              <button onClick={() => setIsOpen(false)} className="p-1 hover:bg-white/20 rounded-lg transition-colors">
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            {/* Message */}
-            <div className="p-4">
-              <p className="text-gray-700 text-sm mb-4">
-                Hello! 👋 Welcome to Musasa Travel. I&apos;m here to help you plan your perfect African adventure. How can I assist you today?
+            {/* Body */}
+            <div className="p-4 space-y-3">
+              <p className="text-white/60 text-sm leading-relaxed">
+                👋 Hi! Our team in Victoria Falls is ready to help. Chat instantly via WhatsApp.
               </p>
-              
+
+              {/* Cart booking shortcut */}
+              {hasCart && (
+                <button onClick={openCartBooking}
+                  className="w-full text-left p-3.5 bg-[#25D366]/10 border border-[#25D366]/30 hover:border-[#25D366]/60 rounded-xl text-sm text-white transition-colors">
+                  <span className="font-semibold text-green-400">📋 Send my current trip selection</span>
+                  <p className="text-white/40 text-xs mt-1">{cartItems.length} item{cartItems.length !== 1 ? "s" : ""} — tap to send full details to our team</p>
+                </button>
+              )}
+
+              {/* Quick links */}
               <div className="space-y-2">
-                <button
-                  onClick={() => window.open(`https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent("I'm interested in accommodation options")}`, '_blank')}
-                  className="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg text-sm transition-colors"
-                >
-                  🏨 Accommodation options
-                </button>
-                <button
-                  onClick={() => window.open(`https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent("I want to know about activities")}`, '_blank')}
-                  className="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg text-sm transition-colors"
-                >
-                  🎯 Activities & Tours
-                </button>
-                <button
-                  onClick={() => window.open(`https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent("I need help with booking")}`, '_blank')}
-                  className="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg text-sm transition-colors"
-                >
-                  📅 Help with booking
-                </button>
-                <button
-                  onClick={() => window.open(`https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent("I'd like a custom quote")}`, '_blank')}
-                  className="w-full text-left p-3 bg-gray-50 hover:bg-gray-100 rounded-lg text-sm transition-colors"
-                >
-                  💰 Get a quote
-                </button>
+                {quickLinks.map((l) => (
+                  <button key={l.text} onClick={() => openWa(l.msg)}
+                    className="w-full text-left p-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl text-sm text-white/70 hover:text-white transition-all">
+                    {l.emoji} {l.text}
+                  </button>
+                ))}
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Floating Prompt */}
-      {!isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="fixed bottom-24 right-6 z-40 bg-white rounded-lg shadow-lg p-3 max-w-[200px]"
-        >
-          <p className="text-xs text-gray-700">
-            💬 Chat with our travel experts for instant help!
-          </p>
-        </motion.div>
-      )}
     </>
   );
 }
