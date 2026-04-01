@@ -16,8 +16,6 @@
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-navigation-menu": "^1.1.4",
     "@radix-ui/react-slot": "^1.0.2",
-    "@react-email/components": "^0.0.24",
-    "@react-email/tailwind": "^0.0.19",
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.27.0",
     "@studio-freight/hamo": "^0.6.28",
