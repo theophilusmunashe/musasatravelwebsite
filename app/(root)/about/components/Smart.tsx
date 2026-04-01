@@ -1,11 +1,7 @@
 "use client";
-import Image from "next/image";
 import React from "react";
-
-import { useRouter } from "next/navigation";
-
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { Button } from "../../../../components/ui/button";
 import { ArrowRight } from "lucide-react";
 
 
@@ -30,7 +26,6 @@ const itemList = {
 };
 
 const Smart = () => {
-  const router = useRouter();
 
   // Hardcoded service items for easy editing
   const serviceItems = [
@@ -84,9 +79,9 @@ const Smart = () => {
                 <br />
                 <div className="flex justify-between">
                   <div></div>
-                  <Button className="bg-transparent text-[#e6b740] hover:translate-x-2 transition-transform">
+                  <Link href="/packages" className="bg-transparent text-[#e6b740] hover:translate-x-2 transition-transform flex items-center">
                     <ArrowRight />
-                  </Button>
+                  </Link>
                 </div>
               </motion.li>
             ))}

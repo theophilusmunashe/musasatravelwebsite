@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { sendEmail } from "../actions/sendEmail";
 import toast from "react-hot-toast";
@@ -9,8 +8,51 @@ import Reveal from "./Reveal";
 
 import "../app/globals.scss";
 
+const WA_NUMBER = "263776093268";
+
 const FormComponent = () => {
   const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const firstName = formData.get("firstName") as string;
+    const senderEmail = formData.get("senderEmail") as string;
+    const phoneNumber = formData.get("phoneNumber") as string;
+    const message = formData.get("message") as string;
+
+    const { error } = await sendEmail(formData);
+    if (error) {
+      toast.error(error);
+      setIsLoading(false);
+      return;
+    }
+
+    toast.success("Message sent successfully!");
+
+    const waMessage = [
+      "🌍 *New Enquiry – Musasa Travel & Tours*",
+      "━━━━━━━━━━━━━━━━━━━━━━",
+      `👤 *Name:* ${firstName}`,
+      `📧 *Email:* ${senderEmail}`,
+      `📱 *Phone:* ${phoneNumber}`,
+      "",
+      `💬 *Message:*\n${message}`,
+    ].join("\n");
+
+    window.open(
+      `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`,
+      "_blank"
+    );
+
+    form.reset();
+    setIsLoading(false);
+  };
+
   return (
     <Reveal width="100%">
       <div className="h-full contact-hero">
@@ -24,15 +66,7 @@ const FormComponent = () => {
             </div>
             <form
               className="flex flex-col text-white"
-              action={async (formData) => {
-                const { data, error } = await sendEmail(formData);
-                if (error) {
-                  toast.error(error);
-                  return;
-                }
-                toast.success("Email sent successfully!");
-                window.location.reload();
-              }}
+              onSubmit={handleSubmit}
             >
               <div className="row gutter-y-default">
                 <div className="grid grid-cols-1  md:grid-cols-2   gap-4">
@@ -82,9 +116,9 @@ const FormComponent = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="bg-white btn btn-white hvr-white-primary"
+                  className="bg-white btn btn-white hvr-white-primary disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Send Message
+                  {isLoading ? "Sending..." : "Send Message"}
                 </button>
               </div>{" "}
               <br />

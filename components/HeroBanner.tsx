@@ -115,14 +115,14 @@ export default function HeroBanner({ data }: any) {
                 className="hero-content_button-group p-2"
               >
                 <Link
-                  href="/contact"
+                  href="/services/customized-itinerary"
                   className="btn btn-primary hvr-fill-black"
                 >
                   Explore Destinations
                   <ArrowUpRight className="w-4 h-4" />
                 </Link>
                 <Link
-                  href="/packages"
+                  href="/bookings"
                   className="btn btn-white hvr-white-primary"
                 >
                   Make A Booking

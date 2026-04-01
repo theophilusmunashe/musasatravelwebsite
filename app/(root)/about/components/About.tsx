@@ -29,7 +29,7 @@ export default function About() {
           </div>
           <br />
           <div className="flex justify-center items-center md:justify-start md:items-start">
-            <Link href="/services" className="btn btn-primary hvr-fill-black">
+            <Link href="/services/customized-itinerary" className="btn btn-primary hvr-fill-black">
               Our Services
               <ArrowUpRight className="w-4 h-4" />
             </Link>

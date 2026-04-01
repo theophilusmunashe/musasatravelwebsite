@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, ArrowUpRight, MessageCircle } from "lucide-react";
-import { FaFacebook, FaInstagram } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 import logoimg from "@/assets/whitelogo.png";
 import { WA_NUMBER, WA_RAW } from "@/app/(root)/bookings/components/WhatsAppButton";
 
@@ -41,6 +41,12 @@ const socials = [
     icon: <MessageCircle size={16} />,
     href: `https://wa.me/${WA_NUMBER}`,
     color: "hover:border-green-500/60 hover:text-green-400",
+  },
+  {
+    label: "TikTok",
+    icon: <FaTiktok size={16} />,
+    href: "https://www.tiktok.com/@musasatravel",
+    color: "hover:border-white/60 hover:text-white",
   },
 ];
 
@@ -85,6 +91,14 @@ export default function Footer() {
                 <Phone className="w-4 h-4 text-amber-400 flex-shrink-0" />
                 <span>{WA_RAW}</span>
               </a>
+              <div className="flex items-center gap-3 text-white/50 text-sm">
+                <Phone className="w-4 h-4 text-amber-400 flex-shrink-0" />
+                <span>+263 778 452 011</span>
+              </div>
+              <div className="flex items-center gap-3 text-white/50 text-sm">
+                <Phone className="w-4 h-4 text-amber-400 flex-shrink-0" />
+                <span>+263 775 770 080</span>
+              </div>
               <a href="mailto:info@musasatravel.com"
                 className="flex items-center gap-3 text-white/50 hover:text-white text-sm transition-colors">
                 <Mail className="w-4 h-4 text-amber-400 flex-shrink-0" />

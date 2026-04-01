@@ -19,7 +19,7 @@ import FloatingCart from "../../components/FloatingCart";
 import WhatsAppButton from "./bookings/components/WhatsAppButton";
 import ConsentBanner from "../../components/ConsentBanner";
 
-export const fontSans = FontSans({
+const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });

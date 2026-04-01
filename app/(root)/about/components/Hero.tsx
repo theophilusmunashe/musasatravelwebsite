@@ -50,7 +50,7 @@ const Hero = ({ home }: any) => {
             Our mission is to provide a global canopy of seamless travel experiences, deeply rooted in the heart of African excellence.
           </motion.p>
 
-          <Link href="/services" className="btn btn-primary hvr-fill-black">
+          <Link href="/packages" className="btn btn-primary hvr-fill-black">
             Discover Our Packages
             <i className="fa-solid fa-arrow-right icon-arrow-corner" />
           </Link>

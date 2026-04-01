@@ -13,13 +13,11 @@ const DESTINATIONS = [
   "Livingstone, Zambia",
 ];
 
-const DURATION_MS = 6000;
+const DURATION_MS = 12000;
 
 export default function Preloader() {
-  // Start as TRUE so the preloader covers the page immediately on first paint
   const [visible, setVisible] = useState(true);
   const [destIndex, setDestIndex] = useState(0);
-  const [ready, setReady] = useState(false); // becomes true once we know session state
   const ranRef = useRef(false);
 
   useEffect(() => {
@@ -27,37 +25,24 @@ export default function Preloader() {
     if (ranRef.current) return;
     ranRef.current = true;
 
-    const seen = sessionStorage.getItem("musasa_intro_seen");
-
-    if (seen) {
-      // Already shown this session — hide instantly, no flash
-      setVisible(false);
-      setReady(true);
-      return;
-    }
-
-    // First visit — mark seen and show full intro
-    sessionStorage.setItem("musasa_intro_seen", "1");
-    setReady(true);
-
     // Cycle destinations
     const destTimer = setInterval(() => {
       setDestIndex((i) => (i + 1) % DESTINATIONS.length);
     }, 1000);
 
     // Hide after DURATION_MS
-    const hideTimer = setTimeout(() => {
+    // No cleanup — intentional. Strict Mode runs effects twice; the ranRef guard
+    // blocks the second run, but a cleanup would cancel the timers from the first run.
+    setTimeout(() => {
       setVisible(false);
       clearInterval(destTimer);
     }, DURATION_MS);
-
-    // No cleanup that could accidentally cancel the timers on re-render
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <AnimatePresence>
-      {visible && ready && (
+      {visible && (
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
