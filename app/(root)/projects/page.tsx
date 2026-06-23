@@ -6,13 +6,14 @@ import { client } from "../../../sanity/lib/client";
 import CardContainer from "./components/CardContainer";
 
 import type { Metadata } from "next";
+import { SITE_NAME } from "@/lib/site";
 import HeroProject from "./components/HeroProject";
 
 import "../../globals.scss";
 
 export const metadata: Metadata = {
-  title: "Packages - Musasa Travel",
-  description: "Discover our curated travel packages and African adventure experiences",
+  title: "Packages",
+  description: `Discover curated packages and experiences at ${SITE_NAME}`,
 };
 
 const query = groq`

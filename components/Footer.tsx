@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, ArrowUpRight, MessageCircle } from "lucide-react";
 import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
-import logoimg from "@/assets/whitelogo.png";
 import { WA_NUMBER, WA_RAW } from "@/app/(root)/bookings/components/WhatsAppButton";
+import { SITE_EMAIL, SITE_NAME, SITE_TAGLINE } from "@/lib/site";
+import LogoMark from "./LogoMark";
 
 const services = [
   { name: "Accommodation", href: "/services/accommodation" },
@@ -76,12 +76,12 @@ export default function Footer() {
             variants={fadeUp} custom={0} initial="hidden" whileInView="show" viewport={{ once: true }}
             className="lg:col-span-4 flex flex-col gap-6"
           >
-            <Image src={logoimg} alt="Musasa Travel" width={160} height={60} className="object-contain" />
+            <LogoMark size="md" />
             <p className="text-white/50 text-sm leading-relaxed max-w-xs">
-              Victoria Falls&apos; premier travel experience. We craft unforgettable African adventures — from thundering falls to silent savannahs.
+              A private estate where refined living meets warm hospitality — a sanctuary crafted for those who call it home.
             </p>
             <p className="text-amber-400/80 text-xs font-semibold uppercase tracking-[0.25em]">
-              Rooted in Africa. Reaching the World.
+              {SITE_TAGLINE}
             </p>
 
             {/* Contact info */}
@@ -99,10 +99,10 @@ export default function Footer() {
                 <Phone className="w-4 h-4 text-amber-400 flex-shrink-0" />
                 <span>+263 775 770 080</span>
               </div>
-              <a href="mailto:info@musasatravel.com"
+              <a href={`mailto:${SITE_EMAIL}`}
                 className="flex items-center gap-3 text-white/50 hover:text-white text-sm transition-colors">
                 <Mail className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                <span>info@musasatravel.com</span>
+                <span>{SITE_EMAIL}</span>
               </a>
               <div className="flex items-start gap-3 text-white/50 text-sm">
                 <MapPin className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
@@ -150,7 +150,7 @@ export default function Footer() {
               <h5 className="text-white font-bold text-sm uppercase tracking-[0.2em] mb-5">Plan Your Trip</h5>
               <div className="bg-gradient-to-br from-amber-500/10 to-amber-500/5 border border-amber-500/20 rounded-2xl p-5 space-y-4">
                 <p className="text-white/60 text-sm leading-relaxed">
-                  Ready to experience the magic of Victoria Falls?
+                  Ready to experience life at {SITE_NAME}?
                 </p>
                 <Link href="/bookings"
                   className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-black font-bold text-sm px-5 py-2.5 rounded-xl transition-colors">
@@ -177,7 +177,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-white/25 text-xs">
-            &copy; {new Date().getFullYear()} Musasa Travel &amp; Tours. All rights reserved.
+            &copy; {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
           </p>
           <div className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />

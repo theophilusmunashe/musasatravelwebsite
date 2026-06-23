@@ -1,22 +1,18 @@
 import ActivitiesClient from "./components/ActivitiesClient";
 import type { Metadata } from "next";
+import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Safari Activities & Experiences",
+  title: "Activities & Experiences",
   description:
-    "Choose from 12 world-class experiences at Victoria Falls — white water rafting, safari game drives, bungee jumping, helicopter flights, cultural tours, sunset cruises and more. Build your perfect itinerary with Musasa Travel.",
+    `Discover curated activities and experiences at ${SITE_NAME} — from on-estate leisure to nearby adventures.`,
   keywords: [
-    "victoria falls activities",
-    "safari activities zimbabwe",
-    "white water rafting victoria falls",
-    "bungee jumping victoria falls",
-    "helicopter flight victoria falls",
-    "game drive hwange",
-    "sunset cruise zambezi",
-    "cultural tours victoria falls",
+    "kumusha ekhayalethu activities",
+    "private estate experiences",
+    "estate activities",
   ],
   openGraph: {
-    title: "Safari Activities & Experiences | Musasa Travel & Tours",
+    title: `Activities & Experiences | ${SITE_NAME}`,
     description:
       "12 world-class African experiences — rafting, safaris, bungee jumping, helicopter flights and more at Victoria Falls.",
     url: "/services/activities",

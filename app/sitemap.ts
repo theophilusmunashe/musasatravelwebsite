@@ -1,9 +1,7 @@
 import { MetadataRoute } from "next";
 import { groq } from "next-sanity";
 import { client } from "../sanity/lib/client";
-
-const BASE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL || "https://www.musasatravelandtours.com";
+import { SITE_URL } from "../lib/site";
 
 const slugQuery = groq`
   *[_type == "project"] {
@@ -17,7 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const response = await client.fetch(slugQuery);
     projectEntries = response.map((p: any) => ({
-      url: `${BASE_URL}/projects/${p.slug.current}`,
+      url: `${SITE_URL}/projects/${p.slug.current}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.5,
@@ -30,85 +28,85 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     {
-      url: BASE_URL,
+      url: SITE_URL,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: `${BASE_URL}/about`,
+      url: `${SITE_URL}/about`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/services`,
+      url: `${SITE_URL}/services`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${BASE_URL}/services/activities`,
+      url: `${SITE_URL}/services/activities`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${BASE_URL}/services/accommodation`,
+      url: `${SITE_URL}/services/accommodation`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${BASE_URL}/services/customized-itinerary`,
+      url: `${SITE_URL}/services/customized-itinerary`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/services/tour-guides`,
+      url: `${SITE_URL}/services/tour-guides`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/services/shuttle-services`,
+      url: `${SITE_URL}/services/shuttle-services`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
-      url: `${BASE_URL}/packages`,
+      url: `${SITE_URL}/packages`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${BASE_URL}/bookings`,
+      url: `${SITE_URL}/bookings`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/contact`,
+      url: `${SITE_URL}/contact`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/blogs`,
+      url: `${SITE_URL}/blogs`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.7,
     },
     {
-      url: `${BASE_URL}/privacy-policy`,
+      url: `${SITE_URL}/privacy-policy`,
       lastModified: now,
       changeFrequency: "yearly",
       priority: 0.3,
     },
     {
-      url: `${BASE_URL}/terms-and-conditions`,
+      url: `${SITE_URL}/terms-and-conditions`,
       lastModified: now,
       changeFrequency: "yearly",
       priority: 0.3,

@@ -21,6 +21,7 @@ const config = {
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
+        display: ["var(--font-display)", "Georgia", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -71,10 +72,26 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "ken-burns": {
+          "0%": { transform: "scale(1) translate3d(0, 0, 0)" },
+          "100%": { transform: "scale(1.08) translate3d(-1.5%, -1%, 0)" },
+        },
+        "dust-float": {
+          "0%": { transform: "translate3d(0, 0, 0)" },
+          "50%": { transform: "translate3d(10px, -24px, 0)" },
+          "100%": { transform: "translate3d(-6px, -48px, 0)" },
+        },
+        "door-glow": {
+          "0%, 100%": { opacity: "0.3", transform: "scale(1)" },
+          "50%": { opacity: "0.62", transform: "scale(1.05)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "ken-burns": "ken-burns 26s ease-in-out infinite alternate",
+        "dust-float": "dust-float 18s ease-in-out infinite",
+        "door-glow": "door-glow 7s ease-in-out infinite",
       },
     },
   },

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import type { Transporter, SentMessageInfo } from 'nodemailer';
+import { SITE_ENQUIRIES_EMAIL, SITE_NAME, SITE_URL } from '@/lib/site';
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,7 +14,7 @@ export async function POST(request: NextRequest) {
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>New Booking Request - Musasa Travel</title>
+        <title>New Booking Request - ${SITE_NAME}</title>
         <style>
           body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; }
           .header { background: #F59E0B; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; }
@@ -26,8 +27,8 @@ export async function POST(request: NextRequest) {
       </head>
       <body>
         <div class="header">
-          <h1>🦁 New Booking Request - Musasa Travel</h1>
-          <p>African Adventure Under Our Canopy</p>
+          <h1>🏡 New Booking Request - ${SITE_NAME}</h1>
+          <p>Private Estate Enquiry</p>
         </div>
         
         <div class="content">
@@ -93,7 +94,7 @@ export async function POST(request: NextRequest) {
         
         <div class="footer">
           <p>This booking request was submitted on ${new Date().toLocaleString()}</p>
-          <p>📍 Victoria Falls, Zimbabwe | 🌍 musasatravel.com</p>
+          <p>📍 Private Estate | 🌍 ${SITE_URL.replace(/^https?:\/\//, "")}</p>
         </div>
       </body>
       </html>
@@ -101,7 +102,7 @@ export async function POST(request: NextRequest) {
 
     // Plain text version for email clients that don't support HTML
     const textContent = `
-      NEW BOOKING REQUEST - MUSASA TRAVEL
+      NEW BOOKING REQUEST - ${SITE_NAME.toUpperCase()}
       
       Service: ${formData.service}
       Accommodation: ${formData.accommodation}
@@ -122,7 +123,7 @@ export async function POST(request: NextRequest) {
       
       ---
       This booking request was submitted on ${new Date().toLocaleString()}
-      📍 Victoria Falls, Zimbabwe | 🌍 musasatravel.com
+      📍 Private Estate | 🌍 ${SITE_URL.replace(/^https?:\/\//, "")}
     `;
 
     // Configure nodemailer transporter with enhanced settings
@@ -146,20 +147,20 @@ export async function POST(request: NextRequest) {
     // Enhanced email options with proper headers
     const mailOptions: nodemailer.SendMailOptions = {
       from: {
-        name: 'Musasa Travel',
-        address: process.env.SMTP_FROM || 'enquiries@musasatravel.com'
+        name: SITE_NAME,
+        address: process.env.SMTP_FROM || SITE_ENQUIRIES_EMAIL
       },
-      to: 'enquiries@musasatravel.com',
+      to: SITE_ENQUIRIES_EMAIL,
       subject: `New Booking Request - ${formData.firstName} ${formData.lastName}`,
       text: textContent,
       html: htmlContent,
       // Add headers to improve deliverability
       headers: {
         'X-Priority': '3',
-        'X-Mailer': 'Musasa Travel Booking System',
+        'X-Mailer': `${SITE_NAME} Booking System`,
         'Reply-To': formData.email,
-        'List-Unsubscribe': '<mailto:unsubscribe@musasatravel.com>',
-        'Organization': 'Musasa Travel',
+        'List-Unsubscribe': `<mailto:unsubscribe@${SITE_ENQUIRIES_EMAIL.split('@')[1]}>`,
+        'Organization': SITE_NAME,
         'Content-Type': 'text/html; charset=UTF-8'
       }
     };
@@ -167,7 +168,7 @@ export async function POST(request: NextRequest) {
     // Send email
     const result = await transporter.sendMail(mailOptions);
 
-    console.log('Booking email sent successfully to enquiries@musasatravel.com');
+    console.log(`Booking email sent successfully to ${SITE_ENQUIRIES_EMAIL}`);
     console.log('Message ID:', result.messageId);
     console.log('Form data:', formData);
 

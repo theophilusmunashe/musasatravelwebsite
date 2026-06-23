@@ -7,6 +7,7 @@ import { client } from "../../../sanity/lib/client";
 import Faq from "./components/Faq";
 
 import type { Metadata } from "next";
+import { SITE_NAME } from "@/lib/site";
 import BlogSection from "../../../components/BlogSection";
 import Service from "../../../components/Services";
 import FormComponent from "../../../components/FormComponent";
@@ -15,18 +16,15 @@ import Header from "../projects/components/Header";
 export const metadata: Metadata = {
   title: "Our Services",
   description:
-    "Explore the full range of Musasa Travel & Tours services — curated safari activities, luxury accommodation, custom itineraries, expert tour guides, and seamless shuttle transfers across Zimbabwe, Botswana, Zambia and beyond.",
+    `Explore the full range of ${SITE_NAME} services — estate accommodation, curated experiences, hospitality, and private transfers.`,
   keywords: [
-    "musasa travel services",
-    "africa safari services",
-    "victoria falls activities",
-    "zimbabwe accommodation",
-    "custom african itinerary",
-    "tour guides victoria falls",
-    "shuttle transfers africa",
+    "kumusha ekhayalethu services",
+    "private estate services",
+    "estate accommodation",
+    "estate hospitality",
   ],
   openGraph: {
-    title: "Our Services | Musasa Travel & Tours",
+    title: `Our Services | ${SITE_NAME}`,
     description:
       "Safaris, luxury accommodation, custom itineraries, expert guides and transfers across Southern Africa.",
     url: "/services",

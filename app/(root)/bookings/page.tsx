@@ -1,21 +1,20 @@
 import type { Metadata } from "next";
 import BookingsPageClient from "./BookingsPageClient";
+import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Book Your Trip",
+  title: "Book Your Stay",
   description:
-    "Complete your African adventure booking with Musasa Travel & Tours. Review your selected activities, accommodation, and services, then send your booking directly via WhatsApp for instant confirmation.",
+    `Complete your booking with ${SITE_NAME}. Review your selected accommodation and services, then send your booking directly via WhatsApp for confirmation.`,
   keywords: [
-    "book safari zimbabwe",
-    "victoria falls booking",
-    "musasa travel booking",
-    "african trip reservation",
-    "safari booking online",
+    "kumusha ekhayalethu booking",
+    "private estate booking",
+    "estate reservation",
   ],
   openGraph: {
-    title: "Book Your Trip | Musasa Travel & Tours",
+    title: `Book Your Stay | ${SITE_NAME}`,
     description:
-      "Review your cart and complete your African safari booking with Musasa Travel & Tours.",
+      `Review your cart and complete your booking with ${SITE_NAME}.`,
     url: "/bookings",
   },
   robots: {

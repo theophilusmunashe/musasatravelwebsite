@@ -1,5 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
+import { SITE_NAME } from "@/lib/site";
 import Header from "../projects/components/Header";
 import { client } from "../../../sanity/lib/client";
 import PortableBody from "../../../components/portable";
@@ -7,7 +8,7 @@ import PortableBody from "../../../components/portable";
 export const metadata: Metadata = {
   title: "Terms & Conditions",
   description:
-    "Review the terms and conditions governing the use of Musasa Travel & Tours services, bookings, and website.",
+    `Review the terms and conditions governing the use of ${SITE_NAME} services, bookings, and website.`,
   robots: { index: true, follow: false },
 };
 

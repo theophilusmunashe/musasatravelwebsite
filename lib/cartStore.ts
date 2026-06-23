@@ -85,6 +85,6 @@ export const useCartStore = create<CartStore>()(
           0
         ),
     }),
-    { name: "musasa-travel-cart" }
+    { name: "kumusha-estate-cart" }
   )
 );

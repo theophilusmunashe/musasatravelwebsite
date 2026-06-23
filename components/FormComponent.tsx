@@ -5,6 +5,7 @@ import { Input } from "./ui/input";
 import { sendEmail } from "../actions/sendEmail";
 import toast from "react-hot-toast";
 import Reveal from "./Reveal";
+import { SITE_NAME } from "@/lib/site";
 
 import "../app/globals.scss";
 
@@ -35,7 +36,7 @@ const FormComponent = () => {
     toast.success("Message sent successfully!");
 
     const waMessage = [
-      "🌍 *New Enquiry – Musasa Travel & Tours*",
+      `🏡 *New Enquiry – ${SITE_NAME}*`,
       "━━━━━━━━━━━━━━━━━━━━━━",
       `👤 *Name:* ${firstName}`,
       `📧 *Email:* ${senderEmail}`,

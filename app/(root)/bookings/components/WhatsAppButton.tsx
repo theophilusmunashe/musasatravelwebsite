@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X } from "lucide-react";
 import { useState } from "react";
 import { useCartStore } from "@/lib/cartStore";
+import { SITE_NAME } from "@/lib/site";
 
 export const WA_NUMBER = "263776093268";
 export const WA_RAW = "+263 77 609 3268";
@@ -11,7 +12,7 @@ export const WA_RAW = "+263 77 609 3268";
 export function buildWhatsAppMessage(cartItems: ReturnType<typeof useCartStore.getState>["items"], formData?: Record<string, any>): string {
   const lines: string[] = [];
 
-  lines.push("🌍 *NEW BOOKING REQUEST – MUSASA TRAVEL*");
+  lines.push(`🏡 *NEW BOOKING REQUEST – ${SITE_NAME.toUpperCase()}*`);
   lines.push("━━━━━━━━━━━━━━━━━━━━━━");
 
   if (formData?.firstName || formData?.lastName) {
@@ -51,10 +52,10 @@ export default function WhatsAppButton() {
   const hasCart = cartItems.length > 0;
 
   const quickLinks = [
-    { emoji: "🏨", text: "Accommodation options", msg: "Hi! I'd like to know about accommodation options at Musasa Travel." },
+    { emoji: "🏨", text: "Accommodation options", msg: `Hi! I'd like to know about accommodation options at ${SITE_NAME}.` },
     { emoji: "🎯", text: "Activities & Tours", msg: "Hi! I'd like to know about activities and tours available." },
-    { emoji: "📅", text: "Help with booking", msg: "Hi! I need help completing a booking with Musasa Travel." },
-    { emoji: "💰", text: "Get a custom quote", msg: "Hi! I'd like a custom travel quote from Musasa Travel." },
+    { emoji: "📅", text: "Help with booking", msg: `Hi! I need help completing a booking with ${SITE_NAME}.` },
+    { emoji: "💰", text: "Get a custom quote", msg: `Hi! I'd like a custom quote from ${SITE_NAME}.` },
   ];
 
   const openWa = (msg: string) =>
@@ -102,7 +103,7 @@ export default function WhatsAppButton() {
                   <MessageCircle className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="font-bold text-sm leading-none">Musasa Travel</p>
+                  <p className="font-bold text-sm leading-none">{SITE_NAME}</p>
                   <p className="text-white/70 text-xs mt-0.5">{WA_RAW} · Instant reply</p>
                 </div>
               </div>
@@ -114,7 +115,7 @@ export default function WhatsAppButton() {
             {/* Body */}
             <div className="p-4 space-y-3">
               <p className="text-white/60 text-sm leading-relaxed">
-                👋 Hi! Our team in Victoria Falls is ready to help. Chat instantly via WhatsApp.
+                👋 Hi! Our team is ready to help. Chat instantly via WhatsApp.
               </p>
 
               {/* Cart booking shortcut */}

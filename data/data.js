@@ -102,7 +102,7 @@ export const serviceItems = [
   
     Service: "A Shield of Seamless Excellence",
     Description:
-      "Just as the Musasa canopy protects the traveler, we provide a total covering of safety and sophistication. From complex cross-border transfers to 24/7 on-ground assistance, we proactively manage every detail so you can explore with absolute peace of mind.",
+      "From secure estate access to attentive on-site support, we provide a standard of care and sophistication that lets you live and unwind with complete peace of mind.",
   },
   {
   
@@ -155,15 +155,15 @@ export const serviceItems2 = [
 
 export const faqItems = [
   {
-    Question: "What does the name \"Musasa\" represent?",
-    Answer: "It refers to the indigenous Musasa tree, known for its vast protective canopy and deep roots. We provide that same \"covering\" and stability for our travelers worldwide."
+    Question: "What does the name \"Kumusha Ekhayalethu\" mean?",
+    Answer: "Kumusha means home in Shona. Ekhayalethu combines ekhaya — home in Ndebele and Zulu — with lethu, meaning ours. Together, the name expresses our vision of a private estate where home truly belongs to us all."
   },
   {
-    Question: "Where is Musasa Travel & Tours headquartered?",
-    Answer: "We are proudly based in the \"Adventure Capital\" of Victoria Falls, Zimbabwe. This local presence allows us to offer authentic, on-the-ground expertise to all our clients."
+    Question: "Where is Kumusha Ekhayalethu located?",
+    Answer: "We are a private estate offering refined living and hospitality. Contact us for location details and estate visits."
   },
   {
-    Question: "Is Musasa Travel & Tours a registered company?",
+    Question: "Is Kumusha Ekhayalethu a registered entity?",
     Answer: "Yes, we are a fully registered and licensed travel management company operating under the laws of Zimbabwe. We maintain the highest international standards of professionalism and safety."
   },
   {
@@ -195,7 +195,7 @@ export const faqItems = [
     Answer: "Yes, while our heart is in Africa, our roots reach destinations all over the world. We offer a global \"canopy\" of service for any destination you choose to explore."
   },
   {
-    Question: "How do I book a tour with Musasa?",
+    Question: "How do I enquire about the estate?",
     Answer: "You can request a quote through our website or contact our team directly via email or phone. We will guide you through the process from the initial inquiry to the final booking."
   },
   {

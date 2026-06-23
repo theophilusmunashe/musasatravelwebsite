@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { SITE_ENQUIRIES_EMAIL } from "@/lib/site";
 import {
   MapPin,
   Users,
@@ -228,14 +229,14 @@ export default function AccommodationDetails({
             </div>
           </motion.a>
           <motion.a
-            href="mailto:bookings@musasatravel.com"
+            href={`mailto:${SITE_ENQUIRIES_EMAIL}`}
             whileHover={{ scale: 1.05 }}
             className="flex items-center gap-4 p-4 bg-white/10 rounded-lg border border-white/20 hover:bg-white/15 transition-colors"
           >
             <Mail className="w-6 h-6 text-amber-400" />
             <div>
               <p className="text-sm text-gray-300">Email us</p>
-              <p className="font-semibold">bookings@musasatravel.com</p>
+              <p className="font-semibold">{SITE_ENQUIRIES_EMAIL}</p>
             </div>
           </motion.a>
         </div>

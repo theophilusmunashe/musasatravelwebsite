@@ -2,6 +2,7 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import Image from "next/image";
+import { SITE_NAME } from "@/lib/site";
 import {
   Star,
   Check,
@@ -239,7 +240,7 @@ function WhyGuide() {
   return (
     <section ref={ref} className="py-24 px-6 md:px-16 max-w-7xl mx-auto">
       <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="text-center mb-16">
-        <p className="text-amber-400 text-sm uppercase tracking-[0.3em] mb-3">The Musasa Guide Difference</p>
+        <p className="text-amber-400 text-sm uppercase tracking-[0.3em] mb-3">The Kumusha Guide Difference</p>
         <h2 className="text-3xl md:text-5xl font-black text-white">Why a Great Guide Changes Everything</h2>
       </motion.div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -268,7 +269,7 @@ function CtaBanner() {
       </div>
       <div className="relative z-10 py-24 px-6 md:px-16 text-center max-w-4xl mx-auto">
         <h2 className="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">See Africa Through a Master&apos;s Eyes</h2>
-        <p className="text-white/60 text-lg mb-10 max-w-2xl mx-auto">Book a guide above and add them to your trip. Combine with activities and accommodation for the complete Musasa experience.</p>
+        <p className="text-white/60 text-lg mb-10 max-w-2xl mx-auto">Book a guide above and add them to your stay. Combine with activities and accommodation for the complete {SITE_NAME} experience.</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           {count > 0 ? (
             <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} onClick={openCart}

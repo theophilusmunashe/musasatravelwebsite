@@ -1,34 +1,17 @@
 import React from "react";
-
-import newlogo from "@/assets/whitelogo.png";
-import Image from "next/image";
+import { SITE_NAME } from "@/lib/site";
+import LogoMark from "./LogoMark";
 
 const Logo = () => {
   return (
-    <div className="flex justify-center items-center  md:h-28 h-14">
+    <div className="flex justify-center items-center md:h-28 h-14">
       <a
         href="/"
-        className="md:flex justify-center items-center h-full hidden"
+        className="flex justify-center items-center h-full"
+        aria-label={`${SITE_NAME} home`}
       >
-        <Image
-          src={newlogo}
-          width={200}
-          height={100}
-          alt="logo"
-          className="object-contain"
-        />
-      </a>
-      <a
-        href="/"
-        className="flex justify-center items-center h-full md:hidden"
-      >
-        <Image
-          src={newlogo}
-          width={150}
-          height={50}
-          alt="logo"
-          className="object-contain"
-        />
+        <LogoMark size="md" className="md:hidden" />
+        <LogoMark size="lg" className="hidden md:inline-flex" />
       </a>
     </div>
   );

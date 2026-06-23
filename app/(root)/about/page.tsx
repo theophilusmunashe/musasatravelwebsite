@@ -6,13 +6,17 @@ import Smart from "./components/Smart";
 import Other from "./components/Other";
 
 import type { Metadata } from "next";
+import { SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About - Musasa",
-  description:
-    "Musasa Travel & Tours is your premier African travel partner, offering curated journeys through Victoria Falls, Zimbabwe, and beyond. Experience authentic adventures with local expertise and global reach.",
+  title: "About",
+  description: `Learn about ${SITE_NAME} — a private estate built on the meaning of home. Discover our story, vision, and commitment to refined living and hospitality.`,
   keywords: [
-    "about musasa travel, about musasa tours, about victoria falls, about zimbabwe travel, about african safari, about african adventure, about travel packages, about luxury travel, about guided tours, about musasa travel and tours, victoria falls tours, zimbabwe safari, african travel experiences",
+    "about kumusha ekhayalethu",
+    "kumusha ekhayalethu private estate",
+    "private estate living",
+    "estate hospitality",
+    "about private estate",
   ],
 };
 

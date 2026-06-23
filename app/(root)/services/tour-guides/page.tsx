@@ -1,20 +1,18 @@
 import TourGuidesClient from "./components/TourGuidesClient";
 import type { Metadata } from "next";
+import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Expert African Tour Guides",
+  title: "Expert Tour Guides",
   description:
-    "Explore Africa through the eyes of passionate, certified local experts. Musasa Travel's guides bring every landmark and hidden trail to life — specialising in wildlife, adventure and cultural experiences.",
+    `Explore with passionate, certified local experts through ${SITE_NAME} — specialising in wildlife, adventure and cultural experiences.`,
   keywords: [
-    "victoria falls tour guide",
-    "safari guide zimbabwe",
-    "expert wildlife guide africa",
-    "certified tour guide victoria falls",
-    "local guide zimbabwe",
-    "adventure guide africa",
+    "kumusha ekhayalethu tour guides",
+    "estate tour guides",
+    "local expert guides",
   ],
   openGraph: {
-    title: "Expert African Tour Guides | Musasa Travel & Tours",
+    title: `Expert Tour Guides | ${SITE_NAME}`,
     description:
       "Certified local guides specialising in wildlife, adventure and cultural experiences across Southern Africa.",
     url: "/services/tour-guides",

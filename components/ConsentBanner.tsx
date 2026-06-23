@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Shield, Check, X, ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
 import Link from "next/link";
+import { SITE_EMAIL, SITE_NAME } from "@/lib/site";
 
-const CONSENT_KEY = "musasa_privacy_consent_v1";
+const CONSENT_KEY = "kumusha_privacy_consent_v1";
 
 const COMPLIANCE_BADGES = [
   { label: "POPIA Compliant", hint: "South Africa Protection of Personal Information Act" },
@@ -75,12 +76,12 @@ export default function ConsentBanner() {
                   <div className="flex items-center gap-2 mb-1.5">
                     <h3 className="text-white font-bold text-sm">Your Privacy & Data Rights</h3>
                     <span className="text-[10px] bg-amber-500/15 border border-amber-500/25 text-amber-400 px-2 py-0.5 rounded-full font-semibold">
-                      Musasa Travel
+                      {SITE_NAME}
                     </span>
                   </div>
 
                   <p className="text-white/50 text-xs leading-relaxed max-w-3xl">
-                    Musasa Travel collects personal information — including your name, email address, phone number, and browsing activity — to deliver travel services, respond to your enquiries, and share relevant travel offers. We process your data lawfully and transparently, and you retain the right to access, correct, or request deletion of your data at any time.
+                    {SITE_NAME} collects personal information — including your name, email address, phone number, and browsing activity — to deliver estate services, respond to your enquiries, and share relevant updates. We process your data lawfully and transparently, and you retain the right to access, correct, or request deletion of your data at any time.
                   </p>
 
                   {/* Expandable detail */}
@@ -115,8 +116,8 @@ export default function ConsentBanner() {
                         </div>
                         <p className="mt-3 text-[11px] text-white/30 max-w-3xl">
                           Your data is stored securely and never sold to third parties. To exercise your rights or withdraw consent, email{" "}
-                          <a href="mailto:info@musasatravel.com" className="text-amber-400/70 hover:text-amber-400 transition-colors">
-                            info@musasatravel.com
+                          <a href={`mailto:${SITE_EMAIL}`} className="text-amber-400/70 hover:text-amber-400 transition-colors">
+                            {SITE_EMAIL}
                           </a>
                           .
                         </p>

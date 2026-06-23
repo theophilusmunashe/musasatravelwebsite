@@ -1,21 +1,18 @@
 import ItineraryClient from "./components/ItineraryClient";
 import type { Metadata } from "next";
+import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Customized Travel Itineraries",
+  title: "Customized Itineraries",
   description:
-    "No two travellers are alike. Musasa Travel crafts bespoke African journeys tailored to your pace and passions — from 5-day Victoria Falls expeditions to 14-day cross-continent epics through Zimbabwe, Botswana and beyond.",
+    `No two guests are alike. ${SITE_NAME} crafts bespoke itineraries tailored to your pace, interests, and preferences.`,
   keywords: [
-    "custom africa itinerary",
-    "bespoke safari itinerary",
-    "victoria falls itinerary",
-    "personalised africa travel",
-    "tailored zimbabwe tour",
-    "private safari package",
-    "cross-continent africa trip",
+    "kumusha ekhayalethu itinerary",
+    "custom estate itinerary",
+    "bespoke private estate experience",
   ],
   openGraph: {
-    title: "Customized Travel Itineraries | Musasa Travel & Tours",
+    title: `Customized Itineraries | ${SITE_NAME}`,
     description:
       "Bespoke African journeys crafted around your pace and passions — from 5 to 14 days across Southern Africa.",
     url: "/services/customized-itinerary",

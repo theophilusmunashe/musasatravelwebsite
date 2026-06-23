@@ -13,9 +13,9 @@ export default function Hero() {
   const item = {
     background:
       "https://res.cloudinary.com/dnir0cslk/image/upload/v1708504257/Home_Page_01_ayf9jv.jpg",
-    title: "Musasa Travel & Tours",
-    subtitle: "Curated Journeys",
-    description: "Lifetime Experiences",
+    title: "Kumusha Ekhayalethu",
+    subtitle: "Private Estate",
+    description: "Home Is Ours",
   };
 
   return (

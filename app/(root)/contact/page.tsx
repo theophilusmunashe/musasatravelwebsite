@@ -1,20 +1,20 @@
 import ContactClient from "./components/ContactClient";
 import type { Metadata } from "next";
+import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Get in touch with Musasa Travel & Tours in Victoria Falls, Zimbabwe. We respond to all enquiries within 24 hours. Call +263 77 609 3268 or send us a message.",
+    `Get in touch with ${SITE_NAME}. We respond to all enquiries within 24 hours. Call +263 77 609 3268 or send us a message.`,
   keywords: [
-    "contact musasa travel",
-    "victoria falls travel enquiry",
-    "musasa travel phone",
-    "travel agency contact zimbabwe",
+    "contact kumusha ekhayalethu",
+    "private estate enquiry",
+    "kumusha ekhayalethu contact",
   ],
   openGraph: {
-    title: "Contact Musasa Travel & Tours",
+    title: `Contact ${SITE_NAME}`,
     description:
-      "Reach the Musasa Travel team in Victoria Falls. We respond within 24 hours.",
+      `Reach the ${SITE_NAME} team. We respond within 24 hours.`,
     url: "/contact",
   },
 };

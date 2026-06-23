@@ -316,7 +316,7 @@ function CtaBanner() {
       </div>
       <div className="relative z-10 py-24 px-6 md:px-16 text-center max-w-4xl mx-auto">
         <h2 className="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">Every Kilometre, Covered.</h2>
-        <p className="text-white/60 text-lg mb-10 max-w-2xl mx-auto">Add the transfers you need, then bundle with activities, accommodation, and a guide for the full Musasa experience.</p>
+        <p className="text-white/60 text-lg mb-10 max-w-2xl mx-auto">Add the transfers you need, then bundle with activities, accommodation, and a guide for the full Kumusha Ekhayalethu experience.</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           {count > 0 ? (
             <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} onClick={openCart}

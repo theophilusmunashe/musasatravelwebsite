@@ -2,6 +2,7 @@
 
 import { Resend } from "resend";
 import { validateString, getErrorMessage } from "../lib/utils";
+import { SITE_EMAIL, SITE_NAME, SITE_URL } from "../lib/site";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -27,7 +28,7 @@ export const sendEmail = async (formData: FormData) => {
   const html = `
     <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;background:#f9f9f9;padding:32px;border-radius:8px;">
       <div style="background:#1a1a1a;padding:24px;border-radius:8px;margin-bottom:24px;">
-        <h1 style="color:#f59e0b;margin:0;font-size:22px;">Musasa Travel & Tours</h1>
+        <h1 style="color:#f59e0b;margin:0;font-size:22px;">${SITE_NAME}</h1>
         <p style="color:#ffffff80;margin:4px 0 0;font-size:13px;">New Contact Form Enquiry</p>
       </div>
       <div style="background:#ffffff;padding:24px;border-radius:8px;">
@@ -51,7 +52,7 @@ export const sendEmail = async (formData: FormData) => {
         </div>
       </div>
       <p style="text-align:center;color:#999;font-size:12px;margin-top:24px;">
-        This message was sent from the contact form on musasatravelandtours.com
+        This message was sent from the contact form on ${SITE_URL.replace(/^https?:\/\//, "")}
       </p>
     </div>
   `;
@@ -60,7 +61,7 @@ export const sendEmail = async (formData: FormData) => {
   try {
     data = await resend.emails.send({
       from: "Contact Form <onboarding@resend.dev>",
-      to: "info@musasatravel.com",
+      to: SITE_EMAIL,
       subject: `New enquiry from ${firstName}`,
       reply_to: senderEmail as string,
       html,

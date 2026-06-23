@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import "../globals.css";
 // import "../globals.scss";
 
-import { Inter as FontSans } from "next/font/google";
+import { Inter as FontSans, Cormorant_Garamond as FontDisplay } from "next/font/google";
 
 import { cn } from "../../lib/utils";
 import Navbar from "../../components/Navbar";
@@ -13,72 +13,74 @@ import { client } from "../../sanity/lib/client";
 import { groq } from "next-sanity";
 
 import { Toaster } from "react-hot-toast";
-import Preloader from "../../components/preloader";
+import PreLandingExperience from "../../components/pre-landing/PreLandingExperience";
 import CartDrawer from "../../components/CartDrawer";
 import FloatingCart from "../../components/FloatingCart";
 import WhatsAppButton from "./bookings/components/WhatsAppButton";
 import ConsentBanner from "../../components/ConsentBanner";
+import {
+  SITE_DESCRIPTION,
+  SITE_EMAIL,
+  SITE_FULL_NAME,
+  SITE_NAME,
+  SITE_URL,
+} from "../../lib/site";
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.musasatravelandtours.com";
+const fontDisplay = FontDisplay({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-display",
+});
 
 export const metadata: Metadata = {
-  metadataBase: new URL(BASE_URL),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Musasa Travel & Tours — Rooted in Africa, Reaching the World",
-    template: "%s | Musasa Travel & Tours",
+    default: SITE_FULL_NAME,
+    template: `%s | ${SITE_NAME}`,
   },
-  applicationName: "Musasa Travel & Tours",
-  description:
-    "Musasa Travel & Tours offers world-class African travel experiences — from Victoria Falls safaris and luxury accommodation to custom itineraries, expert tour guides, and seamless transfers. Book your dream African adventure today.",
+  applicationName: SITE_NAME,
+  description: SITE_DESCRIPTION,
   keywords: [
-    "musasa travel",
-    "musasa tours",
-    "victoria falls tours",
-    "zimbabwe safari",
-    "african travel packages",
-    "victoria falls accommodation",
-    "zambezi safari",
-    "hwange national park",
-    "african tour guides",
-    "custom itinerary africa",
-    "shuttle services victoria falls",
-    "luxury safari zimbabwe",
-    "botswana safari",
-    "zambia tours",
-    "travel agency zimbabwe",
+    "kumusha ekhayalethu",
+    "private estate",
+    "luxury estate living",
+    "estate accommodation",
+    "private estate zimbabwe",
+    "estate hospitality",
+    "curated estate experiences",
+    "kumusha estate",
+    "ekhayalethu",
   ],
-  authors: [{ name: "Musasa Travel & Tours" }],
-  creator: "Musasa Travel & Tours",
-  publisher: "Musasa Travel & Tours",
+  authors: [{ name: SITE_NAME }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
   referrer: "origin-when-cross-origin",
   generator: "Next.js",
   openGraph: {
     type: "website",
     locale: "en_ZW",
-    url: BASE_URL,
-    siteName: "Musasa Travel & Tours",
-    title: "Musasa Travel & Tours — Rooted in Africa, Reaching the World",
-    description:
-      "Discover Africa's finest experiences with Musasa Travel & Tours. Victoria Falls safaris, luxury lodges, custom itineraries and more.",
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: SITE_FULL_NAME,
+    description: SITE_DESCRIPTION,
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Musasa Travel & Tours — Victoria Falls, Zimbabwe",
+        alt: `${SITE_FULL_NAME}`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Musasa Travel & Tours",
-    description:
-      "World-class African travel experiences — Victoria Falls safaris, luxury lodges, custom itineraries.",
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
     images: ["/og-image.jpg"],
   },
   robots: {
@@ -144,19 +146,23 @@ export default async function RootLayout({
         </Script>
       </head>
       <body
-        className={cn("min-h-screen font-sans antialiased", fontSans.className)}
+        className={cn(
+          "min-h-screen font-sans antialiased",
+          fontSans.className,
+          fontDisplay.variable
+        )}
       >
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "TravelAgency",
-              name: "Musasa Travel & Tours",
-              url: BASE_URL,
-              logo: `${BASE_URL}/image/logo.svg`,
-              description:
-                "World-class African travel experiences — Victoria Falls safaris, luxury lodges, custom itineraries, expert guides and seamless transfers.",
+              "@type": "LodgingBusiness",
+              name: SITE_NAME,
+              url: SITE_URL,
+              logo: `${SITE_URL}/image/logo.svg`,
+              description: SITE_DESCRIPTION,
+              email: SITE_EMAIL,
               telephone: "+263776093268",
               address: {
                 "@type": "PostalAddress",
@@ -176,34 +182,21 @@ export default async function RootLayout({
                 opens: "08:00",
                 closes: "18:00",
               },
-              sameAs: [
-                "https://www.instagram.com/musasatravelandtours/",
-                "https://www.facebook.com/profile.php?id=61587802886735",
-              ],
-              areaServed: [
-                { "@type": "Country", name: "Zimbabwe" },
-                { "@type": "Country", name: "Botswana" },
-                { "@type": "Country", name: "Zambia" },
-                { "@type": "Country", name: "South Africa" },
-                { "@type": "Country", name: "Namibia" },
-                { "@type": "Country", name: "Mozambique" },
-              ],
+              sameAs: [],
               hasOfferCatalog: {
                 "@type": "OfferCatalog",
-                name: "African Travel Services",
+                name: "Estate Services",
                 itemListElement: [
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Safari Activities" } },
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Luxury Accommodation" } },
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Customized Itineraries" } },
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Expert Tour Guides" } },
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Shuttle & Transfer Services" } },
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Travel Packages" } },
+                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Estate Accommodation" } },
+                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Curated Experiences" } },
+                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Estate Hospitality" } },
+                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Private Transfers" } },
                 ],
               },
             }),
           }}
         />
-        <Preloader />
+        <PreLandingExperience />
         <Navbar components={category} />
 
         {children}

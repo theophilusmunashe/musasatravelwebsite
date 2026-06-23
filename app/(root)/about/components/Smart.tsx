@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { SITE_NAME } from "@/lib/site";
 
 
 const container = {
@@ -30,16 +31,16 @@ const Smart = () => {
   // Hardcoded service items for easy editing
   const serviceItems = [
     {
-      title: "The Home-Ground Advantage",
-      description: "Headquartered in the heart of Victoria Falls, we don't just study the map—we live the destination. Our at the source presence grants you exclusive insider access, real-time local support, and a level of logistical precision that only a true local expert can provide.",
+      title: "A True Sense of Home",
+      description: "Every residence and guest experience at the estate is designed to feel personal, welcoming, and deeply rooted in the meaning of our name — home that belongs to us all.",
     },
     {
-      title: "A Shield of Seamless Excellence",
-      description: "Just as the Musasa canopy protects the traveler, we provide a total covering of safety and sophistication. From complex cross-border transfers to 24/7 on-ground assistance, we proactively manage every detail so you can explore with absolute peace of mind.",
+      title: "Refined Private Living",
+      description: "From secure gated access to beautifully appointed residences, we provide a standard of living that balances privacy with the warmth of community.",
     },
     {
-      title: "Deeply Rooted Global Reach",
-      description: "Our name reflects our nature: we possess the stability of deep roots and the reach of an expansive canopy. We transcend generic travel by leveraging a vast international network of elite partners to craft bespoke, high-end journeys that are as unique as the travelers we serve.",
+      title: "Curated Estate Experiences",
+      description: "Beyond the homes themselves, we offer hospitality, activities, and services tailored to residents and guests — so every moment at the estate feels effortless and exceptional.",
     },
   ];
 
@@ -54,7 +55,7 @@ const Smart = () => {
       >
         <div className="space-y-4">
           <h4 className="text-2xl md:text-4xl  font-medium leading-7">
-            Why Choose Musasa Travel
+            Why Choose {SITE_NAME}
           </h4>
           <motion.ul
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-8 gap-4 p-2"

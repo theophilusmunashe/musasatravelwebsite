@@ -726,7 +726,7 @@ function WhyChooseUs() {
           Why Travel With Us
         </p>
         <h2 className="text-3xl md:text-5xl font-black text-white">
-          The Musasa Difference
+          The Kumusha Difference
         </h2>
       </motion.div>
 

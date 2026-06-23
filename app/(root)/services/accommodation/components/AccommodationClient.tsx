@@ -31,7 +31,7 @@ import toast from "react-hot-toast";
 /* ─── Types ──────────────────────────────────────────────────────────── */
 type Category =
   | "all"
-  | "musasa"
+  | "estate"
   | "luxury"
   | "safari-lodge"
   | "eco-lodge"
@@ -60,12 +60,12 @@ interface Accommodation {
 
 /* ─── Data ───────────────────────────────────────────────────────────── */
 const ACCOMMODATIONS: Accommodation[] = [
-  /* ── Musasa Exclusive Properties ───────────────────────────────────── */
+  /* ── Estate Exclusive Properties ───────────────────────────────────── */
   {
     id: "musasa-mist-pavilion",
     name: "The Mist Pavilion",
     tagline: "Where the Smoke That Thunders Meets You at Dawn",
-    category: "musasa",
+    category: "estate",
     image: "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774989724/WhatsApp_Image_2026-03-25_at_12.18.44_eaucfj.jpg",
     location: "Victoria Falls Town",
     country: "Zimbabwe",
@@ -75,22 +75,22 @@ const ACCOMMODATIONS: Accommodation[] = [
     reviews: 87,
     nights: "Min. 1 night",
     guests: "2 guests",
-    badge: "Musasa Exclusive",
+    badge: "Estate Exclusive",
     amenities: ["Garden terrace", "Daily breakfast", "Falls transfers", "Wi-Fi", "Concierge", "Sundowner deck"],
     highlights: [
       "10 min walk to Victoria Falls",
       "Private mist-garden setting",
-      "Musasa-curated daily itinerary",
+      "Estate-curated daily itinerary",
       "Breakfast & sunset drinks included",
     ],
     description:
-      "A hand-picked Musasa Travel exclusive — a serene pavilion-style chalet tucked within a lush indigenous garden just ten minutes on foot from the entrance to Victoria Falls. Each morning you wake to the distant roar of the falls and the garden fills with the fine mist that gives the property its name. Our team personally curates a daily activity schedule for every guest, and complimentary falls transfers, daily breakfast, and sunset sundowners on the garden deck are all included. This is Victoria Falls the way the early explorers experienced it — intimate, beautiful, and completely unhurried.",
+      "A hand-picked Kumusha Ekhayalethu exclusive — a serene pavilion-style chalet tucked within a lush indigenous garden just ten minutes on foot from the entrance to Victoria Falls. Each morning you wake to the distant roar of the falls and the garden fills with the fine mist that gives the property its name. Our team personally curates a daily activity schedule for every guest, and complimentary falls transfers, daily breakfast, and sunset sundowners on the garden deck are all included. This is Victoria Falls the way the early explorers experienced it — intimate, beautiful, and completely unhurried.",
   },
   {
     id: "musasa-zambezi-sundown-suites",
     name: "Zambezi Sundown Suites",
     tagline: "Golden Hour on Africa's Greatest River",
-    category: "musasa",
+    category: "estate",
     image: "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774989723/WhatsApp_Image_2026-03-25_at_12.18.44_1_mpd5oh.jpg",
     location: "Upper Zambezi",
     country: "Zimbabwe",
@@ -100,7 +100,7 @@ const ACCOMMODATIONS: Accommodation[] = [
     reviews: 63,
     nights: "Min. 2 nights",
     guests: "2 guests",
-    badge: "Musasa Exclusive",
+    badge: "Estate Exclusive",
     amenities: ["West-facing deck", "River views", "Breakfast", "Guided walks", "Wi-Fi", "Falls transfers"],
     highlights: [
       "West-facing sundowner decks",
@@ -109,13 +109,13 @@ const ACCOMMODATIONS: Accommodation[] = [
       "Complimentary airport pickup",
     ],
     description:
-      "Musasa Travel's most romantic address — a collection of intimate suites built on the banks of the upper Zambezi, each facing west so that your private deck becomes a front-row seat for the extraordinary African sunset that repaints the river in copper and gold every evening without fail. Accommodation is in beautifully appointed stone-and-thatch suites with en-suite bathrooms, handcrafted local furniture, and private decks where breakfast is served as the sun climbs above the mopane woodland on the opposite bank. Our guides lead optional morning bird walks along the river's edge before activities begin — this is the Zambezi at its most peaceful and most beautiful.",
+      "Kumusha Ekhayalethu's most romantic address — a collection of intimate suites built on the banks of the upper Zambezi, each facing west so that your private deck becomes a front-row seat for the extraordinary African sunset that repaints the river in copper and gold every evening without fail. Accommodation is in beautifully appointed stone-and-thatch suites with en-suite bathrooms, handcrafted local furniture, and private decks where breakfast is served as the sun climbs above the mopane woodland on the opposite bank. Our guides lead optional morning bird walks along the river's edge before activities begin — this is the Zambezi at its most peaceful and most beautiful.",
   },
   {
     id: "musasa-baobab-house",
     name: "The Baobab House",
     tagline: "A Century of Stories, All Your Own",
-    category: "musasa",
+    category: "estate",
     image: "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774989724/WhatsApp_Image_2026-03-25_at_12.18.43_3_r0vpel.jpg",
     location: "Victoria Falls Town",
     country: "Zimbabwe",
@@ -125,7 +125,7 @@ const ACCOMMODATIONS: Accommodation[] = [
     reviews: 54,
     nights: "Min. 1 night",
     guests: "Up to 4 guests",
-    badge: "Musasa Exclusive",
+    badge: "Estate Exclusive",
     amenities: ["Private boma", "Full kitchen", "Garden pool", "Wi-Fi", "Braai area", "Family rooms"],
     highlights: [
       "Centred around a 400-year-old baobab",
@@ -134,7 +134,7 @@ const ACCOMMODATIONS: Accommodation[] = [
       "Fully self-contained option",
     ],
     description:
-      "Named for the ancient baobab tree that stands at the heart of its garden — estimated at over 400 years old, its hollow trunk wide enough to shelter a family — The Baobab House is Musasa Travel's most characterful property and the perfect base for families or small groups exploring Victoria Falls. Four individually styled rooms open onto the garden and pool terrace, and a fully equipped kitchen, private boma, and braai area give guests complete independence. Our concierge team is available throughout your stay to arrange activities, transfers, and surprises — but many guests find The Baobab House so enchanting they simply spend their mornings at the pool beneath the ancient tree.",
+      "Named for the ancient baobab tree that stands at the heart of its garden — estimated at over 400 years old, its hollow trunk wide enough to shelter a family — The Baobab House is Kumusha Ekhayalethu's most characterful property and the perfect base for families or small groups exploring Victoria Falls. Four individually styled rooms open onto the garden and pool terrace, and a fully equipped kitchen, private boma, and braai area give guests complete independence. Our concierge team is available throughout your stay to arrange activities, transfers, and surprises — but many guests find The Baobab House so enchanting they simply spend their mornings at the pool beneath the ancient tree.",
   },
   /* ── Partner Properties ──────────────────────────────────────────── */
   {
@@ -379,7 +379,7 @@ const ACCOMMODATIONS: Accommodation[] = [
 
 const CATEGORIES: { id: Category; label: string; icon: React.ReactNode }[] = [
   { id: "all", label: "All Properties", icon: <Home className="w-4 h-4" /> },
-  { id: "musasa", label: "Musasa Exclusive", icon: <Sparkles className="w-4 h-4" /> },
+  { id: "estate", label: "Estate Exclusive", icon: <Sparkles className="w-4 h-4" /> },
   { id: "luxury", label: "Luxury", icon: <Crown className="w-4 h-4" /> },
   { id: "safari-lodge", label: "Safari Lodge", icon: <Tent className="w-4 h-4" /> },
   { id: "eco-lodge", label: "Eco Lodge", icon: <Leaf className="w-4 h-4" /> },
@@ -586,7 +586,7 @@ function AccommodationCard({ property }: { property: Accommodation }) {
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-2">
           {property.badge && (
-            property.badge === "Musasa Exclusive" ? (
+            property.badge === "Estate Exclusive" ? (
               <span className="flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-amber-400 text-black text-xs font-black px-3 py-1 rounded-full shadow-lg shadow-amber-500/40">
                 <Sparkles className="w-3 h-3" />
                 {property.badge}
@@ -781,7 +781,7 @@ function WhyStayWithUs() {
           Our Promise
         </p>
         <h2 className="text-3xl md:text-5xl font-black text-white">
-          Why Book With Musasa
+          Why Book With Kumusha Ekhayalethu
         </h2>
       </motion.div>
 

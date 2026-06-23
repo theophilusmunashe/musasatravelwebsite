@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { sendEmail } from "@/actions/sendEmail";
 import toast from "react-hot-toast";
+import { SITE_ENQUIRIES_EMAIL } from "@/lib/site";
 
 /* ─── Contact Info Cards ─────────────────────────────────────────────── */
 const INFO = [
@@ -21,9 +22,9 @@ const INFO = [
   {
     icon: <Mail className="w-5 h-5" />,
     label: "Email Us",
-    value: "enquiries@musasatravel.com",
+    value: SITE_ENQUIRIES_EMAIL,
     sub: "We reply within 24 hours",
-    href: "mailto:enquiries@musasatravel.com",
+    href: `mailto:${SITE_ENQUIRIES_EMAIL}`,
   },
   {
     icon: <MapPin className="w-5 h-5" />,

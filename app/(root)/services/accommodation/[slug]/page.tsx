@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import AccommodationDetailClient from "./AccommodationDetailClient";
+import { SITE_NAME } from "@/lib/site";
 
 const nameMap: Record<string, string> = {
   "luxury-safari-lodge": "Luxury Safari Lodge",
@@ -35,10 +36,10 @@ export async function generateMetadata({
 
   return {
     title: `${name} — ${location}`,
-    description: `Book ${name} in ${location} with Musasa Travel & Tours. Exceptional service, stunning surroundings, and unforgettable African experiences await.`,
+    description: `Book ${name} in ${location} with ${SITE_NAME}. Exceptional service, stunning surroundings, and unforgettable experiences await.`,
     openGraph: {
-      title: `${name} | Musasa Travel & Tours`,
-      description: `Experience ${name} in ${location}. Curated by Musasa Travel & Tours.`,
+      title: `${name} | ${SITE_NAME}`,
+      description: `Experience ${name} in ${location}. Curated by ${SITE_NAME}.`,
       url: `/services/accommodation/${params.slug}`,
     },
   };

@@ -78,6 +78,16 @@
 }
 
 @layer utilities {
+  @media (prefers-reduced-motion: reduce) {
+    .animate-ken-burns,
+    .animate-dust-float,
+    .animate-door-glow {
+      animation: none !important;
+    }
+  }
+}
+
+@layer utilities {
   .var-position {
     &:nth-of-type(1) {
       top: -45%;
