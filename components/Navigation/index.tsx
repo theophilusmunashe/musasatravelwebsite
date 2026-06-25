@@ -51,14 +51,14 @@ function useMenuAnimation(isOpen: boolean) {
   return scope;
 }
 
-export default function NavMenu({components}: any) {
+export default function NavMenu() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const scope = useMenuAnimation(isOpen);
 
   return (
     <div ref={scope}>
-      <Menu toggle={() => setIsOpen(!isOpen)} components={components} />
+      <Menu toggle={() => setIsOpen(!isOpen)} />
       <MenuToggle toggle={() => setIsOpen(!isOpen)}  />
     </div>
   );

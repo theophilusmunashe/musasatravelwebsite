@@ -11,7 +11,7 @@ import NavMenu from "./Navigation";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import Navigation from "./Navigation/NavigationMain";
 
-const Navbar = ({ components }: any) => {
+const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [scrolledx, setScrolledx] = useState(false);
   const pathname = usePathname();
@@ -70,10 +70,10 @@ const Navbar = ({ components }: any) => {
           <Logo />
         </div>
         <div className="hidden lg:block">
-          <Navigation components={components} />
+          <Navigation />
         </div>
         <div className="lg:hidden">
-          <NavMenu components={components} />
+          <NavMenu />
         </div>
       </div>
     </motion.nav>

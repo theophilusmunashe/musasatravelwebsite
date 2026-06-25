@@ -29,7 +29,7 @@ export default function SiteChrome({
 
   return (
     <>
-      <Navbar components={category} />
+      <Navbar />
       {children}
       <Footer />
       <CartDrawer />
