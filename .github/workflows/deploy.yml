@@ -37,6 +37,7 @@ jobs:
           mkdir -p deploy/.next
           cp -r .next/static deploy/.next/static
           cp -r public deploy/public
+          cp ecosystem.config.cjs deploy/
 
       - name: Deploy to /var/www/kumusha
         run: |
@@ -44,6 +45,5 @@ jobs:
 
       - name: Restart application
         run: |
-          if [ -n "${DEPLOY_RESTART_COMMAND:-}" ]; then
-            eval "$DEPLOY_RESTART_COMMAND"
-          fi
+          pm2 startOrReload /var/www/kumusha/ecosystem.config.cjs --env production
+          pm2 save
