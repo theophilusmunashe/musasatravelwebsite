@@ -38,23 +38,9 @@ jobs:
           cp -r .next/static deploy/.next/static
           cp -r public deploy/public
 
-      - name: Create compressed build archive
-        run: |
-          ARCHIVE="kumusha-${{ github.sha }}.tar.gz"
-          tar -czf "$ARCHIVE" -C deploy .
-          echo "ARCHIVE=$ARCHIVE" >> "$GITHUB_ENV"
-          ls -lh "$ARCHIVE"
-
       - name: Deploy to /var/www/kumusha
         run: |
-          set -euo pipefail
-          DEPLOY_DIR="/var/www/kumusha"
-          STAGING="/tmp/kumusha-staging-${{ github.sha }}"
-          rm -rf "$STAGING"
-          mkdir -p "$STAGING" "$DEPLOY_DIR"
-          tar -xzf "$ARCHIVE" -C "$STAGING"
-          rsync -a --delete --exclude='.env' "$STAGING"/ "$DEPLOY_DIR"/
-          rm -rf "$STAGING" "$ARCHIVE"
+          rsync -a --delete --exclude='.env' deploy/ /var/www/kumusha/
 
       - name: Restart application
         run: |
