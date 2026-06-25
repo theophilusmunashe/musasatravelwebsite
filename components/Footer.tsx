@@ -1,26 +1,23 @@
 "use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, ArrowUpRight, MessageCircle } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
-import { WA_NUMBER, WA_RAW } from "@/app/(root)/bookings/components/WhatsAppButton";
-import { SITE_EMAIL, SITE_NAME, SITE_TAGLINE } from "@/lib/site";
+import { SITE_EMAIL, SITE_NAME, SITE_PHONE, SITE_PHONE_TEL, SITE_TAGLINE } from "@/lib/site";
 import LogoMark from "./LogoMark";
 
 const services = [
-  { name: "Accommodation", href: "/services/accommodation" },
-  { name: "Activities & Tours", href: "/services/activities" },
-  { name: "Customized Itinerary", href: "/services/customized-itinerary" },
-  { name: "Tour Guides", href: "/services/tour-guides" },
-  { name: "Shuttle & Transfers", href: "/services/shuttle-services" },
+  { name: "The Estate", href: "/#the-estate" },
+  { name: "Private Stays", href: "/#services" },
+  { name: "Events & Celebrations", href: "/bookings" },
+  { name: "Wine Tasting", href: "/#experiences" },
+  { name: "Sip & Paint", href: "/#experiences" },
 ];
 
 const company = [
-  { name: "About Us", href: "/about" },
-  { name: "Packages", href: "/packages" },
-  { name: "Bookings", href: "/bookings" },
-  { name: "Contact", href: "/contact" },
-  { name: "Blog", href: "/blogs" },
+  { name: "Featured Experiences", href: "/#featured" },
+  { name: "Enquire", href: "/#enquire" },
+  { name: "Join Us", href: "/bookings" },
 ];
 
 const socials = [
@@ -35,12 +32,6 @@ const socials = [
     icon: <FaFacebook size={16} />,
     href: "https://www.facebook.com/profile.php?id=61587802886735",
     color: "hover:border-blue-500/60 hover:text-blue-400",
-  },
-  {
-    label: "WhatsApp",
-    icon: <MessageCircle size={16} />,
-    href: `https://wa.me/${WA_NUMBER}`,
-    color: "hover:border-green-500/60 hover:text-green-400",
   },
   {
     label: "TikTok",
@@ -78,7 +69,8 @@ export default function Footer() {
           >
             <LogoMark size="md" />
             <p className="text-white/50 text-sm leading-relaxed max-w-xs">
-              A private estate where refined living meets warm hospitality — a sanctuary crafted for those who call it home.
+              A private estate on 2.5 hectares near Victoria Falls — 6 en-suite bedrooms,
+              weddings, conferences, wine tasting, and sip and paint with the Falls in the far distance.
             </p>
             <p className="text-amber-400/80 text-xs font-semibold uppercase tracking-[0.25em]">
               {SITE_TAGLINE}
@@ -86,10 +78,10 @@ export default function Footer() {
 
             {/* Contact info */}
             <div className="space-y-3 mt-2">
-              <a href={`https://wa.me/${WA_NUMBER}`} target="_blank" rel="noopener noreferrer"
+              <a href={`tel:${SITE_PHONE_TEL}`}
                 className="flex items-center gap-3 text-white/50 hover:text-white text-sm transition-colors group">
                 <Phone className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                <span>{WA_RAW}</span>
+                <span>{SITE_PHONE}</span>
               </a>
               <div className="flex items-center gap-3 text-white/50 text-sm">
                 <Phone className="w-4 h-4 text-amber-400 flex-shrink-0" />
@@ -147,18 +139,18 @@ export default function Footer() {
             {/* CTA card */}
             <motion.div variants={fadeUp} custom={3} initial="hidden" whileInView="show" viewport={{ once: true }}
               className="col-span-2 md:col-span-1">
-              <h5 className="text-white font-bold text-sm uppercase tracking-[0.2em] mb-5">Plan Your Trip</h5>
+              <h5 className="text-white font-bold text-sm uppercase tracking-[0.2em] mb-5">Join Us</h5>
               <div className="bg-gradient-to-br from-amber-500/10 to-amber-500/5 border border-amber-500/20 rounded-2xl p-5 space-y-4">
                 <p className="text-white/60 text-sm leading-relaxed">
-                  Ready to experience life at {SITE_NAME}?
+                  Ready to stay, host, or attend something special at {SITE_NAME}?
                 </p>
                 <Link href="/bookings"
                   className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-black font-bold text-sm px-5 py-2.5 rounded-xl transition-colors">
-                  Start Booking
+                  Join Us
                   <ArrowUpRight className="w-4 h-4" />
                 </Link>
                 <div className="pt-2 border-t border-white/8">
-                  <p className="text-white/30 text-xs mb-3">Follow our adventures</p>
+                  <p className="text-white/30 text-xs mb-3">Follow us</p>
                   <div className="flex gap-2">
                     {socials.map((s) => (
                       <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}

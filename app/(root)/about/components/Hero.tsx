@@ -37,7 +37,7 @@ const Hero = ({ home }: any) => {
             transition={{ ...transition }}
             className="font-medium sm:text-left text-3xl md:text-4xl leading-none text-[#fff] "
           >
-            Under the expansive canopy of our local expertise, we provide a global covering for every explorer.
+            Under 2.5 hectares of serene land, with Victoria Falls in the far distance.
           </motion.h1>
           <motion.p
             className="text-lg md:text-xl lg:text-2xl text-white"
@@ -47,11 +47,12 @@ const Hero = ({ home }: any) => {
             viewport={{ once: true }}
             transition={{ ...transition, delay: 0.3 }}
           >
-            Our mission is to provide a global canopy of seamless travel experiences, deeply rooted in the heart of African excellence.
+            Six en-suite bedrooms, versatile entertainment spaces, wine tasting, sip and paint —
+            the perfect setting for weddings, conferences, celebrations, or a peaceful escape.
           </motion.p>
 
-          <Link href="/packages" className="btn btn-primary hvr-fill-black">
-            Discover Our Packages
+          <Link href="/bookings" className="btn btn-primary hvr-fill-black">
+            Plan Your Visit
             <i className="fa-solid fa-arrow-right icon-arrow-corner" />
           </Link>
           {/* <Image 

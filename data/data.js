@@ -1,4 +1,4 @@
-import { FaFacebook, FaInstagram, FaTwitter, FaWhatsapp } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 
 import serviceItem1 from "@/assets/5.png";
 import icon9 from "@/assets/shuttle-icon.png";
@@ -39,15 +39,13 @@ export const foot = [
     name: <FaInstagram color="red" size={22} />,
     url: "https://www.instagram.com",
   },
-  { name: <FaWhatsapp color="green" size={22} />, url: "/" },
 ];
 
 export const navLinks = [
-  { name: "Home", url: "/" },
-  { name: "About", url: "/about" },
-  { name: "Services", url: "/services" },
-  { name: "Packages", url: "/packages" },
-  { name: "Bookings", url: "/bookings" },
+  { name: "The Estate", url: "/#the-estate" },
+  { name: "Services", url: "/#services" },
+  { name: "Experiences", url: "/#experiences" },
+  { name: "Join Us", url: "/bookings" },
 ];
 
 export const navigationServices = [
@@ -160,80 +158,48 @@ export const faqItems = [
   },
   {
     Question: "Where is Kumusha Ekhayalethu located?",
-    Answer: "We are a private estate offering refined living and hospitality. Contact us for location details and estate visits."
+    Answer: "We are a private estate on 2.5 hectares of serene land near Victoria Falls, Zimbabwe — with the Falls visible in the far distance. Contact us for directions and estate visits."
   },
   {
-    Question: "Is Kumusha Ekhayalethu a registered entity?",
-    Answer: "Yes, we are a fully registered and licensed travel management company operating under the laws of Zimbabwe. We maintain the highest international standards of professionalism and safety."
+    Question: "How many guests can the estate accommodate?",
+    Answer: "The estate features 6 beautifully designed en-suite bedrooms, along with versatile entertainment spaces suitable for weddings, conferences, intimate celebrations, and peaceful getaways."
   },
   {
-    Question: "What makes your travel services unique?",
-    Answer: "Our \"home-ground\" advantage in Victoria Falls combined with our global reach sets us apart. We don't just book trips; we provide a protective canopy of local insight and 24/7 support."
+    Question: "What events can I host at Kumusha?",
+    Answer: "Kumusha is the perfect setting for weddings, conferences, intimate celebrations, and private retreats. We also host wine tasting evenings and sip and paint events on the estate."
   },
   {
-    Question: "Which destinations do you specialize in?",
-    Answer: "Our roots run deep across Victoria Falls, Cape Town, Namibia, Zambia, Mozambique, and Mauritius. We also curate bespoke journeys to many other sought-after global destinations."
+    Question: "Do you offer wine tasting and sip and paint events?",
+    Answer: "Yes. We host curated wine tasting evenings and sip and paint events on the estate — relaxed, creative experiences with Victoria Falls shimmering in the far distance."
   },
   {
-    Question: "Can you customize my travel itinerary?",
-    Answer: "Absolutely, we specialize in bespoke itineraries tailored to your specific interests, budget, and pace. Every journey we create is as unique as the traveler we serve."
+    Question: "Can I see Victoria Falls from the estate?",
+    Answer: "Yes. The estate overlooks Victoria Falls in the far distance — a serene backdrop for stays, celebrations, and evening events."
   },
   {
-    Question: "Do you provide airport transfers and shuttle services?",
-    Answer: "Yes, we offer seamless, air-conditioned transfers and cross-border shuttles for individuals and groups. Our professional drivers ensure you arrive safely, comfortably, and on time."
+    Question: "How do I enquire or book?",
+    Answer: "Use our online enquiry form or contact us directly by email or phone. Our team will respond within 24 hours on business days to confirm availability and next steps."
   },
   {
-    Question: "What kind of accommodation do you offer?",
-    Answer: "We partner with a range of vetted properties, from luxury safari lodges to boutique coastal retreats. Every stay is hand-picked to ensure it meets our strict standards for comfort and excellence."
+    Question: "Is the estate suitable for conferences and corporate retreats?",
+    Answer: "Absolutely. Versatile entertainment spaces and en-suite accommodation make Kumusha ideal for conferences, team retreats, and corporate gatherings in a private, elegant setting."
   },
   {
-    Question: "Are your tour guides professionally licensed?",
-    Answer: "Yes, all our guides are licensed experts with deep knowledge of local history, culture, and wildlife. They provide both safety and storytelling to enrich your overall experience."
-  },
-  {
-    Question: "Do you handle international travel outside of Africa?",
-    Answer: "Yes, while our heart is in Africa, our roots reach destinations all over the world. We offer a global \"canopy\" of service for any destination you choose to explore."
-  },
-  {
-    Question: "How do I enquire about the estate?",
-    Answer: "You can request a quote through our website or contact our team directly via email or phone. We will guide you through the process from the initial inquiry to the final booking."
-  },
-  {
-    Question: "Do you provide 24/7 support during my trip?",
-    Answer: "Yes, our dedicated team is available around the clock to assist with any urgent needs or changes. You are always under our protective canopy, regardless of your time zone."
-  },
-  {
-    Question: "Do you facilitate cross-border travel in the Southern African region?",
-    Answer: "Yes, we specialize in seamless transfers between Zimbabwe, Zambia, and Botswana. We manage all the logistics and paperwork so you can focus entirely on the scenery."
+    Question: "Can I book the entire estate for a wedding?",
+    Answer: "Yes. Many couples choose Kumusha for wedding weekends — with room for ceremony, reception, and overnight guests across our 6 en-suite bedrooms."
   },
   {
     Question: "What payment methods do you accept?",
-    Answer: "We accept major credit cards, secure bank transfers, and verified online payment platforms. All transactions are processed through highly secure, encrypted systems for your protection."
+    Answer: "We accept major credit cards, secure bank transfers, and verified online payment platforms. All transactions are processed through secure, encrypted systems."
   },
   {
-    Question: "Do I need travel insurance for my journey?",
-    Answer: "While we do not provide insurance directly, we highly recommend it for every traveler. It serves as an essential extra layer of protection under your travel canopy."
+    Question: "How long does it take to get a quote?",
+    Answer: "Submit an enquiry through our website with your dates and event type. Our team typically responds within 24 to 48 hours on business days."
   },
   {
-    Question: "Do you cater to solo travelers?",
-    Answer: "Yes, we design safe and engaging itineraries specifically for independent explorers. Our constant on-ground support ensures you are never truly alone during your adventure."
+    Question: "Is Kumusha suitable for a peaceful private escape?",
+    Answer: "Yes. Beyond events, the estate is a sanctuary for quiet getaways — 2.5 hectares of serene land where nature, elegance, and privacy come together."
   },
-  {
-    Question: "Can you organize large group or corporate travel?",
-    Answer: "Definitely, we have the logistical capacity to manage everything from family reunions to large-scale corporate retreats. We ensure every member of the group receives consistent, high-quality care."
-  },
-  {
-    Question: "Are activities like safaris or cruises included in the package price?",
-    Answer: "Activities can be bundled into your custom package based on your specific preferences. We handle all the bookings and scheduling so your transitions are completely seamless."
-  },
-  {
-    Question: "Can you assist with visa requirements for different countries?",
-    Answer: "We provide up-to-date information and guidance on visa requirements for our primary destinations. However, the final application and approval remain the responsibility of the traveler."
-  },
-  {
-    Question: "How long does it take to get a custom quote?",
-    Answer: "Simply click the \"Request a Quote\" button on our site and share your vision with us. Our team will plant the seeds for your perfect itinerary within 24 to 48 hours."
-  }
 ];
 
 export const swiperITems = [

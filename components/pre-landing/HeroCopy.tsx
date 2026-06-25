@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { SITE_NAME, SITE_TYPE } from "@/lib/site";
+import { SITE_NAME } from "@/lib/site";
 import LogoMark from "../LogoMark";
 import { COPY_FADE_S, ENTRANCE_SEQUENCE } from "./constants";
 
@@ -20,33 +20,20 @@ export default function HeroCopy({ visible }: { visible: boolean }) {
         duration: visible ? 0.9 : COPY_FADE_S,
         ease,
       }}
-      className="pointer-events-none flex max-w-4xl flex-col items-center px-6 text-center"
+      className="pointer-events-none flex w-full max-w-5xl flex-col items-center px-4 text-center sm:px-6"
     >
       <motion.div
         initial={{ opacity: 0, y: 14 }}
         animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
         transition={{
-          delay: visible ? ENTRANCE_SEQUENCE.headline - 0.15 : 0,
+          delay: visible ? ENTRANCE_SEQUENCE.headline - 0.2 : 0,
           duration: 0.75,
           ease,
         }}
-        className="mb-8"
+        className="relative mb-3 w-full md:mb-4"
       >
-        <LogoMark size="sm" className="opacity-90" />
+        <LogoMark size="hero" tone="intro" className="relative mx-auto" />
       </motion.div>
-
-      <motion.p
-        initial={{ opacity: 0, y: 12 }}
-        animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }}
-        transition={{
-          delay: visible ? ENTRANCE_SEQUENCE.headline - 0.05 : 0,
-          duration: 0.75,
-          ease,
-        }}
-        className="mb-5 font-sans text-[10px] font-medium uppercase tracking-[0.55em] text-amber-200/70"
-      >
-        {SITE_TYPE}
-      </motion.p>
 
       <motion.h1
         initial={{ opacity: 0, y: 28 }}

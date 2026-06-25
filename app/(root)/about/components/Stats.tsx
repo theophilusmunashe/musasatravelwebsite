@@ -8,34 +8,29 @@ const Stats = () => {
       <div className="flex items-center justify-center lg:gap-16 md:gap-8 md:flex-row flex-col gap-4">
         <div className="text-center">
           <h4 className="capitalize text-2xl lg:text-5xl font-medium">
-            <CountUp start={100} end={183} duration={3} />
-            {/* 11,000  */}
-          
+            <CountUp start={0} end={2.5} decimals={1} duration={3} />
           </h4>
           <p className="text-[#979DAC] mt-4 text-base md:text-lg">
-           Global travelers sheltered by our canopy
+            Hectares of serene private land
           </p>
         </div>
 
         <div className="text-center">
           <h4 className="capitalize text-2xl lg:text-5xl font-medium">
-            <CountUp start={0} end={20} duration={3} />
-            {/* 70  */}
-            <span className="text-[#979DAC]">+</span>{" "}
+            <CountUp start={0} end={6} duration={3} />
           </h4>
           <p className="text-[#979DAC] mt-4 text-base md:text-lg">
-            Unique landmarks and hidden gems curated
+            Beautifully designed en-suite bedrooms
           </p>
         </div>
 
         <div className="text-center">
           <h4 className="capitalize text-2xl lg:text-5xl font-medium">
-            <CountUp start={0} end={12} duration={3} />
-            {/* 65  */}
-            <span className="text-[#979DAC]">+</span>{" "}
+            <CountUp start={0} end={1} duration={3} />
+            <span className="text-[#979DAC]"> view</span>
           </h4>
           <p className="text-[#979DAC] mt-4 text-base md:text-lg">
-            Countries across Africa and the Islands
+            Victoria Falls shimmering in the far distance
           </p>
         </div>
       </div>

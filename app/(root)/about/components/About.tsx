@@ -22,22 +22,22 @@ export default function About() {
             </h2>
             <br />
             <p className="sm:text-lg md:text-xl leading-relaxed max-w-none md:max-w-4xl">
-              {SITE_NAME} was born from a simple but powerful idea: that everyone deserves a place
-              they can truly call home. The name weaves together Shona, Ndebele, and Zulu —{" "}
-              <em>Kumusha</em> and <em>Ekhayalethu</em>, our home.
+              Tucked away on 2.5 hectares of serene land, {SITE_NAME} is a private estate where
+              nature, elegance, and privacy come together in perfect harmony. With 6 beautifully
+              designed en-suite bedrooms and versatile entertainment spaces, Kumusha is the perfect
+              setting for weddings, conferences, intimate celebrations, or simply a peaceful escape.
               <br />
               <br />
-              As a private estate, we offer more than residences. We offer a way of living rooted in
-              community, security, and refined hospitality. From thoughtfully designed homes to curated
-              on-estate experiences, every element reflects our commitment to creating a sanctuary where
-              residents and guests feel they truly belong. At {SITE_NAME}, we don&apos;t just provide
-              accommodation — we cultivate a shared sense of home.
+              The name weaves together Shona, Ndebele, and Zulu — <em>Kumusha</em> and{" "}
+              <em>Ekhayalethu</em>, our home. From wine tasting evenings to sip and paint events
+              overlooking Victoria Falls in the far distance, every detail reflects our commitment
+              to creating a sanctuary where you truly belong.
             </p>
           </div>
           <br />
           <div className="flex justify-center items-center md:justify-start md:items-start">
-            <Link href="/services/customized-itinerary" className="btn btn-primary hvr-fill-black">
-              Our Services
+            <Link href="/bookings" className="btn btn-primary hvr-fill-black">
+              Plan Your Visit
               <ArrowUpRight className="w-4 h-4" />
             </Link>
           </div>

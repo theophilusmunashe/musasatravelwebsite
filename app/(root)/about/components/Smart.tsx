@@ -31,16 +31,16 @@ const Smart = () => {
   // Hardcoded service items for easy editing
   const serviceItems = [
     {
-      title: "A True Sense of Home",
-      description: "Every residence and guest experience at the estate is designed to feel personal, welcoming, and deeply rooted in the meaning of our name — home that belongs to us all.",
+      title: "Nature, Elegance & Privacy",
+      description: "On 2.5 hectares of serene land, the estate brings together open skies, indigenous gardens, and refined spaces — with Victoria Falls on the horizon.",
     },
     {
-      title: "Refined Private Living",
-      description: "From secure gated access to beautifully appointed residences, we provide a standard of living that balances privacy with the warmth of community.",
+      title: "Weddings & Celebrations",
+      description: "Versatile entertainment spaces and 6 en-suite bedrooms make Kumusha the perfect setting for weddings, conferences, and intimate gatherings.",
     },
     {
-      title: "Curated Estate Experiences",
-      description: "Beyond the homes themselves, we offer hospitality, activities, and services tailored to residents and guests — so every moment at the estate feels effortless and exceptional.",
+      title: "Wine Tasting & Sip & Paint",
+      description: "Unwind at curated wine tasting evenings and sip and paint events — relaxed, creative, and framed by one of Africa's most iconic views.",
     },
   ];
 
@@ -80,7 +80,7 @@ const Smart = () => {
                 <br />
                 <div className="flex justify-between">
                   <div></div>
-                  <Link href="/packages" className="bg-transparent text-[#e6b740] hover:translate-x-2 transition-transform flex items-center">
+                  <Link href="/bookings" className="bg-transparent text-[#e6b740] hover:translate-x-2 transition-transform flex items-center">
                     <ArrowRight />
                   </Link>
                 </div>

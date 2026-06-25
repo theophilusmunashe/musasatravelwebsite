@@ -14,7 +14,7 @@ import { SITE_ENQUIRIES_EMAIL } from "@/lib/site";
 const INFO = [
   {
     icon: <Phone className="w-5 h-5" />,
-    label: "Call or WhatsApp",
+    label: "Call Us",
     value: "+263 77 609 3268",
     sub: "Mon – Sun · 6am – 9pm CAT",
     href: "tel:+263776093268",
@@ -68,16 +68,16 @@ function Hero() {
           className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.05] tracking-tight mb-4"
         >
           <span className="block">Let&apos;s Plan</span>
-          <span className="block text-amber-400">Your Adventure</span>
+          <span className="block text-amber-400">Your Visit</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.6 }}
           className="text-white/60 text-lg max-w-lg leading-relaxed"
         >
-          Based in the heart of Victoria Falls, Zimbabwe — we are available
-          around the clock to answer questions, build itineraries, and make
-          your African dream a reality.
+          On 2.5 hectares near Victoria Falls — we&apos;re here to help you plan a
+          wedding, conference, wine tasting, sip and paint event, or peaceful escape
+          at Kumusha Ekhayalethu.
         </motion.p>
       </div>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} className="absolute bottom-5 right-8">

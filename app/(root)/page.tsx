@@ -1,20 +1,15 @@
-import dynamic from "next/dynamic";
-
 import FormComponent from "../../components/FormComponent";
 import Hero from "../../components/Hero";
 import Industry from "../../components/Industry";
-import Offers from "../../components/Offers";
 import Recents from "../../components/Recents";
-import Vision from "../../components/Vision";
 
 import type { Metadata } from "next";
 import Note from "../../components/Note";
-import { SITE_DESCRIPTION, SITE_FULL_NAME, SITE_NAME } from "../../lib/site";
+import { SITE_DESCRIPTION, SITE_FULL_NAME } from "../../lib/site";
 
-import ColumnContainer from "../../components/ColumnContainer";
-import Example from "../../components/Hori";
 import Service from "../../components/Services";
-import Cta from "../../components/Collab";
+import HomeScrollToHash from "../../components/HomeScrollToHash";
+import EstateWalkthrough from "../../components/EstateWalkthrough";
 
 export const metadata: Metadata = {
   title: SITE_FULL_NAME,
@@ -41,12 +36,11 @@ export const metadata: Metadata = {
 export default async function Home() {
   return (
     <main className="h-full">
+      <HomeScrollToHash />
       <Hero />
-
       <Note />
-
+      <EstateWalkthrough />
       <Service />
-      {/* <Example data={category} /> */}
       <Industry />
       <Recents />
       <FormComponent />

@@ -6,8 +6,12 @@ import { SITE_ENQUIRIES_EMAIL, SITE_NAME, SITE_URL } from '@/lib/site';
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.json();
-
-    // Create HTML email content for better deliverability
+    const activitiesList = Array.isArray(formData.activities)
+      ? formData.activities.filter(Boolean).join(", ")
+      : formData.activities || "None";
+    const intentLine = formData.intent
+      ? `<div class="field"><span class="label">Intent:</span><span class="value">${formData.intent}</span></div>`
+      : "";
     const htmlContent = `
       <!DOCTYPE html>
       <html>
@@ -32,19 +36,20 @@ export async function POST(request: NextRequest) {
         </div>
         
         <div class="content">
+          ${intentLine}
           <div class="field">
             <span class="label">🎯 Service:</span>
-            <span class="value">${formData.service}</span>
+            <span class="value">${formData.service || "—"}</span>
           </div>
           
           <div class="field">
-            <span class="label">🏨 Accommodation:</span>
-            <span class="value">${formData.accommodation}</span>
+            <span class="label">🏨 Space / accommodation:</span>
+            <span class="value">${formData.accommodation || "—"}</span>
           </div>
           
           <div class="field">
-            <span class="label">🎪 Activities:</span>
-            <span class="value">${formData.activities.join(', ')}</span>
+            <span class="label">🎪 Event / activities:</span>
+            <span class="value">${activitiesList}</span>
           </div>
           
           <div class="field">
@@ -104,9 +109,9 @@ export async function POST(request: NextRequest) {
     const textContent = `
       NEW BOOKING REQUEST - ${SITE_NAME.toUpperCase()}
       
-      Service: ${formData.service}
-      Accommodation: ${formData.accommodation}
-      Activities: ${formData.activities.join(', ')}
+      Service: ${formData.service || "—"}
+      Space: ${formData.accommodation || "—"}
+      Event / activities: ${activitiesList}
       Tour Guide: ${formData.tourGuide}
       Transfers: ${formData.transfers}
       

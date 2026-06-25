@@ -5,11 +5,8 @@ import { Input } from "./ui/input";
 import { sendEmail } from "../actions/sendEmail";
 import toast from "react-hot-toast";
 import Reveal from "./Reveal";
-import { SITE_NAME } from "@/lib/site";
 
 import "../app/globals.scss";
-
-const WA_NUMBER = "263776093268";
 
 const FormComponent = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -33,22 +30,7 @@ const FormComponent = () => {
       return;
     }
 
-    toast.success("Message sent successfully!");
-
-    const waMessage = [
-      `🏡 *New Enquiry – ${SITE_NAME}*`,
-      "━━━━━━━━━━━━━━━━━━━━━━",
-      `👤 *Name:* ${firstName}`,
-      `📧 *Email:* ${senderEmail}`,
-      `📱 *Phone:* ${phoneNumber}`,
-      "",
-      `💬 *Message:*\n${message}`,
-    ].join("\n");
-
-    window.open(
-      `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`,
-      "_blank"
-    );
+    toast.success("Message sent successfully! We'll be in touch soon.");
 
     form.reset();
     setIsLoading(false);
@@ -56,13 +38,13 @@ const FormComponent = () => {
 
   return (
     <Reveal width="100%">
-      <div className="h-full contact-hero">
+      <div id="enquire" className="scroll-mt-24 h-full contact-hero">
         <div className=" bg-neutral-900/70 text-white h-screen w-full py-20">
           <div className="max-w-6xl mx-auto h-full w-full flex flex-col justify-center p-2 md:p-4 ">
             <div className="max-w-3xl mx-auto text-center">
               <span className="subtitle">GET IN TOUCH</span>
               <h2 className="content-title heading-md mb-4">
-                Contact our support team to explore new packages
+                Enquire about stays, events, and estate experiences
               </h2>
             </div>
             <form

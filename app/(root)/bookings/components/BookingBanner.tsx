@@ -18,15 +18,15 @@ export default function BookingBanner() {
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-16 pb-14">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}>
-          <p className="text-amber-400 text-sm font-semibold uppercase tracking-[0.3em] mb-3">Start Your Journey</p>
+          <p className="text-amber-400 text-sm font-semibold uppercase tracking-[0.3em] mb-3">Plan Your Visit</p>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.05] tracking-tight mb-4">
             Book Your
-            <span className="block text-amber-400">African Adventure</span>
+            <span className="block text-amber-400">Estate Experience</span>
           </h1>
           <p className="text-white/60 text-lg max-w-xl leading-relaxed">
             {count > 0
-              ? `You have ${count} item${count !== 1 ? "s" : ""} pre-selected. Complete your details below and we'll confirm availability within 5 minutes.`
-              : "Fill out your details and our Victoria Falls team will craft your perfect itinerary and confirm availability within 5 minutes."}
+              ? `You have ${count} item${count !== 1 ? "s" : ""} pre-selected. Complete your details below and we'll confirm availability by email.`
+              : "Tell us about your stay, wedding, conference, or event — our team will respond by email within 24 hours on business days."}
           </p>
           {count > 0 && (
             <div className="mt-4 inline-flex items-center gap-2 bg-amber-500/20 border border-amber-500/40 text-amber-300 text-sm px-4 py-2 rounded-full">

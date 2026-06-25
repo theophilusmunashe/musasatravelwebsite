@@ -1,9 +1,10 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, Users, MapPin, Clock, ChevronRight, Check, ShoppingBag, MessageCircle } from "lucide-react";
+import { Calendar, Users, MapPin, Clock, ChevronRight, Check, ShoppingBag, Mail } from "lucide-react";
 import { useCartStore } from "@/lib/cartStore";
-import { WA_NUMBER, buildWhatsAppMessage } from "./WhatsAppButton";
+import toast from "react-hot-toast";
+import { SITE_ENQUIRIES_EMAIL } from "@/lib/site";
 
 interface FormData {
   service: string;
@@ -69,56 +70,56 @@ export default function BookingForm({ onDataChange }: BookingFormProps) {
   const fields: FieldConfig[] = [
     {
       id: "service",
-      label: "What service are you interested in?",
+      label: "What are you planning?",
       type: "select",
-      options: ["Accommodation", "Activities", "Customized Itinerary", "Tour Guides", "Shuttle Services & Transfers"],
+      options: ["Private Stay", "Wedding", "Conference", "Intimate Celebration", "Wine Tasting Event", "Sip & Paint Event"],
       icon: <MapPin className="w-5 h-5" />,
     },
     {
       id: "accommodation",
-      label: "Preferred accommodation type?",
+      label: "How many en-suite bedrooms do you need?",
       type: "select",
-      options: ["Luxury Safari Lodge", "Boutique Hotel", "Eco Lodge", "Budget Friendly", "No accommodation needed"],
+      options: ["1 bedroom", "2 bedrooms", "3 bedrooms", "4 bedrooms", "5 bedrooms", "All 6 bedrooms", "Day event only — no overnight stay"],
       icon: <Users className="w-5 h-5" />,
     },
     {
       id: "activities",
-      label: "Select activities you're interested in:",
+      label: "Select estate experiences you're interested in:",
       type: "multiselect",
-      options: ["Victoria Falls Tour", "Wildlife Safari", "Cultural Experience", "Adventure Sports", "Photography Tour", "Bird Watching"],
+      options: ["Wine Tasting", "Sip & Paint", "Wedding Ceremony", "Conference Setup", "Private Dining", "Victoria Falls Viewing"],
       icon: <MapPin className="w-5 h-5" />,
     },
     {
       id: "tourGuide",
-      label: "Do you need a tour guide?",
+      label: "Do you need event coordination support?",
       type: "select",
-      options: ["Yes - Expert Guide", "Yes - Basic Guide", "No, self-guided", "Not sure"],
+      options: ["Yes — full coordination", "Yes — partial support", "No, self-managed", "Not sure yet"],
       icon: <Users className="w-5 h-5" />,
     },
     {
       id: "transfers",
-      label: "Airport transfers required?",
+      label: "Do you need airport transfers?",
       type: "select",
-      options: ["Yes - Round trip", "Yes - One way", "No, arranged separately", "Not sure"],
+      options: ["Yes — round trip", "Yes — one way", "No, arranged separately", "Not sure"],
       icon: <Clock className="w-5 h-5" />,
     },
     {
       id: "startDate",
-      label: "When would you like to start your journey?",
+      label: "Preferred start date",
       type: "date",
       icon: <Calendar className="w-5 h-5" />,
     },
     {
       id: "endDate",
-      label: "When would you like to end your journey?",
+      label: "Preferred end date",
       type: "date",
       icon: <Calendar className="w-5 h-5" />,
     },
     {
       id: "travelers",
-      label: "How many travelers?",
+      label: "How many guests?",
       type: "select",
-      options: ["1", "2", "3-4", "5-8", "9+"],
+      options: ["1–10", "11–20", "21–40", "41–60", "60+"],
       icon: <Users className="w-5 h-5" />,
     },
     {
@@ -179,10 +180,22 @@ export default function BookingForm({ onDataChange }: BookingFormProps) {
   };
 
   const handleSubmit = async () => {
-    const msg = buildWhatsAppMessage(cartItems, formData);
-    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
-    clearCart();
-    setShowSuccess(true);
+    try {
+      const response = await fetch("/api/send-booking-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const result = await response.json();
+      if (!response.ok || !result.success) {
+        toast.error("Failed to send enquiry. Please try again or email us directly.");
+        return;
+      }
+      clearCart();
+      setShowSuccess(true);
+    } catch {
+      toast.error("Failed to send enquiry. Please try again.");
+    }
   };
 
   const renderField = (field: FieldConfig) => {
@@ -271,38 +284,31 @@ export default function BookingForm({ onDataChange }: BookingFormProps) {
   };
 
   if (showSuccess) {
-    const msg = buildWhatsAppMessage(cartItems, formData);
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         className="bg-[#111] border border-white/10 rounded-2xl p-8 text-center"
       >
-        <div className="w-16 h-16 bg-[#25D366]/20 border border-[#25D366]/30 rounded-full flex items-center justify-center mx-auto mb-6">
-          <Check className="w-8 h-8 text-[#25D366]" />
+        <div className="w-16 h-16 bg-amber-500/20 border border-amber-500/30 rounded-full flex items-center justify-center mx-auto mb-6">
+          <Check className="w-8 h-8 text-amber-400" />
         </div>
         <h3 className="text-2xl font-bold text-white mb-3">
-          Your booking has been sent!
+          Your enquiry has been sent!
         </h3>
         <p className="text-white/60 mb-6 leading-relaxed">
-          Your trip selection was sent directly to our team via WhatsApp. We typically confirm within minutes during business hours.
+          Thank you for reaching out to Kumusha Ekhayalethu. Our team will review
+          your request and respond by email — typically within 24 hours on business days.
         </p>
-        <div className="bg-[#25D366]/10 border border-[#25D366]/30 rounded-xl p-4 mb-4">
+        <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <MessageCircle className="w-4 h-4 text-[#25D366]" />
-            <p className="text-sm font-semibold text-[#25D366]">Sent to +263 77 609 3268</p>
+            <Mail className="w-4 h-4 text-amber-400" />
+            <p className="text-sm font-semibold text-amber-300">{SITE_ENQUIRIES_EMAIL}</p>
           </div>
           <p className="text-white/40 text-xs">
-            If WhatsApp didn&apos;t open automatically, tap the button below to resend.
+            Check your inbox for a confirmation. If you don&apos;t hear from us, feel free to email directly.
           </p>
         </div>
-        <button
-          onClick={() => window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank")}
-          className="w-full bg-[#25D366] hover:bg-[#20bb5a] text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-colors"
-        >
-          <MessageCircle className="w-5 h-5" />
-          <span>Resend on WhatsApp</span>
-        </button>
       </motion.div>
     );
   }

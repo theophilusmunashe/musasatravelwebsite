@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useAnimations } from "../hooks/useFramer";
 import { MotionDiv } from "../lib/framer";
+import HeroBrandTitle from "./HeroBrandTitle";
 
 export default function HeroBanner({ data }: any) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -52,12 +53,8 @@ export default function HeroBanner({ data }: any) {
         controls={false}
       >
         <source
-          src=" https://res.cloudinary.com/dnir0cslk/video/upload/v1711011338/Office_-_Main_Page_e8pd2v_1_jibiqf.mp4"
+          src="https://res.cloudinary.com/dv0ljguvv/video/upload/v1782258681/Welcome_to_Kumusha_Ekhayalethu_Tucked_away_on_2.5_hectares_of_serene_land_our_private_estate_hxhksy.mp4"
           type="video/mp4"
-        />
-        <source
-          src="https://res.cloudinary.com/dmxrtcszc/video/upload/v1710929534/Office_-_Main_Page_e8pd2v.webm"
-          type="video/webm"
         />
         Your browser does not support the video tag.
       </video>
@@ -72,28 +69,10 @@ export default function HeroBanner({ data }: any) {
           >
             <div className="hero-content ">
               <div className="hero-content_text-block ">
-                <motion.h1
+                <HeroBrandTitle
                   variants={textReveal}
-                  initial="bananin"
-                  whileInView="bananon"
-                  viewport={{ once: true }}
                   transition={{ ...transition }}
-                  className="hero-content__title heading-lg text-white max-w-[92vw] sm:max-w-none whitespace-normal sm:whitespace-nowrap break-words leading-tight"
-                >
-                  {data.title}
-                </motion.h1>
-                {data.subtitle && (
-                  <motion.h2
-                    variants={textReveal}
-                    initial="bananin"
-                    whileInView="bananon"
-                    viewport={{ once: true }}
-                    transition={{ ...transition, delay: 0.2 }}
-                    className="hero-content__subtitle heading-md text-white mt-2 max-w-[92vw] sm:max-w-none whitespace-normal break-words leading-snug"
-                  >
-                    {data.subtitle}
-                  </motion.h2>
-                )}
+                />
                 {data.subtitle2 && (
                   <motion.p
                     variants={textReveal}
@@ -115,17 +94,17 @@ export default function HeroBanner({ data }: any) {
                 className="hero-content_button-group p-2"
               >
                 <Link
-                  href="/services/customized-itinerary"
+                  href="/#the-estate"
                   className="btn btn-primary hvr-fill-black"
                 >
-                  Explore Destinations
+                  Explore Estate
                   <ArrowUpRight className="w-4 h-4" />
                 </Link>
                 <Link
                   href="/bookings"
                   className="btn btn-white hvr-white-primary"
                 >
-                  Make A Booking
+                  Join Us
                   <ArrowUpRight className="w-4 h-4" />
                 </Link>
               </MotionDiv>

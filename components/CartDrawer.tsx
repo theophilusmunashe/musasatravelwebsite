@@ -14,9 +14,7 @@ import {
   Utensils,
   Car,
   UserCheck,
-  MessageCircle,
 } from "lucide-react";
-import { WA_NUMBER, buildWhatsAppMessage } from "@/app/(root)/bookings/components/WhatsAppButton";
 import Image from "next/image";
 import { useCartStore, CartItem } from "@/lib/cartStore";
 import toast from "react-hot-toast";
@@ -250,22 +248,8 @@ export default function CartDrawer() {
                   onClick={handleCheckout}
                   className="w-full bg-amber-500 hover:bg-amber-400 text-black font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors"
                 >
-                  <span>Complete Booking</span>
+                  <span>Complete Enquiry</span>
                   <ArrowRight className="w-5 h-5" />
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => {
-                    const msg = buildWhatsAppMessage(items);
-                    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
-                    clearCart();
-                    closeCart();
-                  }}
-                  className="w-full bg-[#25D366] hover:bg-[#20bb5a] text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-colors"
-                >
-                  <MessageCircle className="w-4 h-4" />
-                  <span>Send to WhatsApp</span>
                 </motion.button>
               </div>
             )}

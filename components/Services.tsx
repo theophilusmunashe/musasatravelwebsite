@@ -5,47 +5,39 @@ import { useRef } from "react";
 import {
   ArrowUpRight,
   BedDouble,
-  Compass,
-  Map,
-  UserCheck,
-  Car,
+  PartyPopper,
+  Wine,
+  Palette,
 } from "lucide-react";
 
 const SERVICES = [
   {
     icon: <BedDouble className="w-7 h-7" />,
-    title: "Accommodation",
-    href: "/services/accommodation",
+    title: "Private Stays",
+    href: "/#the-estate",
     description:
-      "From luxury safari lodges to boutique coastal retreats, we hand-pick your sanctuary for every night of your journey. Rest easy under our canopy of carefully vetted stays that prioritize comfort, style, and authentic local charm.",
+      "Six beautifully designed en-suite bedrooms on 2.5 hectares of serene land — the perfect peaceful escape, with versatile entertainment spaces and Victoria Falls in the far distance.",
   },
   {
-    icon: <Compass className="w-7 h-7" />,
-    title: "Activities",
-    href: "/services/activities",
+    icon: <PartyPopper className="w-7 h-7" />,
+    title: "Events & Celebrations",
+    href: "/bookings",
     description:
-      "Dive into heart-pounding adventures or tranquil cultural immersions curated by those who know the land best. We connect you to the pulse of every destination, from the spray of the Falls to the silence of the savannah.",
+      "Host weddings, conferences, and intimate celebrations in an elegant private setting where nature, privacy, and warm hospitality come together effortlessly.",
   },
   {
-    icon: <Map className="w-7 h-7" />,
-    title: "Customized Itineraries",
-    href: "/services/customized-itinerary",
+    icon: <Wine className="w-7 h-7" />,
+    title: "Wine Tasting",
+    href: "/#experiences",
     description:
-      "No two travellers are alike, so we craft bespoke journeys tailored specifically to your unique pace and passions. Your dream itinerary is designed with precision, ensuring every detail is rooted in excellence and a personal touch.",
+      "Savour curated wine tasting evenings on the estate — relaxed, refined, and framed by open skies with the mist of Victoria Falls on the horizon.",
   },
   {
-    icon: <UserCheck className="w-7 h-7" />,
-    title: "Tour Guides",
-    href: "/services/tour-guides",
+    icon: <Palette className="w-7 h-7" />,
+    title: "Sip & Paint",
+    href: "/#experiences",
     description:
-      "Explore through the eyes of passionate experts who breathe life into every landmark and hidden trail. Our guides offer deep local insights and a protective presence, making every story of the land come alive for you.",
-  },
-  {
-    icon: <Car className="w-7 h-7" />,
-    title: "Shuttle & Transfers",
-    href: "/services/shuttle-services",
-    description:
-      "Navigate the region with ease through our reliable network of air-conditioned, professional transfers and cross-border shuttles that get you there safely and on time.",
+      "Unwind at our sip and paint events overlooking Victoria Falls in the far distance — creativity, conversation, and a glass in hand as the sun sets.",
   },
 ];
 
@@ -54,7 +46,7 @@ export default function Service() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="bg-[#111] py-24 md:py-32 px-6 md:px-16">
+    <section id="services" ref={ref} className="scroll-mt-24 bg-[#111] py-24 md:py-32 px-6 md:px-16">
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
@@ -69,13 +61,13 @@ export default function Service() {
               What We Offer
             </p>
             <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
-              A Full Covering for the{" "}
-              <span className="text-amber-400">Modern Traveller</span>
+              A Sanctuary for{" "}
+              <span className="text-amber-400">Every Occasion</span>
             </h2>
           </div>
           <p className="text-white/40 text-sm max-w-xs md:text-right leading-relaxed">
-            Every service built around one promise — seamless, expert-led
-            travel from start to finish.
+            From peaceful getaways to grand celebrations — all on one private
+            estate overlooking Victoria Falls.
           </p>
         </motion.div>
 
@@ -83,7 +75,7 @@ export default function Service() {
         <div className="h-px bg-gradient-to-r from-amber-500/50 via-amber-500/10 to-transparent mb-14" />
 
         {/* Cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {SERVICES.map((item, i) => (
             <motion.div
               key={item.title}

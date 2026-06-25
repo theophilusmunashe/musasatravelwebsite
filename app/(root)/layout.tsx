@@ -2,21 +2,16 @@ import Script from "next/script";
 
 import type { Metadata } from "next";
 import "../globals.css";
-// import "../globals.scss";
 
 import { Inter as FontSans, Cormorant_Garamond as FontDisplay } from "next/font/google";
 
 import { cn } from "../../lib/utils";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
+import SiteChrome from "../../components/SiteChrome";
 import { client } from "../../sanity/lib/client";
 import { groq } from "next-sanity";
 
 import { Toaster } from "react-hot-toast";
 import PreLandingExperience from "../../components/pre-landing/PreLandingExperience";
-import CartDrawer from "../../components/CartDrawer";
-import FloatingCart from "../../components/FloatingCart";
-import WhatsAppButton from "./bookings/components/WhatsAppButton";
 import ConsentBanner from "../../components/ConsentBanner";
 import {
   SITE_DESCRIPTION,
@@ -50,7 +45,7 @@ export const metadata: Metadata = {
     "private estate",
     "luxury estate living",
     "estate accommodation",
-    "private estate zimbabwe",
+    "private estate victoria falls",
     "estate hospitality",
     "curated estate experiences",
     "kumusha estate",
@@ -114,7 +109,6 @@ const categoryquery = groq`
 const fetchCategory = async () => {
   try {
     const posts = await client.fetch(categoryquery);
-    // Handle the fetched posts data
     return posts;
   } catch (error) {
     console.error("Error fetching posts:", error);
@@ -187,23 +181,18 @@ export default async function RootLayout({
                 "@type": "OfferCatalog",
                 name: "Estate Services",
                 itemListElement: [
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Estate Accommodation" } },
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Curated Experiences" } },
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Estate Hospitality" } },
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Private Transfers" } },
+                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Private Stays — 6 En-Suite Bedrooms" } },
+                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Weddings & Celebrations" } },
+                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Conferences & Retreats" } },
+                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Wine Tasting Events" } },
+                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Sip & Paint Experiences" } },
                 ],
               },
             }),
           }}
         />
         <PreLandingExperience />
-        <Navbar components={category} />
-
-        {children}
-        <Footer />
-        <CartDrawer />
-        <FloatingCart />
-        <WhatsAppButton />
+        <SiteChrome category={category}>{children}</SiteChrome>
         <ConsentBanner />
         <Toaster position="top-right" />
       </body>

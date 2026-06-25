@@ -101,14 +101,14 @@ export default function ConsentBanner() {
                               <li>Contact details you submit via forms</li>
                               <li>Booking and itinerary preferences</li>
                               <li>Site usage analytics (anonymised)</li>
-                              <li>WhatsApp communication records</li>
+                              <li>Email communication records</li>
                             </ul>
                           </div>
                           <div>
                             <p className="text-white/60 font-semibold mb-1">How we use it</p>
                             <ul className="space-y-0.5 list-disc list-inside">
                               <li>Respond to enquiries and process bookings</li>
-                              <li>Send relevant travel offers (opt-out anytime)</li>
+                              <li>Send relevant estate and event updates (opt-out anytime)</li>
                               <li>Improve our website and services</li>
                               <li>Comply with legal obligations</li>
                             </ul>

@@ -1,26 +1,17 @@
-import type { Metadata } from "next";
-import BookingsPageClient from "./BookingsPageClient";
+import type { Metadata, Viewport } from "next";
 import { SITE_NAME } from "@/lib/site";
+import { SAHWIRA_NAME } from "@/lib/sahwira";
+import BookingsPageClient from "./BookingsPageClient";
 
 export const metadata: Metadata = {
-  title: "Book Your Stay",
-  description:
-    `Complete your booking with ${SITE_NAME}. Review your selected accommodation and services, then send your booking directly via WhatsApp for confirmation.`,
-  keywords: [
-    "kumusha ekhayalethu booking",
-    "private estate booking",
-    "estate reservation",
-  ],
-  openGraph: {
-    title: `Book Your Stay | ${SITE_NAME}`,
-    description:
-      `Review your cart and complete your booking with ${SITE_NAME}.`,
-    url: "/bookings",
-  },
-  robots: {
-    index: false,
-    follow: false,
-  },
+  title: `Join us — ${SAHWIRA_NAME} & booking`,
+  description: `Stay, host, or attend at ${SITE_NAME}. Chat with ${SAHWIRA_NAME}, our AI concierge, or send a manual enquiry for private stays and events at Victoria Falls.`,
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function BookingsPage() {
