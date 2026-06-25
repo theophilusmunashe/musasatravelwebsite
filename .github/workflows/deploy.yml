@@ -32,11 +32,13 @@ jobs:
 
       - name: Prepare deployment bundle
         run: |
+          rm -rf deploy
           mkdir -p deploy
-          cp -r .next/standalone/* deploy/
-          mkdir -p deploy/.next
-          cp -r .next/static deploy/.next/static
-          cp -r public deploy/public
+          # Copy all standalone output, including hidden .next/ (cp * skips dotfiles)
+          rsync -a .next/standalone/ deploy/
+          mkdir -p deploy/.next/static
+          rsync -a .next/static/ deploy/.next/static/
+          rsync -a public/ deploy/public/
           cp ecosystem.config.cjs deploy/
 
       - name: Deploy to /var/www/kumusha
