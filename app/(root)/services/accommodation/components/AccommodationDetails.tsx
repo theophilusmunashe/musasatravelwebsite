@@ -218,14 +218,14 @@ export default function AccommodationDetails({
         <h2 className="text-2xl font-bold mb-6">Questions or Need Help?</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <motion.a
-            href="tel:+263776093268"
+            href="tel:+263782714577"
             whileHover={{ scale: 1.05 }}
             className="flex items-center gap-4 p-4 bg-white/10 rounded-lg border border-white/20 hover:bg-white/15 transition-colors"
           >
             <Phone className="w-6 h-6 text-amber-400" />
             <div>
               <p className="text-sm text-gray-300">Call us</p>
-              <p className="font-semibold">+263 77 609 3268</p>
+              <p className="font-semibold">+263 78 271 4577</p>
             </div>
           </motion.a>
           <motion.a

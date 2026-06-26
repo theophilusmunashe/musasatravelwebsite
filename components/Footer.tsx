@@ -83,14 +83,6 @@ export default function Footer() {
                 <Phone className="w-4 h-4 text-amber-400 flex-shrink-0" />
                 <span>{SITE_PHONE}</span>
               </a>
-              <div className="flex items-center gap-3 text-white/50 text-sm">
-                <Phone className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                <span>+263 778 452 011</span>
-              </div>
-              <div className="flex items-center gap-3 text-white/50 text-sm">
-                <Phone className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                <span>+263 775 770 080</span>
-              </div>
               <a href={`mailto:${SITE_EMAIL}`}
                 className="flex items-center gap-3 text-white/50 hover:text-white text-sm transition-colors">
                 <Mail className="w-4 h-4 text-amber-400 flex-shrink-0" />

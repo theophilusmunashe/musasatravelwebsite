@@ -157,7 +157,7 @@ export default async function RootLayout({
               logo: `${SITE_URL}/image/logo.svg`,
               description: SITE_DESCRIPTION,
               email: SITE_EMAIL,
-              telephone: "+263776093268",
+              telephone: "+263782714577",
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "Victoria Falls",

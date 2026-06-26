@@ -5,8 +5,8 @@ import { useState } from "react";
 import { useCartStore } from "@/lib/cartStore";
 import { SITE_NAME } from "@/lib/site";
 
-export const WA_NUMBER = "263776093268";
-export const WA_RAW = "+263 77 609 3268";
+export const WA_NUMBER = "263782714577";
+export const WA_RAW = "+263 78 271 4577";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (

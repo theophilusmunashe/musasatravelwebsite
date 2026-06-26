@@ -15,9 +15,9 @@ const INFO = [
   {
     icon: <Phone className="w-5 h-5" />,
     label: "Call Us",
-    value: "+263 77 609 3268",
+    value: "+263 78 271 4577",
     sub: "Mon – Sun · 6am – 9pm CAT",
-    href: "tel:+263776093268",
+    href: "tel:+263782714577",
   },
   {
     icon: <Mail className="w-5 h-5" />,
