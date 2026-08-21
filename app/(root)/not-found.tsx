@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import "../globals.scss";
@@ -9,7 +8,7 @@ export default function NotFound() {
     <section className="error-section ">
       <div className="container">
         <div className="error-section-shape">
-          <Image
+          <img
             height={357}
             width={728}
             src="/image/common/error-shape.png"
@@ -21,7 +20,7 @@ export default function NotFound() {
           <div className="col-xxl-6 col-lg-7 col-md-8 col-xs-11">
             <div className="error-content">
               <div className="error-content__image">
-                <Image
+                <img
                   height={220}
                   width={572}
                   src="/image/common/error.png"

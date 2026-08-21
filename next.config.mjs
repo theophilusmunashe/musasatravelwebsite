@@ -1,8 +1,11 @@
-import { withNextVideo } from "next-video/process";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Smaller production bundle for cPanel — copy `public` + `.next/static` into
+  // `.next/standalone` after build (see deploy comment in package.json).
+  output: "standalone",
   images: {
+    loader: "custom",
+    loaderFile: "./image-loader.ts",
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "res.cloudinary.com" },
@@ -14,4 +17,4 @@ const nextConfig = {
   },
 };
 
-export default withNextVideo(nextConfig);
+export default nextConfig;

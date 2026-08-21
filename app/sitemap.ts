@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { groq } from "next-sanity";
 import { client } from "../sanity/lib/client";
+import { getTravelPackageSlugs } from "@/lib/travel-packages";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_BASE_URL || "https://www.musasatravelandtours.com";
@@ -13,6 +14,7 @@ const slugQuery = groq`
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let projectEntries: MetadataRoute.Sitemap = [];
+  let packageEntries: MetadataRoute.Sitemap = [];
 
   try {
     const response = await client.fetch(slugQuery);
@@ -24,6 +26,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
   } catch {
     // Sanity unavailable — skip dynamic entries
+  }
+
+  try {
+    const slugs = await getTravelPackageSlugs();
+    packageEntries = slugs.map((slug) => ({
+      url: `${BASE_URL}/packages/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    }));
+  } catch {
+    // skip
   }
 
   const now = new Date();
@@ -113,6 +127,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "yearly",
       priority: 0.3,
     },
+    ...packageEntries,
     ...projectEntries,
   ];
 }

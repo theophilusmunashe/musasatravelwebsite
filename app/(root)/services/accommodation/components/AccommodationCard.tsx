@@ -1,12 +1,14 @@
 "use client";
 import { ArrowUpRight, Heart } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+
+import { resolveImageSrc } from "@/lib/resolve-image-src";
 
 export default function AccommodationCard({ data }: any) {
   const [isLoading, setLoading] = useState(true);
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const imgSrc = resolveImageSrc(data.mainImage);
 
   const handleWishlistClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -21,10 +23,10 @@ export default function AccommodationCard({ data }: any) {
         className="block h-full"
       >
         <div className="project-card__image relative">
-          <Image
+          <img
             height={331}
             width={402}
-            src={data.mainImage}
+            src={imgSrc}
             alt="card"
             className={`object-image h-full  ${
               isLoading

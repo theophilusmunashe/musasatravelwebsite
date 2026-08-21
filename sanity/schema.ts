@@ -7,7 +7,8 @@ import author from './schemas/author'
 import project from './schemas/project'
 import terms from './schemas/terms'
 import home from './schemas/home'
+import travelPackage from './schemas/travelPackage'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [home, project, post, terms, author, category, blockContent],
+  types: [travelPackage, home, project, post, terms, author, category, blockContent],
 }

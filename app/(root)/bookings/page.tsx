@@ -4,10 +4,12 @@ import BookingsPageClient from "./BookingsPageClient";
 export const metadata: Metadata = {
   title: "Book Your Trip",
   description:
-    "Complete your African adventure booking with Musasa Travel & Tours. Review your selected activities, accommodation, and services, then send your booking directly via WhatsApp for instant confirmation.",
+    "Plan Victoria Falls, Cape Town, Namibia, Botswana, Zambia, or Mauritius with Musasa Travel & Tours. Choose your destination, build your itinerary, then send your enquiry by email and WhatsApp.",
   keywords: [
     "book safari zimbabwe",
     "victoria falls booking",
+    "cape town travel booking",
+    "botswana safari booking",
     "musasa travel booking",
     "african trip reservation",
     "safari booking online",

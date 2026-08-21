@@ -1,23 +1,25 @@
 "use client";
-import Image from "next/image";
 import { useState } from "react";
+
+import { resolveImageSrc } from "@/lib/resolve-image-src";
 
 export default function ProjectCard({ data }: any) {
   const [isLoading, setLoading] = useState(true);
+  const src = resolveImageSrc(data.mainImage);
+  const loadCls = isLoading
+    ? "scale-110 blur-2xl grayscale"
+    : "scale-100 blur-0 grayscale-0";
+  const alt = data?.title ?? "card";
 
   return (
     <div className="project-card d-block h-96">
       <div className="project-card__image ">
-        <Image
+        <img
           height={331}
           width={402}
-          src={data.mainImage}
-          alt="card"
-          className={`object-image h-full  ${
-            isLoading
-              ? "scale-110 blur-2xl grayscale"
-              : "scale-100 blur-0 grayscale-0"
-          }`}
+          src={src}
+          alt={alt}
+          className={`object-image h-full ${loadCls}`}
           onLoad={() => setLoading(false)}
         />
       </div>

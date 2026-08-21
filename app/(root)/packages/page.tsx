@@ -1,10 +1,13 @@
 import PackagesClient from "./components/PackagesClient";
 import type { Metadata } from "next";
+import { getTravelPackages } from "@/lib/travel-packages";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "African Travel Packages",
   description:
-    "Eight hand-crafted African travel packages spanning Victoria Falls, Cape Town, Namibia, Botswana, Mozambique and Mauritius — curated by Musasa Travel & Tours. Every detail included, nothing left to chance.",
+    "Hand-crafted African travel packages spanning Victoria Falls, Cape Town, Namibia, Botswana, Mozambique and Mauritius — curated by Musasa Travel & Tours. Every detail included, nothing left to chance.",
   keywords: [
     "africa travel packages",
     "victoria falls travel package",
@@ -19,11 +22,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "African Travel Packages | Musasa Travel & Tours",
     description:
-      "Eight curated African packages — Victoria Falls, Cape Town, Namibia, Botswana, Mozambique and Mauritius.",
+      "Curated African packages — Victoria Falls, Cape Town, Namibia, Botswana, Mozambique and Mauritius.",
     url: "/packages",
   },
 };
 
-export default function PackagesPage() {
-  return <PackagesClient />;
+export default async function PackagesPage() {
+  const packages = await getTravelPackages();
+  return <PackagesClient packages={packages} />;
 }

@@ -3,46 +3,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X } from "lucide-react";
 import { useState } from "react";
 import { useCartStore } from "@/lib/cartStore";
+import { buildWhatsAppEnquiryMessage, type EnquiryFormData } from "@/lib/enquiry-templates";
 
 export const WA_NUMBER = "263776093268";
 export const WA_RAW = "+263 77 609 3268";
 
 /** Build a full WhatsApp booking message from cart items + optional form data */
-export function buildWhatsAppMessage(cartItems: ReturnType<typeof useCartStore.getState>["items"], formData?: Record<string, any>): string {
-  const lines: string[] = [];
-
-  lines.push("🌍 *NEW BOOKING REQUEST – MUSASA TRAVEL*");
-  lines.push("━━━━━━━━━━━━━━━━━━━━━━");
-
-  if (formData?.firstName || formData?.lastName) {
-    lines.push(`👤 *Guest:* ${formData.firstName ?? ""} ${formData.lastName ?? ""}`.trim());
-  }
-  if (formData?.email) lines.push(`📧 *Email:* ${formData.email}`);
-  if (formData?.phone) lines.push(`📱 *Phone:* ${formData.phone}`);
-  if (formData?.startDate && formData?.endDate) {
-    lines.push(`📅 *Dates:* ${new Date(formData.startDate).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })} → ${new Date(formData.endDate).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}`);
-  }
-  if (formData?.travelers) lines.push(`👥 *Travellers:* ${formData.travelers}`);
-
-  if (cartItems.length > 0) {
-    lines.push("");
-    lines.push("🛒 *SELECTED ITEMS:*");
-    cartItems.forEach((item) => {
-      const qty = item.quantity > 1 ? ` (×${item.quantity})` : "";
-      const typeEmoji = item.category === "accommodation" ? "🏨" : item.category === "guide" ? "🧭" : item.category === "transfer" ? "🚗" : item.category === "meal" ? "🍽️" : "✅";
-      lines.push(`${typeEmoji} ${item.name}${qty} — ${item.price}`);
-    });
-  }
-
-  if (formData?.specialRequests) {
-    lines.push("");
-    lines.push(`💬 *Special Requests:* ${formData.specialRequests}`);
-  }
-
-  lines.push("");
-  lines.push("Please confirm availability. Thank you! 🙏");
-
-  return lines.join("\n");
+export function buildWhatsAppMessage(
+  cartItems: ReturnType<typeof useCartStore.getState>["items"],
+  formData?: EnquiryFormData
+): string {
+  return buildWhatsAppEnquiryMessage(cartItems, formData);
 }
 
 export default function WhatsAppButton() {

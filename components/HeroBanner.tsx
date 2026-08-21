@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import Video from "next-video";
 import { motion } from "framer-motion";
 
 import { ArrowUpRight } from "lucide-react";

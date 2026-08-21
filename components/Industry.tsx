@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React from "react";
 
 import Link from "next/link";
@@ -8,15 +7,32 @@ import { motion } from "framer-motion";
 import Reveal from "./Reveal";
 import { MotionDiv } from "../lib/framer";
 
+import imgBotswana from "../public/image/botswana.jpg";
+import imgMozambique from "../public/image/mozambique.jpg";
+import imgNamibia from "../public/image/namibia.jpg";
+import imgSouthAfrica from "../public/image/south-africa.jpg";
+import imgZambia from "../public/image/zambia.jpg";
+import imgZimbabwe from "../public/image/zimbabwe.jpg";
+
 const Industry = () => {
-  // Static data for destinations
+  // Bundled like logo — avoids relying on /public on cPanel standalone
   const destinations = [
-    { _id: '1', slug: { current: 'zimbabwe' }, mainImage: '/image/zimbabwe.jpg', name: 'Zimbabwe' },
-    { _id: '2', slug: { current: 'south-africa' }, mainImage: '/image/south-africa.jpg', name: 'South Africa' },
-    { _id: '3', slug: { current: 'namibia' }, mainImage: '/image/namibia.jpg', name: 'Namibia' },
-    { _id: '4', slug: { current: 'mozambique' }, mainImage: '/image/mozambique.jpg', name: 'Mozambique' },
-    { _id: '5', slug: { current: 'zambia' }, mainImage: '/image/zambia.jpg', name: 'Zambia' },
-    { _id: '6', slug: { current: 'botswana' }, mainImage: '/image/botswana.jpg', name: 'Botswana' },
+    { _id: "1", slug: { current: "zimbabwe" }, mainImage: imgZimbabwe, name: "Zimbabwe" },
+    {
+      _id: "2",
+      slug: { current: "south-africa" },
+      mainImage: imgSouthAfrica,
+      name: "South Africa",
+    },
+    { _id: "3", slug: { current: "namibia" }, mainImage: imgNamibia, name: "Namibia" },
+    {
+      _id: "4",
+      slug: { current: "mozambique" },
+      mainImage: imgMozambique,
+      name: "Mozambique",
+    },
+    { _id: "5", slug: { current: "zambia" }, mainImage: imgZambia, name: "Zambia" },
+    { _id: "6", slug: { current: "botswana" }, mainImage: imgBotswana, name: "Botswana" },
   ];
 
   return (
@@ -35,11 +51,12 @@ const Industry = () => {
                     className="relative h-96  md:h-[450px] overflow-hidden group transition-all w-full"
                     key={item._id}
                   >
-                    <Image
-                      src={item.mainImage}
+                    <img
+                      src={item.mainImage.src}
                       alt={item.name}
-                      fill
-                      className="w-full h-full group-hover:scale-150 duration-300 object-cover transition-all"
+                      width={item.mainImage.width}
+                      height={item.mainImage.height}
+                      className="absolute inset-0 h-full w-full object-cover transition-all duration-300 group-hover:scale-150"
                     />
                     <MotionDiv
                       initial={{ opacity: 0, transform: "translateY(-100%)" }}

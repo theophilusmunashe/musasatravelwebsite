@@ -9,12 +9,30 @@ import ProjectCard from "./ProjectCard";
 import "../app/globals.scss";
 import { ArrowUpRight } from "lucide-react";
 
+import imgCapeTown from "../public/image/cape-town.jpg";
+import imgNamibiaDesert from "../public/image/namibia-desert.jpg";
+import imgVictoriaFalls from "../public/image/victoria-falls.jpg";
+
 const Recents = () => {
-  // Static data for recent projects/tours
   const projects = [
-    { _id: '1', title: 'Victoria Falls Adventure', mainImage: '/image/victoria-falls.jpg', slug: { current: 'victoria-falls' } },
-    { _id: '2', title: 'Cape Town Explorer', mainImage: '/image/cape-town.jpg', slug: { current: 'cape-town' } },
-    { _id: '3', title: 'Namibia Desert Safari', mainImage: '/image/namibia-desert.jpg', slug: { current: 'namibia' } },
+    {
+      _id: "1",
+      title: "Victoria Falls Adventure",
+      mainImage: imgVictoriaFalls,
+      slug: { current: "victoria-falls" },
+    },
+    {
+      _id: "2",
+      title: "Cape Town Explorer",
+      mainImage: imgCapeTown,
+      slug: { current: "cape-town" },
+    },
+    {
+      _id: "3",
+      title: "Namibia Desert Safari",
+      mainImage: imgNamibiaDesert,
+      slug: { current: "namibia" },
+    },
   ];
 
   return (
