@@ -27,7 +27,7 @@ const fontSans = FontSans({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "Victoria Falls Tours & Safari Bookings | Musasa Travel & Tours",
+    default: "Musasa Travel & Tours — Rooted in Africa, Reaching the World",
     template: "%s | Musasa Travel & Tours",
   },
   applicationName: SITE.name,
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     locale: "en_ZW",
     url: SITE.url,
     siteName: SITE.name,
-    title: "Victoria Falls Tours & Safari Bookings | Musasa Travel",
+    title: "Musasa Travel & Tours — Rooted in Africa, Reaching the World",
     description:
       "Local Victoria Falls travel agency for tours, safaris, lodges, guides and airport transfers. Book with Musasa Travel & Tours.",
     images: [
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Victoria Falls Tours & Safari Bookings | Musasa Travel",
+    title: "Musasa Travel & Tours — Rooted in Africa, Reaching the World",
     description:
       "Book Victoria Falls tours, safaris, lodges and transfers with a local Zimbabwe travel agency.",
     images: [SITE.ogImage],

@@ -12,7 +12,7 @@ export const revalidate = 300;
 
 export const metadata = {
   ...pageMeta({
-    title: "Victoria Falls Tours & Safari Bookings",
+    title: "Musasa Travel & Tours — Rooted in Africa, Reaching the World",
     description:
       "Book Victoria Falls tours, safari packages, lodges and airport transfers with Musasa Travel — a local travel agency based in Victoria Falls, Zimbabwe.",
     path: "/",
@@ -28,7 +28,7 @@ export const metadata = {
     ],
   }),
   title: {
-    absolute: "Victoria Falls Tours & Safari Bookings | Musasa Travel & Tours",
+    absolute: "Musasa Travel & Tours — Rooted in Africa, Reaching the World",
   },
 };
 

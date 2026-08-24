@@ -5,9 +5,9 @@ import HeroBanner from "./HeroBanner";
 
 export default function Hero() {
   const item = {
-    title: "Victoria Falls Tours & Safari Bookings",
-    subtitle: "Local experts in Victoria Falls, Zimbabwe",
-    subtitle2: "Tours, lodges, guides and airport transfers — book with Musasa Travel",
+    title: "Musasa Travel & Tours",
+    subtitle: "Curated Journeys",
+    subtitle2: "Lifetime Experiences",
   };
 
   return (

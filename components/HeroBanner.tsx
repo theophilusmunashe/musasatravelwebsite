@@ -1,32 +1,69 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useAnimations } from "../hooks/useFramer";
 import { MotionDiv } from "../lib/framer";
-import { SITE } from "@/lib/site";
 
 export default function HeroBanner({
   data,
 }: {
   data: { title: string; subtitle?: string; subtitle2?: string };
 }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
   const { transition, textReveal } = useAnimations();
 
-  return (
-    <div className="relative w-full h-screen min-h-[100dvh]">
-      <Image
-        src={SITE.ogImage}
-        alt="Victoria Falls, Zimbabwe — book tours, safaris and transfers with Musasa Travel"
-        fill
-        priority
-        className="object-cover"
-        sizes="100vw"
-        unoptimized
-      />
+  useEffect(() => {
+    const video = videoRef.current;
 
-      <div className="absolute top-0 left-0 bg-black/45 w-full h-full flex justify-center flex-col">
+    const handleVideoEnd = () => {
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
+        setTimeout(() => {
+          if (video) {
+            video.play();
+          }
+        }, 100);
+      }
+    };
+
+    if (video) {
+      video.addEventListener("ended", handleVideoEnd);
+    }
+
+    return () => {
+      if (video) {
+        video.removeEventListener("ended", handleVideoEnd);
+      }
+    };
+  }, []);
+
+  return (
+    <div className="relative h-full w-full">
+      <video
+        id="myVideo"
+        className="video"
+        ref={videoRef}
+        autoPlay
+        loop
+        muted
+        playsInline
+        controls={false}
+      >
+        <source
+          src="https://res.cloudinary.com/dnir0cslk/video/upload/v1711011338/Office_-_Main_Page_e8pd2v_1_jibiqf.mp4"
+          type="video/mp4"
+        />
+        <source
+          src="https://res.cloudinary.com/dmxrtcszc/video/upload/v1710929534/Office_-_Main_Page_e8pd2v.webm"
+          type="video/webm"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      <div className="absolute top-0 left-0 bg-black/40 w-full h-full flex justify-center flex-col">
         <div className="row justify-content-center mt-10 align-items-center text-white">
           <div className="col-xxl-10 col-md-9">
             <div className="hero-content">
@@ -37,7 +74,7 @@ export default function HeroBanner({
                   whileInView="bananon"
                   viewport={{ once: true }}
                   transition={{ ...transition }}
-                  className="hero-content__title heading-lg text-white max-w-[92vw] sm:max-w-4xl whitespace-normal break-words leading-tight"
+                  className="hero-content__title heading-lg text-white max-w-[92vw] sm:max-w-none whitespace-normal sm:whitespace-nowrap break-words leading-tight"
                 >
                   {data.title}
                 </motion.h1>
@@ -60,7 +97,7 @@ export default function HeroBanner({
                     whileInView="bananon"
                     viewport={{ once: true }}
                     transition={{ ...transition, delay: 0.3 }}
-                    className="hero-content__subtitle2 heading-md text-white mt-2 max-w-[92vw] sm:max-w-3xl whitespace-normal break-words leading-snug"
+                    className="hero-content__subtitle2 heading-md text-white mt-2 max-w-[92vw] sm:max-w-none whitespace-normal break-words leading-snug"
                   >
                     {data.subtitle2}
                   </motion.p>
