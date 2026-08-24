@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npx next dev",
-    "build": "npx next build",
-    "build:cpanel": "npx next build && node scripts/prepare-standalone.cjs",
-    "start": "npx next start",
-    "lint": "npx next lint",
+    "dev": "next dev",
+    "build": "next build",
+    "build:cpanel": "next build && node scripts/prepare-standalone.cjs",
+    "start": "next start",
+    "lint": "next lint",
     "sanity:seed-packages": "node scripts/seed-travel-packages.mjs"
   },
   "dependencies": {
