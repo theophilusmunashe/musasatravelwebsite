@@ -9,8 +9,6 @@ import { Inter as FontSans } from "next/font/google";
 import { cn } from "../../lib/utils";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { client } from "../../sanity/lib/client";
-import { groq } from "next-sanity";
 
 import { Toaster } from "react-hot-toast";
 import Preloader from "../../components/preloader";
@@ -102,32 +100,11 @@ export const metadata: Metadata = {
   },
 };
 
-const categoryquery = groq`
-  *[_type=="category"] {
-    ...,
-    "mainImage": mainImage.asset->url,
-  } 
-`;
-
-const fetchCategory = async () => {
-  try {
-    const posts = await client.fetch(categoryquery);
-    // Handle the fetched posts data
-    return posts;
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-    return null;
-  }
-};
-
-export const revalidate = 3600;
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const category = await fetchCategory();
-
   return (
     <html lang="en">
       <head>
@@ -204,7 +181,7 @@ export default async function RootLayout({
           }}
         />
         <Preloader />
-        <Navbar components={category} />
+        <Navbar />
 
         {children}
         <Footer />

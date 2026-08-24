@@ -8,7 +8,8 @@
     "build:cpanel": "next build && node scripts/prepare-standalone.cjs",
     "start": "next start",
     "lint": "next lint",
-    "sanity:seed-packages": "node scripts/seed-travel-packages.mjs"
+    "sanity:seed-packages": "node scripts/seed-travel-packages.mjs",
+    "sanity:seed-services": "node scripts/seed-services.mjs"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.1",

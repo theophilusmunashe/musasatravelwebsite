@@ -1,0 +1,166 @@
+[
+  {
+    "id": "airport-transfer",
+    "name": "Victoria Falls Airport Transfer",
+    "tagline": "Seamless Arrival & Departure",
+    "type": "airport",
+    "image": "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=900&q=80",
+    "price": "From $45/transfer",
+    "priceNum": 45,
+    "duration": "15–25 min",
+    "capacity": "1–8 passengers",
+    "badge": "Most Booked",
+    "amenities": [
+      "Air-conditioned",
+      "Meet & greet",
+      "Luggage assistance",
+      "Wi-Fi on request",
+      "Flight tracking",
+      "24/7 availability"
+    ],
+    "routes": [
+      "VFA Airport → Victoria Falls Town",
+      "VFA Airport → Hotels & Lodges",
+      "Cross-town transfers"
+    ],
+    "highlights": [
+      "Flight-tracked pickups",
+      "Professional uniformed driver",
+      "Real-time WhatsApp updates",
+      "Available 24/7, 365 days"
+    ],
+    "description": "Your journey through Africa begins the moment you step off the plane — and our airport transfer service ensures that first impression is of seamless, professional luxury. Our drivers monitor your flight in real time, adjusting pickup times automatically for delays so you're never kept waiting. Each vehicle is air-conditioned, immaculately maintained, and equipped with chilled water for your arrival. Your driver carries a personalised name board and assists with all luggage from arrivals hall to vehicle. We serve all hotels, lodges, and private residences in the Victoria Falls area and can arrange onward cross-border connections to Livingstone, Botswana, or beyond.",
+    "displayOrder": 1
+  },
+  {
+    "id": "livingstone-shuttle",
+    "name": "Victoria Falls ↔ Livingstone Shuttle",
+    "tagline": "Cross the Border Effortlessly",
+    "type": "cross-border",
+    "image": "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=900&q=80",
+    "price": "From $35/person",
+    "priceNum": 35,
+    "duration": "30–45 min",
+    "capacity": "1–14 passengers",
+    "badge": "Daily Departures",
+    "amenities": [
+      "Border crossing assistance",
+      "Document handling",
+      "Air-conditioned",
+      "Scenic route",
+      "Group friendly",
+      "Return trips"
+    ],
+    "routes": [
+      "Victoria Falls → Livingstone (Zambia)",
+      "Livingstone → Victoria Falls",
+      "Return day trips"
+    ],
+    "highlights": [
+      "Twice-daily scheduled departures",
+      "Border paperwork assistance",
+      "Victoria Falls Bridge crossing",
+      "Day trip & multi-day options"
+    ],
+    "description": "The Victoria Falls Bridge is one of the world's most spectacularly located border crossings — a steel arch spanning the dramatic Batoka Gorge 111 metres above the churning Zambezi, with Victoria Falls visible just upstream. Our Livingstone shuttle crosses this bridge twice daily, with our experienced drivers handling all border crossing formalities and paperwork to make the process completely stress-free. The journey takes 30–45 minutes depending on border activity and offers excellent views of the gorge from the bridge itself. We offer single journeys, return day trips (ideal for Livingstone's museum and the Zambian side of the falls), and multi-day connections.",
+    "displayOrder": 2
+  },
+  {
+    "id": "kasane-transfer",
+    "name": "Victoria Falls ↔ Kasane Transfer",
+    "tagline": "Gateway to Chobe National Park",
+    "type": "cross-border",
+    "image": "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=900&q=80",
+    "price": "From $85/person",
+    "priceNum": 85,
+    "duration": "1.5–2 hours",
+    "capacity": "1–10 passengers",
+    "amenities": [
+      "Border crossing assistance",
+      "Air-conditioned 4x4",
+      "Scenic Botswana route",
+      "Game spotting en route",
+      "Luggage capacity",
+      "Private options"
+    ],
+    "routes": [
+      "Victoria Falls → Kasane, Botswana",
+      "Kasane → Chobe Safari Lodges",
+      "Return day trip to Chobe"
+    ],
+    "highlights": [
+      "Cross into Botswana",
+      "Chobe National Park access",
+      "Wildlife spotting en route",
+      "All border fees managed"
+    ],
+    "description": "Kasane, the gateway to Chobe National Park, is just 70 kilometres from Victoria Falls across the Botswana border — but the journey feels like crossing into another world as the landscape opens into the vast Chobe floodplains. Our cross-border transfer service handles all the paperwork at the Kazungula border post, which also crosses the Zambezi River by pontoon ferry — itself a memorable experience as hippo pods surface around the vessel. The route to Kasane passes through wildlife-rich bush and our drivers are trained to spot and stop for game along the way. We can also arrange direct connections to individual Chobe safari lodges, boat cruise embarkation points, and Kasane Airport.",
+    "displayOrder": 3
+  },
+  {
+    "id": "private-safari-transfer",
+    "name": "Private Safari Vehicle Transfer",
+    "tagline": "Your Exclusive Road Through Africa",
+    "type": "private",
+    "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900&q=80",
+    "price": "From $120/day",
+    "priceNum": 120,
+    "duration": "As required",
+    "capacity": "1–6 passengers",
+    "badge": "Premium",
+    "amenities": [
+      "Dedicated vehicle & driver",
+      "Open-sided game vehicle option",
+      "Full day availability",
+      "Cooler with drinks",
+      "Guided commentary",
+      "Flexible routing"
+    ],
+    "routes": [
+      "Custom routes throughout Zimbabwe",
+      "Cross-border to Zambia & Botswana",
+      "Multi-day safari circuits"
+    ],
+    "highlights": [
+      "Dedicated vehicle all day",
+      "Professional driver-guide",
+      "Flexible, go-anywhere routing",
+      "Stop anywhere, anytime"
+    ],
+    "description": "When standard transfers won't do, our private safari vehicle service puts a dedicated, professionally driven vehicle at your complete disposal for the duration you need — half day, full day, or multi-day. Unlike shared shuttles, a private vehicle waits while you linger at a viewpoint, stops wherever you ask to photograph wildlife, and operates entirely on your schedule. Our vehicles range from comfortable minibuses to purpose-built open-sided game viewing vehicles with elevated seating and full communications equipment. All drivers hold professional driver's licences and many double as trained guides who provide running commentary on the landscapes, wildlife, and history you pass through. Ideal for couples, families, and small groups who value flexibility and privacy above all.",
+    "displayOrder": 4
+  },
+  {
+    "id": "group-shuttle",
+    "name": "Group Charter Shuttle",
+    "tagline": "Corporate & Group Travel Made Easy",
+    "type": "group",
+    "image": "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=900&q=80",
+    "price": "From $180/trip",
+    "priceNum": 180,
+    "duration": "As required",
+    "capacity": "10–40 passengers",
+    "amenities": [
+      "Air-conditioned coach",
+      "PA system",
+      "Luggage capacity",
+      "Scheduled or charter",
+      "Corporate billing",
+      "Event coordination"
+    ],
+    "routes": [
+      "Conference & event transfers",
+      "Wedding party shuttles",
+      "School & educational groups",
+      "Corporate safari circuits"
+    ],
+    "highlights": [
+      "10 to 40 passengers",
+      "Corporate billing available",
+      "Event-day coordination",
+      "Licensed coach drivers"
+    ],
+    "description": "Moving a group of 10 to 40 people smoothly through Victoria Falls — across borders, between lodges, and to event venues — requires precision logistics and reliable vehicles. Our group charter service specialises in exactly this: scheduled multi-vehicle convoys for large safari groups, dedicated conference shuttles for corporate events at Victoria Falls hotels, wedding party transportation, and educational group tours. Each coach is air-conditioned, equipped with a PA system for group briefings, and driven by a licensed professional. Our operations team coordinates loading, timing, and border crossings with military precision so your group moves as one seamless unit. Corporate invoicing and detailed itinerary management are available for all group bookings.",
+    "displayOrder": 5
+  }
+]

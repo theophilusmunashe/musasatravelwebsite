@@ -1,21 +1,10 @@
 import { FaFacebook, FaInstagram, FaTwitter, FaWhatsapp } from "react-icons/fa";
 
-import serviceItem1 from "@/assets/5.png";
-import icon9 from "@/assets/shuttle-icon.png";
-import icon8 from "@/assets/tourguide-icon.png";
-import icon7 from "@/assets/itenarary-icon.png";
-import icon6 from "@/assets/handover.svg";
-import icon5 from "@/assets/activities-icon.png";
-import icon1 from "@/assets/accomodation-icon.png";
-
-import partner from "@/assets/partner-50.png";
-import design from "@/assets/design-thinking.png";
 export const footerItems = [
   {
     title: "About Us",
     links: [
       { name: "Our Story", url: "/about" },
-      { name: "Blogs", url: "/blogs" },
     ],
   },
   {
@@ -56,101 +45,6 @@ export const navigationServices = [
   { title: "Customized Itinerary", slug: { current: "customized-itinerary" }, url: "/services/customized-itinerary" },
   { title: "Tour Guides", slug: { current: "tour-guides" }, url: "/services/tour-guides" },
   { title: "Shuttle Services & Transfers", slug: { current: "shuttle-services" }, url: "/services/shuttle-services" },
-];
-
-export const industries = [
-  {
-    image: "",
-    name: "Retails",
-    background: "",
-  },
-  {
-    image: "",
-    name: "Office",
-    background: "",
-  },
-  {
-    image: "",
-    name: "Hospitality",
-    background: "",
-  },
-  {
-    image: "",
-    name: "de-fits",
-    background: "",
-  },
-  {
-    image: "",
-    name: "fitness",
-    background: "",
-  },
-  {
-    image: "",
-    name: "childcare",
-    background: "",
-  },
-];
-
-export const serviceItems = [
-  {
-   
-    Service: "The Home-Ground Advantage",
-    Description:
-      "Headquartered in the heart of Victoria Falls, we don’t just study the map—we live the destination. Our at the source presence grants you exclusive insider access, real-time local support, and a level of logistical precision that only a true local expert can provide.",
-  },
-  {
-  
-    Service: "A Shield of Seamless Excellence",
-    Description:
-      "Just as the Musasa canopy protects the traveler, we provide a total covering of safety and sophistication. From complex cross-border transfers to 24/7 on-ground assistance, we proactively manage every detail so you can explore with absolute peace of mind.",
-  },
-  {
-  
-    Service: "Deeply Rooted Global Reach",
-    Description:
-      "Our name reflects our nature: we possess the stability of deep roots and the reach of an expansive canopy. We transcend generic travel by leveraging a vast international network of elite partners to craft bespoke, high-end journeys that are as unique as the travelers we serve.",
-  },
-];
-
-export const serviceItems2 = [
-  {
-    image: icon1,
-    Service: "Accommodation",
-    animation: 500,
-    Description:
-      "From luxury safari lodges to boutique coastal retreats, we hand-pick your sanctuary for every night of your journey.Rest easy under our canopy of carefully vetted stays that prioritize comfort, style, and authentic local charm.",
-  },
-  {
-    image: icon5,
-    Service: "Activities",
-    animation: 650,
-    Description:
-      "Dive into heart-pounding adventures or tranquil cultural immersions curated by those who know the land best.We connect you to the pulse of every destination, from the spray of the Falls to the silence of the savannah.",
-
-  },
-  {
-    image: icon7,
-    Service: "Customized Itineraries",
-    animation: 800,
-    Description:
-      "No two travelers are alike, so we craft bespoke journeys tailored specifically to your unique pace and passions.Your dream itinerary is designed with precision, ensuring every detail is rooted in excellence and personal touch."
-,
-  },
-  {
-    image: icon8,
-    Service: "Tour Guides",
-    animation: 950,
-    Description:
-      "Explore through the eyes of passionate experts who breathe life into every landmark and hidden trail.Our guides offer deep local insights and a protective presence, making every story of the land come alive for you.",
-
-  },
-  {
-    image: icon9,
-    Service: "Shuttle Service & Transfers",
-    animation: 1250,
-    Description:
-      "Navigate the region with ease through our reliable network of air-conditioned, professional transfers and cross-border shuttles.",
-  },
 ];
 
 export const faqItems = [
@@ -235,60 +129,3 @@ export const faqItems = [
     Answer: "Simply click the \"Request a Quote\" button on our site and share your vision with us. Our team will plant the seeds for your perfect itinerary within 24 to 48 hours."
   }
 ];
-
-export const swiperITems = [
-  {
-    name: "Matroco Ltd.",
-    review:
-      "I recently had solar panels installed on my roof by this company and I couldn't be happier with the results. The whole process was smooth and the installation was completed in a timely manner. My energy bills have already decreased significantly and I'm excited to see the long-term savings.",
-  },
-  {
-    name: "Obinna Ude",
-    review:
-      "I was hesitant to switch to solar energy, but this company made the transition so easy. They walked me through the process and answered all of my questions. The installation was seamless and their team was professional and courteous. I'm already seeing a difference in my energy bills and I'm so glad I made the switch.",
-  },
-  {
-    name: "Anonymous",
-    review:
-      "I can't say enough good things about this company. From start to finish, they were professional, knowledgeable, and efficient. They took care of everything, from the initial consultation to the final installation. My solar panels look great and my energy bills have never been lower. I highly recommend this company to anyone considering solar energy.",
-  },
-  {
-    name: "Collins",
-    review:
-      "I can't say enough good things about this company. From start to finish, they were professional, knowledgeable, and efficient. They took care of everything, from the initial consultation to the final installation. My solar panels look great and my energy bills have never been lower. I highly recommend this company to anyone considering solar energy.",
-  },
-];
-
-// export const brands = [
-//   {
-//     image: Brand1
-//   },
-//   {
-//     image: Brand2
-//   },
-//   {
-//     image: Brand3
-//   },
-//   {
-//     image: Brand4
-//   },
-//   {
-//     image: Brand5
-//   },
-//   {
-//     image: Brand6
-//   },
-// ]
-
-// export const aboutData = [
-//   {
-//     title: 'Vision',
-//     description: "Our vision is to be a leading provider of solar products, leveraging cutting-edge technology and innovative solutions to drive the adoption of renewable energy worldwide. We strive to create a future where clean energy is accessible to everyone, reducing our carbon footprint and preserving the planet for future generations.",
-//     image: Vision
-//   },
-//   {
-//     title: "Mission",
-//     description: "Mission Statement: Our mission is to provide high-quality, reliable, and cost-effective solar products to our customers while promoting sustainable and environmentally friendly practices.",
-//     image: Mission
-//   }
-// ]

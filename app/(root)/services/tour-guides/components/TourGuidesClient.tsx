@@ -40,52 +40,6 @@ interface Guide {
 }
 
 /* ─── Data ───────────────────────────────────────────────────────────── */
-const GUIDES: Guide[] = [
-  {
-    id: "guide-sloven",
-    name: "Sloven",
-    role: "Senior Wildlife Naturalist",
-    specialty: "wildlife",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80",
-    experience: "14 years",
-    languages: ["English", "Shona", "Ndebele", "Zulu"],
-    rating: 5.0,
-    reviews: 412,
-    badge: "Top Rated",
-    certifications: ["ZIMPARKS Licensed", "FGASA Level 3", "First Aid Wilderness"],
-    highlights: ["Expert tracker", "Big Five specialist", "Hwange & Chobe expert", "Published naturalist"],
-    bio: "With 14 years working across Zimbabwe and Botswana's finest reserves, Tendai is widely regarded as one of the finest wildlife naturalists in southern Africa. His tracking ability is extraordinary — he can read a game trail like a book, identifying not just the species but the age, sex, emotional state, and direction of travel of every animal that passed. His encyclopaedic knowledge of animal behaviour transforms a standard game drive into a masterclass in African ecology. Tendai's patient, unhurried guiding style allows wildlife encounters to unfold naturally and without pressure, creating experiences of genuine depth. He has been published in three African wildlife journals and mentors young Zimbabwean guides through a local conservation programme.",
-  },
-  {
-    id: "guide-simba",
-    name: "Simba",
-    role: "Adventure & Adrenaline Specialist",
-    specialty: "adventure",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80",
-    experience: "9 years",
-    languages: ["English", "Ndebele", "Afrikaans"],
-    rating: 4.9,
-    reviews: 287,
-    certifications: ["Swift Water Rescue", "Rafting Guide Level 4", "First Aid Wilderness"],
-    highlights: ["White water rafting expert", "Bungee & gorge guide", "Microlight certified", "Canopy & zip-line"],
-    bio: "Farai grew up on the banks of the Zambezi and has spent his entire adult life guiding travellers through its most dramatic experiences. As a certified Swift Water Rescue technician and internationally qualified white water guide, he has led thousands of guests down the Grade 5 rapids of the Batoka Gorge without a single safety incident — a testament to his technical skill and unwavering attention to safety. Beyond the water, Farai guides bungee jump groups from the Victoria Falls Bridge, microlight flights, and gorge swing experiences. His infectious enthusiasm and calm under pressure create an atmosphere of total confidence that allows guests to push their personal limits and discover reservoirs of courage they didn't know they had.",
-  },
-  {
-    id: "guide-anesu",
-    name: "Anesu",
-    role: "Cultural Heritage Specialist",
-    specialty: "culture",
-    image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80",
-    experience: "11 years",
-    languages: ["English", "Ndebele", "Shona", "Tonga", "Zulu"],
-    rating: 4.9,
-    reviews: 334,
-    badge: "Cultural Expert",
-    certifications: ["Cultural Heritage Guide", "Community Tourism Cert.", "Traditional Arts Facilitator"],
-    highlights: ["Five languages spoken", "Village ceremony access", "Traditional cooking guide", "Oral history storyteller"],
-    bio: "Nomvula is the rare guide who can genuinely bridge cultures — her warm, open personality and fluency in five languages (including the rare Tonga language of the Zambezi valley's original inhabitants) allow her to facilitate authentic connections between travellers and communities that simply cannot be replicated. Born in a village 30 kilometres from Victoria Falls, she grew up participating in the traditional ceremonies, crafts, and foodways that she now shares with travellers. Her village tours reach places and people that no other guide can access — private ceremonies, elders who share oral history passed down for 20 generations, and craft masters who demonstrate techniques on the verge of extinction. Nomvula's passion is cultural preservation through authentic cultural tourism.",
-  },
-];
 
 const SPECIALTIES: { id: Specialty; label: string; icon: React.ReactNode }[] = [
   { id: "all", label: "All Guides", icon: <Globe className="w-4 h-4" /> },
@@ -292,9 +246,9 @@ function CtaBanner() {
 }
 
 /* ─── Main Export ────────────────────────────────────────────────────── */
-export default function TourGuidesClient() {
+export default function TourGuidesClient({ guides }: { guides: Guide[] }) {
   const [activeSpec, setActiveSpec] = useState<Specialty>("all");
-  const filtered = activeSpec === "all" ? GUIDES : GUIDES.filter((g) => g.specialty === activeSpec);
+  const filtered = activeSpec === "all" ? guides : guides.filter((g) => g.specialty === activeSpec);
 
   return (
     <div className="bg-[#0a0a0a] min-h-screen">
@@ -316,6 +270,9 @@ export default function TourGuidesClient() {
             {filtered.map((guide) => <GuideCard key={guide.id} guide={guide} />)}
           </motion.div>
         </AnimatePresence>
+        {filtered.length === 0 && (
+          <p className="text-center py-20 text-white/40 text-lg">No guides in this specialty yet.</p>
+        )}
       </section>
 
       <WhyGuide />

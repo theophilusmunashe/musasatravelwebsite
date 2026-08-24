@@ -1,21 +1,12 @@
 "use client";
-import { navLinks } from "@/data/data";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Logo from "./Logo";
-import { usePathname } from "next/navigation";
-import { cn } from "../lib/utils";
-import ServicesNav from "./ServicesNav";
 import NavMenu from "./Navigation";
-
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import Navigation from "./Navigation/NavigationMain";
 
-const Navbar = ({ components }: any) => {
+const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [scrolledx, setScrolledx] = useState(false);
-  const pathname = usePathname();
-
   const [hidden, setHidden] = useState(false);
 
   const { scrollY } = useScroll();
@@ -26,12 +17,6 @@ const Navbar = ({ components }: any) => {
       setScrolled(true);
     } else {
       setScrolled(false);
-    }
-
-    if (scrollPosition > 150 && scrollPosition < 500) {
-      setScrolledx(true);
-    } else {
-      setScrolledx(false);
     }
   };
 
@@ -70,10 +55,10 @@ const Navbar = ({ components }: any) => {
           <Logo />
         </div>
         <div className="hidden lg:block">
-          <Navigation components={components} />
+          <Navigation />
         </div>
         <div className="lg:hidden">
-          <NavMenu components={components} />
+          <NavMenu />
         </div>
       </div>
     </motion.nav>

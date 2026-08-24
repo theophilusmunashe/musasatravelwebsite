@@ -2,6 +2,7 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Star,
   Check,
@@ -59,323 +60,6 @@ interface Accommodation {
 }
 
 /* ─── Data ───────────────────────────────────────────────────────────── */
-const ACCOMMODATIONS: Accommodation[] = [
-  /* ── Musasa Exclusive Properties ───────────────────────────────────── */
-  {
-    id: "musasa-mist-pavilion",
-    name: "The Mist Pavilion",
-    tagline: "Where the Smoke That Thunders Meets You at Dawn",
-    category: "musasa",
-    image: "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774989724/WhatsApp_Image_2026-03-25_at_12.18.44_eaucfj.jpg",
-    location: "Victoria Falls Town",
-    country: "Zimbabwe",
-    price: "From $120/night",
-    priceNum: 120,
-    rating: 4.9,
-    reviews: 87,
-    nights: "Min. 1 night",
-    guests: "2 guests",
-    badge: "Musasa Exclusive",
-    amenities: ["Garden terrace", "Daily breakfast", "Falls transfers", "Wi-Fi", "Concierge", "Sundowner deck"],
-    highlights: [
-      "10 min walk to Victoria Falls",
-      "Private mist-garden setting",
-      "Musasa-curated daily itinerary",
-      "Breakfast & sunset drinks included",
-    ],
-    description:
-      "A hand-picked Musasa Travel exclusive — a serene pavilion-style chalet tucked within a lush indigenous garden just ten minutes on foot from the entrance to Victoria Falls. Each morning you wake to the distant roar of the falls and the garden fills with the fine mist that gives the property its name. Our team personally curates a daily activity schedule for every guest, and complimentary falls transfers, daily breakfast, and sunset sundowners on the garden deck are all included. This is Victoria Falls the way the early explorers experienced it — intimate, beautiful, and completely unhurried.",
-  },
-  {
-    id: "musasa-zambezi-sundown-suites",
-    name: "Zambezi Sundown Suites",
-    tagline: "Golden Hour on Africa's Greatest River",
-    category: "musasa",
-    image: "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774989723/WhatsApp_Image_2026-03-25_at_12.18.44_1_mpd5oh.jpg",
-    location: "Upper Zambezi",
-    country: "Zimbabwe",
-    price: "From $145/night",
-    priceNum: 145,
-    rating: 4.9,
-    reviews: 63,
-    nights: "Min. 2 nights",
-    guests: "2 guests",
-    badge: "Musasa Exclusive",
-    amenities: ["West-facing deck", "River views", "Breakfast", "Guided walks", "Wi-Fi", "Falls transfers"],
-    highlights: [
-      "West-facing sundowner decks",
-      "Zambezi River frontage",
-      "Guided morning bird walks",
-      "Complimentary airport pickup",
-    ],
-    description:
-      "Musasa Travel's most romantic address — a collection of intimate suites built on the banks of the upper Zambezi, each facing west so that your private deck becomes a front-row seat for the extraordinary African sunset that repaints the river in copper and gold every evening without fail. Accommodation is in beautifully appointed stone-and-thatch suites with en-suite bathrooms, handcrafted local furniture, and private decks where breakfast is served as the sun climbs above the mopane woodland on the opposite bank. Our guides lead optional morning bird walks along the river's edge before activities begin — this is the Zambezi at its most peaceful and most beautiful.",
-  },
-  {
-    id: "musasa-baobab-house",
-    name: "The Baobab House",
-    tagline: "A Century of Stories, All Your Own",
-    category: "musasa",
-    image: "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774989724/WhatsApp_Image_2026-03-25_at_12.18.43_3_r0vpel.jpg",
-    location: "Victoria Falls Town",
-    country: "Zimbabwe",
-    price: "From $135/night",
-    priceNum: 135,
-    rating: 4.8,
-    reviews: 54,
-    nights: "Min. 1 night",
-    guests: "Up to 4 guests",
-    badge: "Musasa Exclusive",
-    amenities: ["Private boma", "Full kitchen", "Garden pool", "Wi-Fi", "Braai area", "Family rooms"],
-    highlights: [
-      "Centred around a 400-year-old baobab",
-      "Private pool & boma",
-      "Ideal for families & groups",
-      "Fully self-contained option",
-    ],
-    description:
-      "Named for the ancient baobab tree that stands at the heart of its garden — estimated at over 400 years old, its hollow trunk wide enough to shelter a family — The Baobab House is Musasa Travel's most characterful property and the perfect base for families or small groups exploring Victoria Falls. Four individually styled rooms open onto the garden and pool terrace, and a fully equipped kitchen, private boma, and braai area give guests complete independence. Our concierge team is available throughout your stay to arrange activities, transfers, and surprises — but many guests find The Baobab House so enchanting they simply spend their mornings at the pool beneath the ancient tree.",
-  },
-  /* ── Partner Properties ──────────────────────────────────────────── */
-  {
-    id: "matetsi-water-lodge",
-    name: "Matetsi Water Lodge",
-    tagline: "The Most Exclusive Address in Southern Africa",
-    category: "luxury",
-    // Cantilevered deck/pool over river — Zambezi, Zimbabwe
-    image:
-      "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774990051/lodge-lap-pool_bjhcwb.jpg",
-    location: "Matetsi Private Reserve",
-    country: "Zimbabwe",
-    price: "From $890/night",
-    priceNum: 890,
-    rating: 5.0,
-    reviews: 412,
-    nights: "Min. 3 nights",
-    guests: "2 guests",
-    badge: "Editor's Pick",
-    amenities: ["Private pool", "All-inclusive", "Game drives", "River suite", "Spa", "Butler"],
-    highlights: [
-      "136,000ha private reserve",
-      "Cantilevered river suites",
-      "Big Five territory",
-      "All meals & drinks included",
-    ],
-    description:
-      "Set within the 136,000-hectare Matetsi Private Game Reserve on the south bank of the Zambezi River — arguably the most exclusive address in southern Africa — this internationally acclaimed lodge represents the pinnacle of African safari accommodation. The 18 suites are architectural masterpieces in teak, stone, and glass, each with its own private pool cantilevered over the riverbank so that you wake to the sight of elephants drinking just metres below. The reserve is traversed exclusively by Matetsi's own guests, ensuring sightings of exceptional rarity and intimacy; big cats, wild dogs, and enormous elephant herds are regular visitors to the suites' private decks. Fully all-inclusive — game drives, boat cruises, all meals, and premium beverages are covered.",
-  },
-  {
-    id: "chobe-bush-lodge",
-    name: "Chobe Bush Lodge",
-    tagline: "Life on the Legendary Chobe River",
-    category: "safari-lodge",
-    // Chobe River / Botswana savannah river landscape
-    image:
-      "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774990158/kasane-accommodation-chobe-bush-lodge_xuz6xj.jpg",
-    location: "Chobe National Park",
-    country: "Botswana",
-    price: "From $650/night",
-    priceNum: 650,
-    rating: 4.9,
-    reviews: 687,
-    nights: "Min. 2 nights",
-    guests: "2 guests",
-    badge: "All-Inclusive",
-    amenities: ["Private plunge pool", "All-inclusive", "Boat cruises", "Walking safaris", "Game drives", "Star beds"],
-    highlights: [
-      "Private river concession",
-      "120,000+ elephants nearby",
-      "Outdoor star-bed sleeping",
-      "Boat cruises on Chobe River",
-    ],
-    description:
-      "Positioned on the banks of the legendary Chobe River within its own private concession adjacent to Chobe National Park — home to the world's highest concentration of African elephants — this all-inclusive safari lodge delivers pure, unpretentious African wilderness luxury. The 15 river suites are suspended above the floodplain on raised decks, each with a private plunge pool, outdoor sala for sleeping under the stars, and floor-to-ceiling glass walls that dissolve the boundary between interior and the wilderness beyond. All-inclusive pricing covers game drives, boat cruises, walking safaris, all meals, and premium beverages — every moment of your stay is expertly curated to deliver the very best of the Chobe ecosystem.",
-  },
-  {
-    id: "victoria-falls-safari-lodge",
-    name: "Victoria Falls Safari Lodge",
-    tagline: "Perched Above the Zambezi Floodplains",
-    category: "safari-lodge",
-    // Thatched safari lodge overlooking African floodplain — Victoria Falls, Zimbabwe
-    image:
-      "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774990387/image_1774990372076_hy0wam.jpg",
-    location: "Victoria Falls",
-    country: "Zimbabwe",
-    price: "From $380/night",
-    priceNum: 380,
-    rating: 4.8,
-    reviews: 1203,
-    nights: "Min. 1 night",
-    guests: "2 guests",
-    badge: "Most Popular",
-    amenities: ["Plunge pool", "Game drives", "Fine dining", "Spa", "Sundeck", "Waterhole viewing"],
-    highlights: [
-      "Overlooks Zambezi Floodplains",
-      "White rhino & buffalo",
-      "Open-air waterhole deck",
-      "Award-winning restaurant",
-    ],
-    description:
-      "Perched on a rocky ridge overlooking the Zambezi National Park, this award-winning lodge offers panoramic views from your private plunge pool while white rhino and buffalo graze on the floodplains below. The lodge's 72 thatched chalets are architecturally stunning — organic shapes inspired by termite mounds, open to the African sky with outdoor showers and handcrafted Ndebele furnishings. Mornings begin with the thunderous chorus of the African bush and the haunting call of fish eagles; evenings are spent watching herds of elephant silhouetted against extraordinary Zimbabwean sunsets from the elevated deck — a ritual that guests return to year after year.",
-  },
-  {
-    id: "gorges-lodge",
-    name: "Gorges Lodge",
-    tagline: "On the Rim of the Batoka Gorge",
-    category: "boutique",
-    // Dramatic gorge cliff edge — Batoka Gorge, Zimbabwe
-    image:
-      "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774990479/image_1774990465698_kho475.jpg",
-    location: "Batoka Gorge",
-    country: "Zimbabwe",
-    price: "From $320/night",
-    priceNum: 320,
-    rating: 4.8,
-    reviews: 334,
-    nights: "Min. 2 nights",
-    guests: "2 guests",
-    amenities: ["Infinity pool", "Gorge views", "Private swimming holes", "Birdwatching", "Sundowners", "Gourmet dining"],
-    highlights: [
-      "Cliff-edge infinity pool",
-      "200m gorge views",
-      "Private gorge swimming",
-      "8km from Victoria Falls",
-    ],
-    description:
-      "Dramatically situated on the rim of the Batoka Gorge just 8 kilometres downstream from Victoria Falls, Gorges Lodge offers one of the most spectacularly positioned accommodations in all of Africa — where the mighty Zambezi has carved a series of ancient volcanic gorges of vertiginous beauty over millions of years. The lodge's chalets and main areas are built to the very edge of the cliff, offering heart-stopping views straight down into the gorge and the churning rapids 200 metres below, while the infinity pool appears to hover above the abyss. Exclusive access to the gorge for private swimming, fly-fishing, and birdwatching is available only to lodge guests.",
-  },
-  {
-    id: "palm-river-hotel",
-    name: "The Palm River Hotel",
-    tagline: "Colonial Elegance Meets African Soul",
-    category: "boutique",
-    // Boutique tropical garden hotel pool — Victoria Falls Town
-    image:
-      "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774990572/image_1774990561284_pevd4s.jpg",
-    location: "Victoria Falls Town",
-    country: "Zimbabwe",
-    price: "From $220/night",
-    priceNum: 220,
-    rating: 4.7,
-    reviews: 891,
-    nights: "Min. 1 night",
-    guests: "2 guests",
-    amenities: ["Pool terrace", "Restaurant", "Garden rooms", "Concierge", "Wi-Fi", "Airport transfers"],
-    highlights: [
-      "Minutes from the falls",
-      "Celebrated restaurant",
-      "Tropical garden setting",
-      "10 individually designed rooms",
-    ],
-    description:
-      "This intimate boutique hotel sits within lush tropical gardens just minutes from the entrance to Victoria Falls, blending colonial elegance with contemporary African luxury in a way that larger properties simply cannot replicate. The 10 individually designed rooms each feature hand-woven textiles, locally crafted furniture, and private garden terraces where the sound of birdsong replaces alarm clocks each morning. The property's celebrated restaurant — The Palms — serves innovative fusion cuisine combining Southern African ingredients with international techniques, while the pool terrace is widely regarded as the best sundowner spot in all of Victoria Falls town.",
-  },
-  {
-    id: "livingstone-royal",
-    name: "Livingstone Royal Suites",
-    tagline: "Five-Star Grace in the Heart of Livingstone",
-    category: "luxury",
-    // Five-star hotel suite with private balcony — Livingstone, Zambia
-    image:
-      "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774990666/image_1774990646804_hxnby7.jpg",
-    location: "Livingstone",
-    country: "Zambia",
-    price: "From $295/night",
-    priceNum: 295,
-    rating: 4.7,
-    reviews: 567,
-    nights: "Min. 1 night",
-    guests: "2 guests",
-    amenities: ["Spa", "Pool", "Fine dining", "Concierge", "Airport shuttle", "Wellness centre"],
-    highlights: [
-      "Named after Dr Livingstone",
-      "Award-winning spa",
-      "Zambia side of the falls",
-      "42 private-balcony suites",
-    ],
-    description:
-      "Named in honour of the great explorer who first documented Victoria Falls, this five-star hotel in Livingstone offers the perfect base for experiencing the Zambian side of the falls with an atmosphere of timeless, gracious luxury that echoes the great African lodges of the colonial golden age — updated entirely for contemporary comfort and sustainability. The 42 suites each have private balconies overlooking the hotel's verdant gardens and pool terrace, and the property's spa — The Mosi-oa-Tunya Wellness Centre — is consistently rated among Zambia's finest, offering treatments inspired by traditional African healing practices using local botanicals and minerals.",
-  },
-  {
-    id: "gwango-elephant-camp",
-    name: "Gwango Elephant Camp",
-    tagline: "Wilderness Conservation Done Right",
-    category: "eco-lodge",
-    // Canvas-walled eco-lodge in African wilderness — Hwange, Zimbabwe
-    image:
-      "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774990780/image_1774990759900_nuphy9.jpg",
-    location: "Hwange District",
-    country: "Zimbabwe",
-    price: "From $180/night",
-    priceNum: 180,
-    rating: 4.8,
-    reviews: 423,
-    nights: "Min. 2 nights",
-    guests: "2 guests",
-    badge: "Eco Certified",
-    amenities: ["Solar-powered", "Wildlife corridor", "Organic kitchen", "Research walks", "Star gazing", "Community tours"],
-    highlights: [
-      "Multi-award winning eco-lodge",
-      "Adjacent to Hwange NP",
-      "Conservation researcher stays",
-      "Zero carbon footprint",
-    ],
-    description:
-      "This pioneering eco-lodge sits within a private wildlife corridor adjacent to Hwange National Park, where the property's philosophy of minimal environmental footprint and maximum wildlife immersion has earned it multiple sustainable tourism awards. Nine canvas-walled chalets on raised wooden platforms allow you to hear every sound of the African night — lions coughing in the distance, hyenas whooping, and the deep rumble of elephants passing in the darkness — while remaining in extraordinary comfort with en-suite bathrooms, solar-heated water, and chef-prepared cuisine using produce from the lodge's organic garden. Morning walks with resident researchers offer an unparalleled insight into one of Africa's richest ecosystems.",
-  },
-  {
-    id: "elephant-hills-resort",
-    name: "Elephant Hills Resort",
-    tagline: "Victoria Falls' Complete Safari Resort",
-    category: "resort",
-    // Large resort with golf course & Zambezi River frontage — Victoria Falls, Zimbabwe
-    image:
-      "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774990868/image_1774990854673_swxyzr.jpg",
-    location: "Victoria Falls",
-    country: "Zimbabwe",
-    price: "From $165/night",
-    priceNum: 165,
-    rating: 4.5,
-    reviews: 2103,
-    nights: "Min. 1 night",
-    guests: "Up to 4 guests",
-    amenities: ["Championship golf", "Tennis", "Waterpark", "Spa", "Multiple restaurants", "Zambezi water sports"],
-    highlights: [
-      "18-hole championship golf",
-      "Zambezi River frontage",
-      "276 rooms & suites",
-      "37 hectares of grounds",
-    ],
-    description:
-      "Situated on the banks of the upper Zambezi River and spread across 37 hectares of indigenous bush and manicured golf fairways, Elephant Hills is Victoria Falls's largest and most comprehensive resort — offering an all-encompassing experience for travellers who want multiple world-class facilities on-site. The 276 rooms range from comfortable standard rooms to opulent suites with direct river frontage, and the property features Zimbabwe's only 18-hole championship golf course, a tennis academy, water sports centre on the Zambezi, and Victoria Falls's most extensive spa and wellness facility — all on a single, stunning property.",
-  },
-  {
-    id: "lokuthula-lodges",
-    name: "Lokuthula Lodges",
-    tagline: "Privacy, Space & African Garden Living",
-    category: "boutique",
-    // Private self-catering lodge with tropical garden — Victoria Falls, Zimbabwe
-    image:
-      "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774990959/image_1774990948820_aeqo0k.jpg",
-    location: "Victoria Falls",
-    country: "Zimbabwe",
-    price: "From $145/night",
-    priceNum: 145,
-    rating: 4.6,
-    reviews: 678,
-    nights: "Min. 1 night",
-    guests: "Up to 6 guests",
-    amenities: ["Private pool", "Fully equipped kitchen", "Private boma", "Garden", "Wildlife access", "Self-catering"],
-    highlights: [
-      "1.2km from the falls",
-      "Perfect for families & groups",
-      "Private pools & boma",
-      "Indigenous wildlife garden",
-    ],
-    description:
-      "These exceptionally well-appointed self-catering lodges in the heart of Victoria Falls town offer the ideal combination of privacy, space, and quality for families, groups, and travellers who prefer flexibility over a standard hotel room. Each of the 18 three-bedroom lodges is fully equipped with a fitted kitchen, private pool, boma for outdoor braais, and a shaded garden area surrounded by indigenous trees that attract abundant wildlife including vervet monkeys, bushbuck, and scores of bird species. At just 1.2 kilometres from the entrance to Victoria Falls, these lodges combine the convenience of a central location with the independence and privacy of a private home.",
-  },
-];
 
 const CATEGORIES: { id: Category; label: string; icon: React.ReactNode }[] = [
   { id: "all", label: "All Properties", icon: <Home className="w-4 h-4" /> },
@@ -566,7 +250,7 @@ function AccommodationCard({ property }: { property: Accommodation }) {
       className="group relative bg-[#111] rounded-2xl overflow-hidden border border-white/5 hover:border-amber-500/30 transition-all duration-500"
     >
       {/* Image */}
-      <div className="relative h-64 md:h-72 overflow-hidden">
+      <Link href={`/services/accommodation/${property.id}`} className="relative h-64 md:h-72 overflow-hidden block">
         <motion.div
           animate={{ scale: hovered ? 1.07 : 1 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -620,17 +304,17 @@ function AccommodationCard({ property }: { property: Accommodation }) {
             {property.category.replace("-", " ")}
           </span>
         </div>
-      </div>
-
-      {/* Content */}
+      </Link>
       <div className="p-5">
         <div className="mb-3">
           <p className="text-amber-400/70 text-xs uppercase tracking-widest mb-1">
             {property.tagline}
           </p>
-          <h3 className="text-white text-xl font-bold leading-tight group-hover:text-amber-400 transition-colors duration-300">
-            {property.name}
-          </h3>
+          <Link href={`/services/accommodation/${property.id}`}>
+            <h3 className="text-white text-xl font-bold leading-tight group-hover:text-amber-400 transition-colors duration-300">
+              {property.name}
+            </h3>
+          </Link>
         </div>
 
         {/* Meta row */}
@@ -868,13 +552,13 @@ function CtaBanner() {
 }
 
 /* ─── Main Export ────────────────────────────────────────────────────── */
-export default function AccommodationClient() {
+export default function AccommodationClient({ stays }: { stays: Accommodation[] }) {
   const [activeCategory, setActiveCategory] = useState<Category>("all");
 
   const filtered =
     activeCategory === "all"
-      ? ACCOMMODATIONS
-      : ACCOMMODATIONS.filter((a) => a.category === activeCategory);
+      ? stays
+      : stays.filter((a) => a.category === activeCategory);
 
   return (
     <div className="bg-[#0a0a0a] min-h-screen">

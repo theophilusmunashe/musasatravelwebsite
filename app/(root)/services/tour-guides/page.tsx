@@ -1,5 +1,8 @@
 import TourGuidesClient from "./components/TourGuidesClient";
 import type { Metadata } from "next";
+import { getGuides } from "@/lib/services-cms";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Expert African Tour Guides",
@@ -21,6 +24,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function TourGuidesPage() {
-  return <TourGuidesClient />;
+export default async function TourGuidesPage() {
+  const guides = await getGuides();
+  return <TourGuidesClient guides={guides} />;
 }

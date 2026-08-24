@@ -4,8 +4,10 @@ import Stats from "./components/Stats";
 import About from "./components/About";
 import Smart from "./components/Smart";
 import Other from "./components/Other";
-
 import type { Metadata } from "next";
+import { getTravelPackages } from "@/lib/travel-packages";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "About - Musasa",
@@ -16,37 +18,16 @@ export const metadata: Metadata = {
   ],
 };
 
-// Hardcoded package data for Other section
-const packageData = [
-  {
-    _id: '1',
-    title: 'Victoria Falls Adventure',
-    mainImage: 'https://res.cloudinary.com/dwx3y9j1d/image/upload/v1772711417/victoria-falls_kzd1kp.jpg',
-    slug: { current: 'victoria-falls' }
-  },
-  {
-    _id: '2',
-    title: 'Cape Town Explorer',
-    mainImage: 'https://res.cloudinary.com/dwx3y9j1d/image/upload/v1772711419/south-africa_fv8tky.jpg',
-    slug: { current: 'cape-town' }
-  },
-  {
-    _id: '3',
-    title: 'Namibia Desert Safari',
-    mainImage: 'https://res.cloudinary.com/dwx3y9j1d/image/upload/v1772711385/bernd-dittrich-F4IdzUgXwa4-unsplash_qidgzk.jpg',
-    slug: { current: 'namibia' }
-  },
-];
-
 const Page = async () => {
+  const packages = (await getTravelPackages()).slice(0, 3);
+
   return (
     <div>
       <Hero />
       <Stats />
       <About />
       <Smart />
-      <Other data={packageData} />
-      {/* <Recents data={data} /> */}
+      <Other data={packages} />
     </div>
   );
 };

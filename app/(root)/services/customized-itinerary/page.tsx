@@ -1,5 +1,8 @@
 import ItineraryClient from "./components/ItineraryClient";
 import type { Metadata } from "next";
+import { getItineraries } from "@/lib/services-cms";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Customized Travel Itineraries",
@@ -22,6 +25,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function CustomizedItineraryPage() {
-  return <ItineraryClient />;
+export default async function CustomizedItineraryPage() {
+  const itineraries = await getItineraries();
+  return <ItineraryClient itineraries={itineraries} />;
 }

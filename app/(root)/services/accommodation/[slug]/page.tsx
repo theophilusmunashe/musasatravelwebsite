@@ -1,53 +1,52 @@
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import AccommodationDetailClient from "./AccommodationDetailClient";
+import { getStayBySlug, getStaySlugs } from "@/lib/services-cms";
 
-const nameMap: Record<string, string> = {
-  "luxury-safari-lodge": "Luxury Safari Lodge",
-  "boutique-coastal-retreat": "Boutique Coastal Retreat",
-  "mountain-view-cabin": "Mountain View Cabin",
-  "safari-tent-camp": "Safari Tent Camp",
-  "beachfront-villa": "Beachfront Villa",
-  "eco-lodge": "Eco Lodge",
-  "river-view-cottage": "River View Cottage",
-  "desert-camp": "Desert Camp",
-  "forest-retreat": "Forest Retreat",
-};
+export const revalidate = 300;
 
-const locationMap: Record<string, string> = {
-  "luxury-safari-lodge": "Victoria Falls, Zimbabwe",
-  "boutique-coastal-retreat": "Cape Town, South Africa",
-  "mountain-view-cabin": "Drakensberg Mountains, South Africa",
-  "safari-tent-camp": "Okavango Delta, Botswana",
-  "beachfront-villa": "Langebaan, South Africa",
-  "eco-lodge": "Greater Limpopo, Mozambique",
-  "river-view-cottage": "Livingstone, Zambia",
-  "desert-camp": "Namib Desert, Namibia",
-  "forest-retreat": "Eastern Cape, South Africa",
-};
+type Props = { params: { slug: string } };
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
-  const name = nameMap[params.slug] || "Luxury Accommodation";
-  const location = locationMap[params.slug] || "Southern Africa";
+export async function generateStaticParams() {
+  const slugs = await getStaySlugs();
+  return slugs.map((slug) => ({ slug }));
+}
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const stay = await getStayBySlug(params.slug);
+  if (!stay) {
+    return { title: "Accommodation not found" };
+  }
+  const location = `${stay.location}, ${stay.country}`;
   return {
-    title: `${name} — ${location}`,
-    description: `Book ${name} in ${location} with Musasa Travel & Tours. Exceptional service, stunning surroundings, and unforgettable African experiences await.`,
+    title: `${stay.name} — ${location}`,
+    description: stay.description,
     openGraph: {
-      title: `${name} | Musasa Travel & Tours`,
-      description: `Experience ${name} in ${location}. Curated by Musasa Travel & Tours.`,
-      url: `/services/accommodation/${params.slug}`,
+      title: `${stay.name} | Musasa Travel & Tours`,
+      description: stay.tagline,
+      url: `/services/accommodation/${stay.id}`,
     },
   };
 }
 
-export default function AccommodationDetailPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  return <AccommodationDetailClient params={params} />;
+export default async function AccommodationDetailPage({ params }: Props) {
+  const stay = await getStayBySlug(params.slug);
+  if (!stay) notFound();
+
+  return (
+    <AccommodationDetailClient
+      accommodation={{
+        _id: stay.id,
+        title: stay.name,
+        mainImage: stay.image,
+        location: `${stay.location}, ${stay.country}`,
+        price: stay.price,
+        rating: stay.rating,
+        reviews: stay.reviews,
+        description: stay.description,
+        amenities: stay.amenities,
+        highlights: stay.highlights,
+      }}
+    />
+  );
 }

@@ -1,10 +1,13 @@
 import ActivitiesClient from "./components/ActivitiesClient";
 import type { Metadata } from "next";
+import { getActivities } from "@/lib/services-cms";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Safari Activities & Experiences",
   description:
-    "Choose from 12 world-class experiences at Victoria Falls — white water rafting, safari game drives, bungee jumping, helicopter flights, cultural tours, sunset cruises and more. Build your perfect itinerary with Musasa Travel.",
+    "Choose from world-class experiences at Victoria Falls — white water rafting, safari game drives, bungee jumping, helicopter flights, cultural tours, sunset cruises and more. Build your perfect itinerary with Musasa Travel.",
   keywords: [
     "victoria falls activities",
     "safari activities zimbabwe",
@@ -18,11 +21,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Safari Activities & Experiences | Musasa Travel & Tours",
     description:
-      "12 world-class African experiences — rafting, safaris, bungee jumping, helicopter flights and more at Victoria Falls.",
+      "World-class African experiences — rafting, safaris, bungee jumping, helicopter flights and more at Victoria Falls.",
     url: "/services/activities",
   },
 };
 
-export default function ActivitiesPage() {
-  return <ActivitiesClient />;
+export default async function ActivitiesPage() {
+  const activities = await getActivities();
+  return <ActivitiesClient activities={activities} />;
 }

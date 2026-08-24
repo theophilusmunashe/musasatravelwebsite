@@ -1,32 +1,13 @@
 import { MetadataRoute } from "next";
-import { groq } from "next-sanity";
-import { client } from "../sanity/lib/client";
 import { getTravelPackageSlugs } from "@/lib/travel-packages";
+import { getStaySlugs } from "@/lib/services-cms";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_BASE_URL || "https://www.musasatravelandtours.com";
 
-const slugQuery = groq`
-  *[_type == "project"] {
-    slug
-  }
-`;
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  let projectEntries: MetadataRoute.Sitemap = [];
   let packageEntries: MetadataRoute.Sitemap = [];
-
-  try {
-    const response = await client.fetch(slugQuery);
-    projectEntries = response.map((p: any) => ({
-      url: `${BASE_URL}/projects/${p.slug.current}`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.5,
-    }));
-  } catch {
-    // Sanity unavailable — skip dynamic entries
-  }
+  let stayEntries: MetadataRoute.Sitemap = [];
 
   try {
     const slugs = await getTravelPackageSlugs();
@@ -35,6 +16,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.8,
+    }));
+  } catch {
+    // skip
+  }
+
+  try {
+    const slugs = await getStaySlugs();
+    stayEntries = slugs.map((slug) => ({
+      url: `${BASE_URL}/services/accommodation/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
     }));
   } catch {
     // skip
@@ -110,12 +103,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/blogs`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.7,
-    },
-    {
       url: `${BASE_URL}/privacy-policy`,
       lastModified: now,
       changeFrequency: "yearly",
@@ -128,6 +115,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.3,
     },
     ...packageEntries,
-    ...projectEntries,
+    ...stayEntries,
   ];
 }

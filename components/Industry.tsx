@@ -47,7 +47,7 @@ const Industry = () => {
               <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 font-medium w-full">
                 {destinations.map((item: any) => (
                   <Link
-                    href={`/category/${item.slug.current}`}
+                    href="/packages"
                     className="relative h-96  md:h-[450px] overflow-hidden group transition-all w-full"
                     key={item._id}
                   >

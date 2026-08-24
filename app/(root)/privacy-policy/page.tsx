@@ -1,6 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
-import Header from "../projects/components/Header";
+import PageHeader from "../../../components/PageHeader";
 import { client } from "../../../sanity/lib/client";
 import PortableBody from "../../../components/portable";
 
@@ -28,7 +28,7 @@ const Page = async () => {
   return (
     <div>
       <div className="h-16 bg-[#F7F4ED] text-black w-full" />
-      <Header title="Privacy Policy" />
+      <PageHeader title="Privacy Policy" />
 
       <div className="max-w-4xl mx-auto pb-20">
         <PortableBody value={data.body} />

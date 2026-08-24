@@ -1,0 +1,346 @@
+[
+  {
+    "id": "victoria-falls-tour",
+    "name": "Victoria Falls Rainforest Tour",
+    "tagline": "The Smoke That Thunders",
+    "category": "adventure",
+    "image": "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774991992/image_1774991979373_pvrvtp.jpg",
+    "gallery": [
+      "https://images.unsplash.com/photo-1549366021-9f761d450615?w=400&q=80"
+    ],
+    "duration": "3 hours",
+    "groupSize": "2–16",
+    "price": "From $85/person",
+    "priceNum": 85,
+    "rating": 4.9,
+    "reviews": 1247,
+    "difficulty": {
+      "label": "Easy",
+      "color": "text-green-400"
+    },
+    "highlights": [
+      "12+ viewpoints",
+      "Rainforest paths",
+      "Expert local guide",
+      "Small groups only"
+    ],
+    "badge": "Most Popular",
+    "description": "Stand face-to-face with one of the world's greatest natural wonders on a guided walk through the permanent rainforest created by the falls' eternal spray. Over 500 million litres of water plunge 108 metres into the Batoka Gorge every minute during peak flood, generating a roar heard 40 kilometres away and mist that rises 400 metres into the sky. Your knowledgeable guide leads you through more than a dozen viewpoints, each revealing a different perspective — from the thundering Main Falls and the aptly named Devil's Cataract to the tranquil Eastern Cataract and the dramatic Boiling Pot below the Victoria Falls Bridge. A perpetual rainbow arcs through the mist, soaking you in a fine spray and creating an atmosphere of raw, primal wonder that simply cannot be replicated anywhere else on earth.",
+    "difficultyLabel": "Easy",
+    "difficultyColor": "text-green-400",
+    "displayOrder": 1
+  },
+  {
+    "id": "white-water-rafting",
+    "name": "Zambezi White Water Rafting",
+    "tagline": "Grade 5 Adrenaline",
+    "category": "adventure",
+    "image": "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774992071/image_1774992059545_mpalwz.jpg",
+    "gallery": [],
+    "duration": "Full day",
+    "groupSize": "6–12",
+    "price": "From $125/person",
+    "priceNum": 125,
+    "rating": 4.8,
+    "reviews": 893,
+    "difficulty": {
+      "label": "Extreme",
+      "color": "text-red-400"
+    },
+    "highlights": [
+      "23 legendary rapids",
+      "Safety briefing included",
+      "Lunch on the riverbank",
+      "Professional photos"
+    ],
+    "badge": "Adrenaline Rush",
+    "description": "Tackle the legendary rapids of the Zambezi River, consistently ranked among the world's top five white water rafting destinations. Below Victoria Falls, the Batoka Gorge channels the mighty river through 23 rapid sections, with many graded Class 4 and 5. You'll navigate through towering basalt cliffs that rise 250 metres, deep emerald pools of calm, and thundering rapids with names like 'The Devil's Toilet Bowl', 'The Washing Machine', and 'Oblivion'. Our expert guides — trained to the highest international safety standards — ensure your safety while delivering a maximum adrenaline experience. A riverside lunch of fresh salads, sandwiches, and cold drinks is served mid-river before you tackle the afternoon's legendary rapids in the dramatic Lower Zambezi gorge.",
+    "difficultyLabel": "Extreme",
+    "difficultyColor": "text-red-400",
+    "displayOrder": 2
+  },
+  {
+    "id": "helicopter-flight",
+    "name": "Flight of Angels Helicopter",
+    "tagline": "Aerial Masterpiece",
+    "category": "aerial",
+    "image": "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774992136/image_1774992128033_prvubv.jpg",
+    "gallery": [],
+    "duration": "13 minutes",
+    "groupSize": "1–6",
+    "price": "From $185/person",
+    "priceNum": 185,
+    "rating": 4.9,
+    "reviews": 2103,
+    "difficulty": {
+      "label": "Easy",
+      "color": "text-green-400"
+    },
+    "highlights": [
+      "360° panoramic views",
+      "Full falls visible",
+      "Named by Livingstone",
+      "Photography heaven"
+    ],
+    "badge": "Bucket List",
+    "description": "Experience Victoria Falls from the perspective that inspired Dr David Livingstone to write 'scenes so lovely must have been gazed upon by angels in their flight' in 1855. As your helicopter ascends above the rising mist column, the full magnitude of the falls reveals itself across the Zambia–Zimbabwe border — a curtain of white water stretching 1,708 metres wide, the largest waterfall on earth by combined width and flow. The aircraft banks and turns above the Devil's Cataract, the Main Falls, the Horseshoe Falls, the Rainbow Falls, and the Eastern Cataract, giving you multiple angles impossible to appreciate from ground level. The Batoka Gorge snakes dramatically below, and on clear days the Zambezi River is visible for 30 kilometres. Morning flights offer crystal clarity; afternoon flights bathe everything in liquid gold.",
+    "difficultyLabel": "Easy",
+    "difficultyColor": "text-green-400",
+    "displayOrder": 3
+  },
+  {
+    "id": "bungee-jump",
+    "name": "Victoria Falls Bridge Bungee",
+    "tagline": "111 Metres of Pure Fear",
+    "category": "adventure",
+    "image": "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774992219/image_1774992209601_tiqsqy.jpg",
+    "gallery": [],
+    "duration": "2 hours",
+    "groupSize": "1–1",
+    "price": "From $160/person",
+    "priceNum": 160,
+    "rating": 4.7,
+    "reviews": 678,
+    "difficulty": {
+      "label": "Extreme",
+      "color": "text-red-400"
+    },
+    "highlights": [
+      "111m freefall",
+      "Zambezi River below",
+      "Historic 1905 bridge",
+      "Video package included"
+    ],
+    "description": "Take the ultimate leap of faith from the historic Victoria Falls Bridge, 111 metres above the churning, emerald Zambezi River with the roaring falls barely 150 metres to your side. Built in 1905, this iconic bridge spanning the border between Zimbabwe and Zambia is the world's most spectacularly located bungee jump — consistently ranked in the top ten globally. As you stand at the edge, the gorge plunges dramatically below your feet while the thunder of the falls fills your ears and the mist cools your skin. The moment of launch transforms into a moment of pure liberation — a 3.5-second freefall before the cord catches you in a series of exhilarating bounces, each one giving you an upside-down view of one of Africa's greatest landmarks. A complete video package captures every second of your bravery.",
+    "difficultyLabel": "Extreme",
+    "difficultyColor": "text-red-400",
+    "displayOrder": 4
+  },
+  {
+    "id": "elephant-safari",
+    "name": "Elephant-Back Safari",
+    "tagline": "Giants of the African Bush",
+    "category": "wildlife",
+    "image": "https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=900&q=80",
+    "gallery": [],
+    "duration": "2 hours",
+    "groupSize": "2–8",
+    "price": "From $145/person",
+    "priceNum": 145,
+    "rating": 4.8,
+    "reviews": 1089,
+    "difficulty": {
+      "label": "Easy",
+      "color": "text-green-400"
+    },
+    "highlights": [
+      "Ride rescued elephants",
+      "Conservation education",
+      "Hands-on interaction",
+      "Bush breakfast included"
+    ],
+    "badge": "Family Favourite",
+    "description": "Forge an intimate bond with Africa's most iconic and intelligent creatures on a magical elephant-back safari through the mopane and thorn-bush of the Zimbabwe wilderness. Riding high on the back of these magnificent pachyderms, you traverse the African savannah at their gentle pace, experiencing the bush from a perspective that no other safari vehicle can match — at the same eye level as giraffes and within reaching distance of the treetops. Your mahout guides share the fascinating life stories of each elephant, revealing their distinct personalities, family histories, and the conservation programme that rescued and rehabilitated them. The experience concludes with a hands-on interaction session where you can feed the elephants acacia pods, assist in their daily bathing, and sit quietly as they lean their enormous, warm heads against you — an unforgettable connection with one of nature's most extraordinary beings.",
+    "difficultyLabel": "Easy",
+    "difficultyColor": "text-green-400",
+    "displayOrder": 5
+  },
+  {
+    "id": "chobe-safari",
+    "name": "Chobe National Park Day Safari",
+    "tagline": "World's Greatest Elephant Sanctuary",
+    "category": "wildlife",
+    "image": "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=900&q=80",
+    "gallery": [],
+    "duration": "Full day",
+    "groupSize": "2–10",
+    "price": "From $195/person",
+    "priceNum": 195,
+    "rating": 4.9,
+    "reviews": 1562,
+    "difficulty": {
+      "label": "Easy",
+      "color": "text-green-400"
+    },
+    "highlights": [
+      "120,000+ elephants",
+      "Big Five territory",
+      "River cruise included",
+      "All meals & park fees"
+    ],
+    "badge": "Premium Experience",
+    "description": "Cross into Botswana for an extraordinary full-day immersion in Chobe National Park — home to the world's highest concentration of African elephants, with an estimated 120,000 individuals roaming these extraordinary wetlands and floodplains. Morning game drives in specialist open 4×4 vehicles take you deep into habitats teeming with buffalo herds numbering in the thousands, stately giraffe browsing in acacia forests, massive zebra migrations, and an astonishing array of predators including lions, leopards, cheetah, and the rare African wild dog. A gourmet riverside lunch sets the scene for the afternoon boat cruise along the Chobe River, where the experience transforms entirely — floating past enormous hippo pods, massive Nile crocodiles on sandy banks, and literally hundreds of elephants coming to drink, bathe, and play at the river's edge as the sun turns everything amber and gold.",
+    "difficultyLabel": "Easy",
+    "difficultyColor": "text-green-400",
+    "displayOrder": 6
+  },
+  {
+    "id": "lion-encounter",
+    "name": "Lion Encounter & Walk",
+    "tagline": "Walk with Africa's Apex Predators",
+    "category": "wildlife",
+    "image": "https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=900&q=80",
+    "gallery": [],
+    "duration": "90 minutes",
+    "groupSize": "2–8",
+    "price": "From $110/person",
+    "priceNum": 110,
+    "rating": 4.7,
+    "reviews": 734,
+    "difficulty": {
+      "label": "Moderate",
+      "color": "text-yellow-400"
+    },
+    "highlights": [
+      "Walk with young lions",
+      "Conservation programme",
+      "Expert handlers",
+      "Exceptional photography"
+    ],
+    "description": "Walk alongside magnificent African lions through their natural bush habitat in one of the most extraordinary and thought-provoking wildlife encounters available anywhere on the continent. Accompanied by highly trained handlers and your own guide, you walk through the African bush alongside young lions participating in a phased conservation programme designed to support the eventual reintroduction of lions into protected wilderness areas. As you walk at the lions' pace — sometimes slow and contemplative, sometimes a brisk saunter — you observe their natural behaviours at breathtakingly close range: how they investigate scents, read the bush for prey and rivals, and interact socially with each other and with their human carers. Your guide delivers a masterclass in lion ecology, conservation challenges, and the urgent work being done to protect these iconic apex predators whose populations have declined by 43% in the past two decades.",
+    "difficultyLabel": "Moderate",
+    "difficultyColor": "text-yellow-400",
+    "displayOrder": 7
+  },
+  {
+    "id": "zambezi-cruise",
+    "name": "Zambezi Sunset Cruise",
+    "tagline": "Africa's Golden Hour on the River",
+    "category": "water",
+    "image": "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774992316/image_1774992304643_y5jdze.jpg",
+    "gallery": [],
+    "duration": "2 hours",
+    "groupSize": "4–40",
+    "price": "From $75/person",
+    "priceNum": 75,
+    "rating": 4.8,
+    "reviews": 2341,
+    "difficulty": {
+      "label": "Easy",
+      "color": "text-green-400"
+    },
+    "highlights": [
+      "Sundowner drinks included",
+      "Hippo & croc sightings",
+      "African fish eagle calls",
+      "Canapes & catering"
+    ],
+    "badge": "Most Romantic",
+    "description": "Glide along the upper Zambezi River as the African sun transforms the sky into a canvas of fire — golds, crimsons, violets, and deep purples — on this enchanting two-hour sunset cruise through one of Africa's most biodiverse waterways. The upper Zambezi above the falls is a tranquil paradise of islands, channels, and riverine forest inhabited by enormous hippo pods that surface with characteristic snorts just metres from the boat, Nile crocodiles measuring up to five metres basking on sandy banks, and a kaleidoscope of 350+ bird species including the iconic African fish eagle whose haunting cry is the unmistakable voice of the African wilderness. Complimentary sundowner drinks — gin and tonic, wine, cold beer, or soft drinks — and freshly prepared canapés of smoked salmon, bruschetta, and cheese are served as your boat drifts through channels that have remained unchanged for thousands of years.",
+    "difficultyLabel": "Easy",
+    "difficultyColor": "text-green-400",
+    "displayOrder": 8
+  },
+  {
+    "id": "cultural-village",
+    "name": "Cultural Village Experience",
+    "tagline": "Living Stories of Zimbabwe",
+    "category": "culture",
+    "image": "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774992501/image_1774992393481_kdmmsp.jpg",
+    "gallery": [],
+    "duration": "3 hours",
+    "groupSize": "2–20",
+    "price": "From $65/person",
+    "priceNum": 65,
+    "rating": 4.6,
+    "reviews": 456,
+    "difficulty": {
+      "label": "Easy",
+      "color": "text-green-400"
+    },
+    "highlights": [
+      "Traditional cooking class",
+      "Drumming & dancing",
+      "Craft demonstrations",
+      "Community-owned"
+    ],
+    "description": "Immerse yourself in the rich, layered cultural heritage of the Tonga, Ndebele, and Shona peoples through this authentic, community-owned village experience that goes far beyond a typical tourist encounter. You'll learn the ancient art of fire-making by hand, try your skill at traditional clay pot creation, and watch master craftspeople weave intricate Ilala palm baskets using patterns that carry genealogical significance and community stories told across generations. Village women cook a traditional meal using fresh ingredients ground by hand on flat stones — sadza, nyama, and fresh vegetables prepared with recipes unchanged for centuries — which you share with the community in the shade of an ancient fig tree. As the afternoon deepens, the air fills with the resonant heartbeat of traditional drums as the village dancers perform the powerful, athletically demanding Ndebele war dances and the joyful Shona mbira music, before inviting you to join in — a cultural exchange of pure warmth and genuine connection.",
+    "difficultyLabel": "Easy",
+    "difficultyColor": "text-green-400",
+    "displayOrder": 9
+  },
+  {
+    "id": "microlight-flight",
+    "name": "Microlight Flight Over the Falls",
+    "tagline": "Open-Air Aerial Adventure",
+    "category": "aerial",
+    "image": "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774992500/image_1774992419689_zquz9r.jpg",
+    "gallery": [],
+    "duration": "15–30 minutes",
+    "groupSize": "1–2",
+    "price": "From $140/person",
+    "priceNum": 140,
+    "rating": 4.8,
+    "reviews": 389,
+    "difficulty": {
+      "label": "Easy",
+      "color": "text-green-400"
+    },
+    "highlights": [
+      "Open-air cockpit",
+      "Unlimited photography",
+      "Dawn & dusk flights",
+      "Tandem with pilot"
+    ],
+    "description": "Soar above Victoria Falls in an open-air microlight aircraft for an exhilarating, wind-in-your-face aerial experience that surpasses even a helicopter in pure freedom and intimacy. Flying tandem with a highly experienced pilot, you bank and turn at low speed above the falls, giving you unlimited time to photograph in any direction without the vibration, noise restrictions, or enclosed cockpit of a helicopter. The microlight's slow airspeed — typically around 100km/h — means you can linger above each section of the falls as long as you wish, while the open cockpit puts you in complete sensory contact with the environment: the cool updrafts from the gorge, the growing roar of the falls, and the extraordinary smell of millions of tonnes of water cascading through the ancient basalt. Dawn flights, when the gorge is filled with morning mist and lit by slanting golden light, are widely considered the single most spectacular natural aerial experience available anywhere in Africa.",
+    "difficultyLabel": "Easy",
+    "difficultyColor": "text-green-400",
+    "displayOrder": 10
+  },
+  {
+    "id": "zambezi-kayaking",
+    "name": "Upper Zambezi Kayaking",
+    "tagline": "Paddle Through Untouched Wilderness",
+    "category": "water",
+    "image": "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774992500/image_1774992451212_owlcf5.jpg",
+    "gallery": [],
+    "duration": "3 hours",
+    "groupSize": "2–12",
+    "price": "From $95/person",
+    "priceNum": 95,
+    "rating": 4.7,
+    "reviews": 312,
+    "difficulty": {
+      "label": "Moderate",
+      "color": "text-yellow-400"
+    },
+    "highlights": [
+      "Beginner-friendly",
+      "Close hippo encounters",
+      "180+ bird species",
+      "Expert guide included"
+    ],
+    "description": "Paddle through the pristine upper Zambezi River waterways on a guided kayaking adventure through one of Africa's most biodiverse and least-disturbed river ecosystems, exploring a network of islands, channels, and backwaters that very few visitors ever experience. Threading silently between papyrus-fringed islands and braided channels, you'll encounter hippo pods of 20–30 individuals lounging in the shallows, raising their massive heads to regard you with mild curiosity before subsiding again, and enormous Nile crocodiles on sun-baked sandbanks. The birdlife is extraordinary — over 180 species have been recorded along this stretch, including African fish eagle, African skimmer, rock pratincole, giant kingfisher, and the tiny, jewel-brilliant malachite kingfisher darting through the reeds like a streak of sapphire and fire. The calm, braided channels of the upper Zambezi make this experience suitable for beginners and experienced paddlers alike.",
+    "difficultyLabel": "Moderate",
+    "difficultyColor": "text-yellow-400",
+    "displayOrder": 11
+  },
+  {
+    "id": "hwange-safari",
+    "name": "Hwange National Park Safari",
+    "tagline": "Zimbabwe's Untouched Wilderness",
+    "category": "wildlife",
+    "image": "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1774992499/image_1774992481223_j3z7jl.jpg",
+    "gallery": [],
+    "duration": "Full day",
+    "groupSize": "2–8",
+    "price": "From $175/person",
+    "priceNum": 175,
+    "rating": 4.8,
+    "reviews": 891,
+    "difficulty": {
+      "label": "Easy",
+      "color": "text-green-400"
+    },
+    "highlights": [
+      "Big Five territory",
+      "Expert tracker guides",
+      "Artificial waterholes",
+      "Teak forest ecosystem"
+    ],
+    "description": "Journey to Zimbabwe's largest and oldest national park — 14,651 square kilometres of pristine wilderness ranging from ancient teak forests and golden grasslands to enigmatic Kalahari sandveld and dramatic baobab woodlands — for an unforgettable full-day safari through one of Africa's most underrated wildlife destinations. Hwange harbours Zimbabwe's largest elephant population alongside all members of the Big Five: lion, leopard, rhinoceros, buffalo, and elephant, plus wild dog, cheetah, giraffe, zebra, wildebeest, and over 400 bird species. The park's famous artificial waterholes — some created by the legendary researcher and conservationist WW 'Oom' Barry — attract extraordinary concentrations of wildlife during the dry season. Watching hundreds of elephants, zebra, giraffe, and buffalo gather simultaneously at a single waterhole while lions wait patiently in the shade is a wildlife spectacle that rivals anything Africa has to offer. Expert trackers interpret the landscape's hidden stories with extraordinary skill.",
+    "difficultyLabel": "Easy",
+    "difficultyColor": "text-green-400",
+    "displayOrder": 12
+  }
+]

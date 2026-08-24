@@ -40,132 +40,6 @@ interface Itinerary {
 }
 
 /* ─── Data ───────────────────────────────────────────────────────────── */
-const ITINERARIES: Itinerary[] = [
-  {
-    id: "vic-falls-chobe",
-    name: "Victoria Falls & Chobe Expedition",
-    tagline: "Two Countries, One Unforgettable Journey",
-    image: "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=900&q=80",
-    days: 5,
-    filter: "short",
-    destinations: ["Victoria Falls, Zimbabwe", "Chobe, Botswana"],
-    price: "From $1,850/person",
-    priceNum: 1850,
-    groupSize: "2–10",
-    badge: "Best Seller",
-    highlights: [
-      "Victoria Falls walking tour",
-      "Chobe full-day game drive",
-      "Zambezi sunset cruise",
-      "Luxury lodge stays",
-    ],
-    description:
-      "The perfect introduction to southern Africa's crown jewels. Five transformative days that balance the raw thunder of Victoria Falls with the extraordinary wildlife spectacle of Chobe National Park — home to over 120,000 elephants. Days one and two are dedicated to the falls: walking tours through the rainforest, a sunset boat cruise on the upper Zambezi, and the optional bungee jump from the historic Victoria Falls Bridge. Days three and four cross into Botswana for immersive game drives and a Chobe River cruise. Day five is a gentle return, with a final sundowner watching elephants at the waterhole. All transfers, park fees, accommodation, and most meals are included.",
-  },
-  {
-    id: "southern-safari-circuit",
-    name: "Southern Safari Circuit",
-    tagline: "The Great African Loop",
-    image: "https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=900&q=80",
-    days: 10,
-    filter: "medium",
-    destinations: ["Zimbabwe", "Botswana", "Zambia"],
-    price: "From $4,200/person",
-    priceNum: 4200,
-    groupSize: "2–8",
-    badge: "Most Popular",
-    highlights: [
-      "Three-country circuit",
-      "Hwange & Chobe safaris",
-      "Zambezi houseboat",
-      "Victoria Falls & Livingstone",
-    ],
-    description:
-      "A decade of memories compressed into ten extraordinary days. This signature circuit begins in Victoria Falls before looping through Zimbabwe's largest national park — Hwange — where enormous elephant herds and resident lion prides await. Crossing into Zambia, you spend two nights on an intimate houseboat drifting the Lower Zambezi, where tigers fish jump beside the boat at dawn and hippo paths through the reeds fill the air with sound. The final leg crosses into Botswana for Chobe's legendary game drives and a river cruise. Expert naturalist guides accompany you throughout, transforming every sighting into a deeper understanding of these extraordinary ecosystems.",
-  },
-  {
-    id: "cape-to-vic-falls",
-    name: "Cape to Victoria Falls",
-    tagline: "The Ultimate Southern African Road",
-    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=900&q=80",
-    days: 14,
-    filter: "extended",
-    destinations: ["Cape Town, SA", "Namibia", "Victoria Falls, Zimbabwe"],
-    price: "From $7,500/person",
-    priceNum: 7500,
-    groupSize: "2–6",
-    badge: "Premium Journey",
-    highlights: [
-      "Cape Town city & winelands",
-      "Namib Desert & Sossusvlei",
-      "Etosha National Park",
-      "Victoria Falls grand finale",
-    ],
-    description:
-      "Africa's most iconic overland journey — from the staggering beauty of Cape Town and the Cape Peninsula through the otherworldly landscapes of Namibia's Namib Desert, the flamingo-filled Walvis Bay lagoon, and the vast Etosha salt pan with its extraordinary wildlife, before culminating in the thunder of Victoria Falls. Fourteen days that encompass the full emotional spectrum of this extraordinary continent: cosmopolitan Cape Town, the silence of the oldest desert on earth, the surreal geometry of red dunes at Sossusvlei, lions hunting at Etosha's floodlit waterholes, and finally the roar of one of the world's greatest natural wonders as your crescendo.",
-  },
-  {
-    id: "mozambique-beach-safari",
-    name: "Mozambique Beach & Safari Combo",
-    tagline: "Bush Meets Beach in Perfect Balance",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80",
-    days: 8,
-    filter: "medium",
-    destinations: ["Victoria Falls, Zimbabwe", "Vilankulo, Mozambique"],
-    price: "From $3,100/person",
-    priceNum: 3100,
-    groupSize: "2–8",
-    highlights: [
-      "Victoria Falls highlights",
-      "Bazaruto Archipelago",
-      "Dhow sailing at sunset",
-      "Dugong & whale shark snorkel",
-    ],
-    description:
-      "Africa's best-kept secret for those who want both the wild and the sea. Four days in Victoria Falls for the falls, safari, and adrenaline, then a scenic flight east to Mozambique's Bazaruto Archipelago — a marine national park of extraordinary beauty where turquoise channels between islands shelter the last viable population of dugong in the Indian Ocean. The islands are encircled by pristine coral reefs, and whale sharks pass through from September to March. Accommodation is in luxurious island lodges where barefoot elegance and exceptional seafood are the only agenda. A beach-and-bush combination that cannot be replicated anywhere else in the world.",
-  },
-  {
-    id: "dubai-africa-twin",
-    name: "Dubai & Africa Twin Experience",
-    tagline: "From Desert Skylines to African Wilderness",
-    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=900&q=80",
-    days: 10,
-    filter: "medium",
-    destinations: ["Dubai, UAE", "Victoria Falls, Zimbabwe"],
-    price: "From $4,800/person",
-    priceNum: 4800,
-    groupSize: "2–10",
-    badge: "Unique Combo",
-    highlights: [
-      "Dubai desert safari & city",
-      "Burj Khalifa & souks",
-      "Victoria Falls & helicopter",
-      "Luxury throughout",
-    ],
-    description:
-      "The world's most dramatic contrast in ten remarkable days. Begin in Dubai for four nights of architectural wonder and desert luxury — the Burj Khalifa at sunrise, a private desert camp under the stars, the gold souk, and a dhow dinner cruise on the Dubai Creek. Then fly direct to Victoria Falls for six days of pure African wilderness: the falls, a helicopter flight of angels, game drives in Hwange, a sunset cruise on the Zambezi, and the optional adrenaline bucket list of bungee jumping and white water rafting. The juxtaposition of gleaming modernity and primal wilderness creates a journey of extraordinary depth and contrast that stays with you for life.",
-  },
-  {
-    id: "namibia-delta",
-    name: "Namibia Desert & Okavango Delta",
-    tagline: "Desert Silence to Delta Symphony",
-    image: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=900&q=80",
-    days: 12,
-    filter: "extended",
-    destinations: ["Namibia", "Okavango Delta, Botswana"],
-    price: "From $6,200/person",
-    priceNum: 6200,
-    groupSize: "2–6",
-    highlights: [
-      "Sossusvlei red dunes",
-      "Skeleton Coast wilderness",
-      "Okavango Delta mokoro",
-      "Moremi Game Reserve",
-    ],
-    description:
-      "One of Africa's great journey of contrasts — from the bone-dry silence of the Namib, earth's oldest desert, to the flooded labyrinth of the Okavango Delta, the world's largest inland delta. Namibia's first week delivers Sossusvlei's iconic red sand dunes rising 325 metres above white clay pans, the eerie Deadvlei with its 900-year-old fossilised camel thorn trees, the wild and lonely Skeleton Coast, and Etosha's productive game viewing. A scenic flight east delivers you to Botswana's delta, where motorised mokoro (dugout canoe) trips through papyrus channels, walking safaris through prime lion territory, and intimate fly-camps under the stars create a second, completely different African experience of equal power.",
-  },
-];
 
 const FILTERS: { id: Filter; label: string; days: string }[] = [
   { id: "all", label: "All Journeys", days: "" },
@@ -397,9 +271,9 @@ function CtaBanner() {
 }
 
 /* ─── Main Export ────────────────────────────────────────────────────── */
-export default function ItineraryClient() {
+export default function ItineraryClient({ itineraries }: { itineraries: Itinerary[] }) {
   const [activeFilter, setActiveFilter] = useState<Filter>("all");
-  const filtered = activeFilter === "all" ? ITINERARIES : ITINERARIES.filter((i) => i.filter === activeFilter);
+  const filtered = activeFilter === "all" ? itineraries : itineraries.filter((i) => i.filter === activeFilter);
 
   return (
     <div className="bg-[#0a0a0a] min-h-screen">
@@ -421,6 +295,9 @@ export default function ItineraryClient() {
             {filtered.map((item) => <ItineraryCard key={item.id} item={item} />)}
           </motion.div>
         </AnimatePresence>
+        {filtered.length === 0 && (
+          <p className="text-center py-20 text-white/40 text-lg">No sample itineraries in this length yet.</p>
+        )}
       </section>
 
       <HowItWorks />

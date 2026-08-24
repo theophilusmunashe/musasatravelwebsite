@@ -190,7 +190,7 @@ export default function AccommodationDetails({
       >
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Amenities & Features</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {defaultAmenities.map((amenity, index) => (
+          {amenities.map((amenity, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.8 }}
@@ -199,9 +199,9 @@ export default function AccommodationDetails({
               className="p-4 bg-gradient-to-br from-white to-gray-50 rounded-lg border border-gray-200 hover:border-amber-300 hover:shadow-lg transition-all duration-200 text-center"
             >
               <div className="flex justify-center mb-2 text-amber-500">
-                {amenityIcons[amenity.icon] || <Wifi className="w-6 h-6" />}
+                {amenityIcons[amenity.toLowerCase()] || <Wifi className="w-6 h-6" />}
               </div>
-              <p className="text-sm font-semibold text-gray-900">{amenity.name}</p>
+              <p className="text-sm font-semibold text-gray-900">{amenity}</p>
             </motion.div>
           ))}
         </div>

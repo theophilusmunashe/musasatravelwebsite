@@ -20,7 +20,6 @@ const company = [
   { name: "Packages", href: "/packages" },
   { name: "Bookings", href: "/bookings" },
   { name: "Contact", href: "/contact" },
-  { name: "Blog", href: "/blogs" },
 ];
 
 const socials = [

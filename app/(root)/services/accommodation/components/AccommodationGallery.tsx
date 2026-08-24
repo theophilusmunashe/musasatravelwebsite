@@ -16,12 +16,7 @@ export default function AccommodationGallery({ mainImage, title, images = [] }: 
   const [isLoading, setIsLoading] = useState(true);
 
   // Create gallery with main image and additional images
-  const galleryImages = [mainImage, ...(images.length > 0 ? images : [
-    "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1772711417/victoria-falls_kzd1kp.jpg",
-    "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1772711419/south-africa_fv8tky.jpg",
-    "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1772711385/bernd-dittrich-F4IdzUgXwa4-unsplash_qidgzk.jpg",
-    "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1772711417/victoria-falls_kzd1kp.jpg",
-  ])];
+  const galleryImages = images.length > 0 ? [mainImage, ...images] : [mainImage];
 
   const selectedImage = galleryImages[selectedImageIndex];
 

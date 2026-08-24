@@ -1,5 +1,8 @@
 import ShuttleClient from "./components/ShuttleClient";
 import type { Metadata } from "next";
+import { getTransfers } from "@/lib/services-cms";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Shuttle Services & Transfers",
@@ -22,6 +25,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ShuttleServicesPage() {
-  return <ShuttleClient />;
+export default async function ShuttleServicesPage() {
+  const transfers = await getTransfers();
+  return <ShuttleClient transfers={transfers} />;
 }

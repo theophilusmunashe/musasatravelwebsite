@@ -1,19 +1,13 @@
-import dynamic from "next/dynamic";
-
 import FormComponent from "../../components/FormComponent";
 import Hero from "../../components/Hero";
 import Industry from "../../components/Industry";
-import Offers from "../../components/Offers";
-import Recents from "../../components/Recents";
-import Vision from "../../components/Vision";
-
+import FeaturedJourneys from "../../components/FeaturedJourneys";
 import type { Metadata } from "next";
 import Note from "../../components/Note";
-
-import ColumnContainer from "../../components/ColumnContainer";
-import Example from "../../components/Hori";
 import Service from "../../components/Services";
-import Cta from "../../components/Collab";
+import { getTravelPackages } from "@/lib/travel-packages";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Musasa Travel & Tours — Rooted in Africa, Reaching the World",
@@ -49,16 +43,15 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
+  const packages = await getTravelPackages();
+
   return (
     <main className="h-full">
       <Hero />
-
       <Note />
-
       <Service />
-      {/* <Example data={category} /> */}
       <Industry />
-      <Recents />
+      <FeaturedJourneys packages={packages.slice(0, 3)} />
       <FormComponent />
     </main>
   );
