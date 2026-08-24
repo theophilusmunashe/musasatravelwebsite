@@ -1,36 +1,46 @@
 import React from "react";
 import Stats from "../about/components/Stats";
 import Faq from "./components/Faq";
-import type { Metadata } from "next";
 import Service from "../../../components/Services";
 import FormComponent from "../../../components/FormComponent";
 import PageHeader from "../../../components/PageHeader";
+import JsonLd from "../../../components/JsonLd";
+import { faqItems } from "@/data/data";
+import { breadcrumbsJsonLd, faqJsonLd, pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Our Services",
+export const metadata = pageMeta({
+  title: "Victoria Falls Travel Services",
   description:
-    "Explore the full range of Musasa Travel & Tours services — curated safari activities, luxury accommodation, custom itineraries, expert tour guides, and seamless shuttle transfers across Zimbabwe, Botswana, Zambia and beyond.",
+    "Book Victoria Falls tours, safari lodges, custom itineraries, licensed tour guides and airport transfers with Musasa Travel in Victoria Falls, Zimbabwe.",
+  path: "/services",
   keywords: [
-    "musasa travel services",
-    "africa safari services",
-    "victoria falls activities",
-    "zimbabwe accommodation",
-    "custom african itinerary",
-    "tour guides victoria falls",
-    "shuttle transfers africa",
+    "Victoria Falls travel services",
+    "Victoria Falls tours",
+    "Victoria Falls accommodation",
+    "Victoria Falls tour guides",
+    "Victoria Falls airport transfer",
+    "custom Africa itinerary",
   ],
-  openGraph: {
-    title: "Our Services | Musasa Travel & Tours",
-    description:
-      "Safaris, luxury accommodation, custom itineraries, expert guides and transfers across Southern Africa.",
-    url: "/services",
-  },
-};
+});
 
 const Page = () => {
   return (
     <div>
-      <PageHeader title="Services" />
+      <JsonLd
+        data={breadcrumbsJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Victoria Falls travel services", path: "/services" },
+        ])}
+      />
+      <JsonLd
+        data={faqJsonLd(
+          faqItems.map((item: { Question: string; Answer: string }) => ({
+            question: item.Question,
+            answer: item.Answer,
+          }))
+        )}
+      />
+      <PageHeader title="Victoria Falls Travel Services" />
       <Service />
       <Stats />
       <FormComponent />

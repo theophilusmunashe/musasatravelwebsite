@@ -14,7 +14,7 @@ const Logo = () => {
           src={newlogo}
           width={200}
           height={100}
-          alt="logo"
+          alt="Musasa Travel & Tours"
           className="object-contain"
         />
       </a>
@@ -26,7 +26,7 @@ const Logo = () => {
           src={newlogo}
           width={150}
           height={50}
-          alt="logo"
+          alt="Musasa Travel & Tours"
           className="object-contain"
         />
       </a>

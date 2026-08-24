@@ -102,9 +102,9 @@ function ActivitiesHero({
           transition={{ delay: 0.15, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6"
         >
-          <span className="block">Extraordinary</span>
-          <span className="block text-amber-400">African</span>
-          <span className="block">Adventures</span>
+          <span className="block">Victoria Falls</span>
+          <span className="block text-amber-400">Activities</span>
+          <span className="block">&amp; Tours</span>
         </motion.h1>
 
         <motion.p
@@ -113,9 +113,7 @@ function ActivitiesHero({
           transition={{ delay: 0.3, duration: 0.6 }}
           className="text-white/70 text-lg md:text-xl max-w-xl mb-10 leading-relaxed"
         >
-          Choose from 12 world-class experiences curated by those who know this
-          land intimately. Build your perfect itinerary — add as many as you
-          like and checkout in one seamless flow.
+          Choose from world-class Victoria Falls experiences curated by local experts. Build your itinerary — add as many as you like and checkout in one seamless flow.
         </motion.p>
 
         {/* Stats row */}

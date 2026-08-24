@@ -1,31 +1,47 @@
 import ShuttleClient from "./components/ShuttleClient";
-import type { Metadata } from "next";
+import JsonLd from "../../../../components/JsonLd";
 import { getTransfers } from "@/lib/services-cms";
+import { breadcrumbsJsonLd, itemListJsonLd, pageMeta } from "@/lib/seo";
 
 export const revalidate = 300;
 
-export const metadata: Metadata = {
-  title: "Shuttle Services & Transfers",
+export const metadata = pageMeta({
+  title: "Victoria Falls Airport Transfers & Shuttles",
   description:
-    "Airport transfers, cross-border shuttles to Livingstone and Kasane, private safari vehicles and group charters. Reliable professional transfers across Zimbabwe, Zambia and Botswana with Musasa Travel.",
+    "Book Victoria Falls Airport (VFA) transfers, Livingstone and Kasane shuttles, and private safari vehicles with Musasa Travel across Zimbabwe, Zambia and Botswana.",
+  path: "/services/shuttle-services",
   keywords: [
-    "victoria falls airport transfer",
-    "shuttle service victoria falls",
-    "livingstone transfer",
-    "kasane shuttle",
-    "cross border transfer africa",
-    "private safari vehicle zimbabwe",
-    "group charter transfer africa",
+    "Victoria Falls airport transfer",
+    "VFA shuttle",
+    "Livingstone transfer",
+    "Kasane shuttle",
+    "cross border transfer Victoria Falls",
   ],
-  openGraph: {
-    title: "Shuttle Services & Transfers | Musasa Travel & Tours",
-    description:
-      "Airport transfers, cross-border shuttles and private safari vehicles across Zimbabwe, Zambia and Botswana.",
-    url: "/services/shuttle-services",
-  },
-};
+});
 
 export default async function ShuttleServicesPage() {
   const transfers = await getTransfers();
-  return <ShuttleClient transfers={transfers} />;
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbsJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: "Victoria Falls airport transfers", path: "/services/shuttle-services" },
+        ])}
+      />
+      {transfers.length > 0 && (
+        <JsonLd
+          data={itemListJsonLd(
+            "Victoria Falls airport transfers and shuttles",
+            transfers.map((transfer) => ({
+              name: transfer.name,
+              path: "/services/shuttle-services",
+            }))
+          )}
+        />
+      )}
+      <ShuttleClient transfers={transfers} />
+    </>
+  );
 }

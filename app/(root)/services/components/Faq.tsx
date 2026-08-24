@@ -17,9 +17,9 @@ const Faq = () => {
     }
   return (
     <div className='bg-neutral-900/90 text-white relative py-8 flex justify-center flex-col'>
-        <h4 className='font-medium text-xl sm:text-3xl lg:text-4xl text-center text-[#fff] capitalize'>
+        <h2 className='font-medium text-xl sm:text-3xl lg:text-4xl text-center text-[#fff] capitalize'>
         frequently asked questions
-        </h4>
+        </h2>
 
       <div className='max-w-5xl mx-auto p-2'>
       {

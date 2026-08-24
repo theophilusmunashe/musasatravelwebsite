@@ -66,8 +66,8 @@ function Hero() {
           transition={{ delay: 0.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.05] tracking-tight mb-4"
         >
-          <span className="block">Let&apos;s Plan</span>
-          <span className="block text-amber-400">Your Adventure</span>
+          <span className="block">Contact Musasa Travel</span>
+          <span className="block text-amber-400">in Victoria Falls</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}

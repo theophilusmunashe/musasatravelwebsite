@@ -1,30 +1,35 @@
 import TourGuidesClient from "./components/TourGuidesClient";
-import type { Metadata } from "next";
+import JsonLd from "../../../../components/JsonLd";
 import { getGuides } from "@/lib/services-cms";
+import { breadcrumbsJsonLd, pageMeta } from "@/lib/seo";
 
 export const revalidate = 300;
 
-export const metadata: Metadata = {
-  title: "Expert African Tour Guides",
+export const metadata = pageMeta({
+  title: "Victoria Falls Tour Guides",
   description:
-    "Explore Africa through the eyes of passionate, certified local experts. Musasa Travel's guides bring every landmark and hidden trail to life — specialising in wildlife, adventure and cultural experiences.",
+    "Book licensed Victoria Falls tour guides with Musasa Travel. Local experts for wildlife, adventure and cultural tours around the Falls, Zambezi and Hwange.",
+  path: "/services/tour-guides",
   keywords: [
-    "victoria falls tour guide",
-    "safari guide zimbabwe",
-    "expert wildlife guide africa",
-    "certified tour guide victoria falls",
-    "local guide zimbabwe",
-    "adventure guide africa",
+    "Victoria Falls tour guide",
+    "licensed safari guide Zimbabwe",
+    "local guide Victoria Falls",
+    "wildlife guide Hwange",
   ],
-  openGraph: {
-    title: "Expert African Tour Guides | Musasa Travel & Tours",
-    description:
-      "Certified local guides specialising in wildlife, adventure and cultural experiences across Southern Africa.",
-    url: "/services/tour-guides",
-  },
-};
+});
 
 export default async function TourGuidesPage() {
   const guides = await getGuides();
-  return <TourGuidesClient guides={guides} />;
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbsJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: "Victoria Falls tour guides", path: "/services/tour-guides" },
+        ])}
+      />
+      <TourGuidesClient guides={guides} />
+    </>
+  );
 }

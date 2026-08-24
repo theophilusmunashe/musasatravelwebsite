@@ -73,8 +73,8 @@ export const faqItems = [
     Answer: "Absolutely, we specialize in bespoke itineraries tailored to your specific interests, budget, and pace. Every journey we create is as unique as the traveler we serve."
   },
   {
-    Question: "Do you provide airport transfers and shuttle services?",
-    Answer: "Yes, we offer seamless, air-conditioned transfers and cross-border shuttles for individuals and groups. Our professional drivers ensure you arrive safely, comfortably, and on time."
+    Question: "Do you provide Victoria Falls airport transfers and shuttles?",
+    Answer: "Yes. We provide Victoria Falls Airport (VFA) transfers, Livingstone and Kasane shuttles, and private safari vehicles across Zimbabwe, Zambia and Botswana."
   },
   {
     Question: "What kind of accommodation do you offer?",
@@ -89,8 +89,8 @@ export const faqItems = [
     Answer: "Yes, while our heart is in Africa, our roots reach destinations all over the world. We offer a global \"canopy\" of service for any destination you choose to explore."
   },
   {
-    Question: "How do I book a tour with Musasa?",
-    Answer: "You can request a quote through our website or contact our team directly via email or phone. We will guide you through the process from the initial inquiry to the final booking."
+    Question: "How do I book Victoria Falls tours with Musasa Travel?",
+    Answer: "Use the Bookings page on musasatravel.com to choose Victoria Falls activities, lodges, guides and transfers, then send your enquiry by email or WhatsApp. Our local team in Victoria Falls confirms availability and pricing."
   },
   {
     Question: "Do you provide 24/7 support during my trip?",

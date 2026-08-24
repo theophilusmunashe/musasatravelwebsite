@@ -65,9 +65,9 @@ function Hero({ activeSpec, setActiveSpec }: { activeSpec: Specialty; setActiveS
       <div className="relative z-10 px-6 md:px-16 pb-16 max-w-7xl mx-auto w-full">
         <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6">
-          <span className="block">The Land</span>
-          <span className="block text-amber-400">Through Expert</span>
-          <span className="block">Eyes.</span>
+          <span className="block">Victoria Falls</span>
+          <span className="block text-amber-400">Tour Guides</span>
+          <span className="block">&amp; Safari Experts</span>
         </motion.h1>
 
         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.6 }}

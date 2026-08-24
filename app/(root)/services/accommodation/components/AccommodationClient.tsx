@@ -126,9 +126,9 @@ function AccommodationHero({
           transition={{ delay: 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6"
         >
-          <span className="block">Your Perfect</span>
-          <span className="block text-amber-400">African</span>
-          <span className="block">Sanctuary</span>
+          <span className="block">Victoria Falls</span>
+          <span className="block text-amber-400">Accommodation</span>
+          <span className="block">&amp; Safari Lodges</span>
         </motion.h1>
 
         <motion.p
@@ -137,9 +137,7 @@ function AccommodationHero({
           transition={{ delay: 0.25, duration: 0.6 }}
           className="text-white/70 text-lg md:text-xl max-w-xl mb-10 leading-relaxed"
         >
-          From cantilevered river suites perched above the Zambezi to pioneering
-          eco-lodges deep in the bush — every property is hand-picked and
-          personally vetted by our team.
+          From river suites above the Zambezi to eco-lodges near Victoria Falls — every property is hand-picked and personally vetted by our local team.
         </motion.p>
 
         {/* Stats */}

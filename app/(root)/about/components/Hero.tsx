@@ -17,7 +17,7 @@ const Hero = ({ home }: any) => {
         src={
           "https://res.cloudinary.com/dwx3y9j1d/image/upload/v1772611294/nam_cfqi1a.jpg"
         }
-        alt="about-hero"
+        alt="Victoria Falls and Southern Africa — Musasa Travel agency based in Zimbabwe"
         fill
         className="w-full h-full object-cover"
       />
@@ -37,7 +37,7 @@ const Hero = ({ home }: any) => {
             transition={{ ...transition }}
             className="font-medium sm:text-left text-3xl md:text-4xl leading-none text-[#fff] "
           >
-            Under the expansive canopy of our local expertise, we provide a global covering for every explorer.
+            Under the expansive canopy of our local expertise, we provide a global covering for every explorer of Victoria Falls and Southern Africa.
           </motion.h1>
           <motion.p
             className="text-lg md:text-xl lg:text-2xl text-white"

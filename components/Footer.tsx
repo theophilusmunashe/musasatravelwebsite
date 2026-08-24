@@ -75,7 +75,7 @@ export default function Footer() {
             variants={fadeUp} custom={0} initial="hidden" whileInView="show" viewport={{ once: true }}
             className="lg:col-span-4 flex flex-col gap-6"
           >
-            <Image src={logoimg} alt="Musasa Travel" width={160} height={60} className="object-contain" />
+            <Image src={logoimg} alt="Musasa Travel & Tours — Victoria Falls, Zimbabwe" width={160} height={60} className="object-contain" />
             <p className="text-white/50 text-sm leading-relaxed max-w-xs">
               Victoria Falls&apos; premier travel experience. We craft unforgettable African adventures — from thundering falls to silent savannahs.
             </p>

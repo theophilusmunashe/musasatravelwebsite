@@ -1,7 +1,5 @@
 import { MetadataRoute } from "next";
-
-const BASE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL || "https://www.musasatravelandtours.com";
+import { SITE } from "@/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -9,10 +7,18 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/studio", "/studio/", "/_next/", "/api/"],
+        disallow: [
+          "/studio",
+          "/studio/",
+          "/_next/",
+          "/api/",
+          "/blogs",
+          "/projects",
+          "/category",
+        ],
       },
     ],
-    sitemap: `${BASE_URL}/sitemap.xml`,
-    host: BASE_URL,
+    sitemap: `${SITE.url}/sitemap.xml`,
+    host: SITE.url,
   };
 }

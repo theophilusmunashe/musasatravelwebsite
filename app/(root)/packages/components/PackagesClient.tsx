@@ -60,7 +60,7 @@ function Hero({
       <div className="absolute inset-0">
         <Image
           src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1600&q=85"
-          alt="African travel packages"
+          alt="Victoria Falls safari packages with Musasa Travel"
           fill
           priority
           className="object-cover"
@@ -77,9 +77,9 @@ function Hero({
           transition={{ delay: 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6"
         >
-          <span className="block">Africa, Perfectly</span>
-          <span className="block text-amber-400">Packaged</span>
-          <span className="block">for You.</span>
+          <span className="block">Victoria Falls</span>
+          <span className="block text-amber-400">Safari Packages</span>
+          <span className="block">Built for You</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -87,8 +87,8 @@ function Hero({
           transition={{ delay: 0.25, duration: 0.6 }}
           className="text-white/70 text-lg md:text-xl max-w-xl mb-10 leading-relaxed"
         >
-          Hand-crafted journeys spanning Victoria Falls, Cape Town, Namibia, Botswana,
-          Mozambique, and Mauritius — every detail included, nothing left to chance.
+          Hand-crafted Victoria Falls safari packages spanning Zimbabwe, Cape Town, Namibia, Botswana,
+          Mozambique and Mauritius — every detail included, nothing left to chance.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

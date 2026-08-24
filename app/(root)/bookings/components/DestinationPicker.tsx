@@ -20,9 +20,9 @@ export default function DestinationPicker({ onSelect }: Props) {
       >
         <p className="text-amber-400/95 text-xs font-bold uppercase tracking-[0.28em] mb-4">Musasa Travel</p>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.05]">
-          Where would you like
+          Book Victoria Falls
           <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600">
-            Musasa to take you?
+            Tours &amp; Safaris
           </span>
         </h1>
         <p className="mt-6 text-base md:text-lg text-white/50 leading-relaxed">

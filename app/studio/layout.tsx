@@ -1,6 +1,7 @@
 export const metadata = {
   title: "Musasa Travel Studio",
-  description: "Content studio for Musasa Travel & Tours",
+  description: "Private content studio for Musasa Travel & Tours",
+  robots: { index: false, follow: false },
 };
 
 export default function StudioLayout({
@@ -9,7 +10,7 @@ export default function StudioLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en-ZW">
       <body>{children}</body>
     </html>
   );

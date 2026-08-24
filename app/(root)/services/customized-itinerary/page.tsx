@@ -1,31 +1,47 @@
 import ItineraryClient from "./components/ItineraryClient";
-import type { Metadata } from "next";
+import JsonLd from "../../../../components/JsonLd";
 import { getItineraries } from "@/lib/services-cms";
+import { breadcrumbsJsonLd, itemListJsonLd, pageMeta } from "@/lib/seo";
 
 export const revalidate = 300;
 
-export const metadata: Metadata = {
-  title: "Customized Travel Itineraries",
+export const metadata = pageMeta({
+  title: "Custom Victoria Falls & Africa Itineraries",
   description:
-    "No two travellers are alike. Musasa Travel crafts bespoke African journeys tailored to your pace and passions — from 5-day Victoria Falls expeditions to 14-day cross-continent epics through Zimbabwe, Botswana and beyond.",
+    "Plan a custom Victoria Falls itinerary with Musasa Travel — from a 5-day Falls trip to a 14-day safari across Zimbabwe, Botswana, Zambia and beyond.",
+  path: "/services/customized-itinerary",
   keywords: [
-    "custom africa itinerary",
+    "Victoria Falls itinerary",
+    "custom Africa itinerary",
     "bespoke safari itinerary",
-    "victoria falls itinerary",
-    "personalised africa travel",
-    "tailored zimbabwe tour",
-    "private safari package",
-    "cross-continent africa trip",
+    "private Victoria Falls tour",
+    "tailored Zimbabwe safari",
   ],
-  openGraph: {
-    title: "Customized Travel Itineraries | Musasa Travel & Tours",
-    description:
-      "Bespoke African journeys crafted around your pace and passions — from 5 to 14 days across Southern Africa.",
-    url: "/services/customized-itinerary",
-  },
-};
+});
 
 export default async function CustomizedItineraryPage() {
   const itineraries = await getItineraries();
-  return <ItineraryClient itineraries={itineraries} />;
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbsJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: "Custom itineraries", path: "/services/customized-itinerary" },
+        ])}
+      />
+      {itineraries.length > 0 && (
+        <JsonLd
+          data={itemListJsonLd(
+            "Custom Victoria Falls and Africa itineraries",
+            itineraries.map((item) => ({
+              name: item.name,
+              path: "/services/customized-itinerary",
+            }))
+          )}
+        />
+      )}
+      <ItineraryClient itineraries={itineraries} />
+    </>
+  );
 }

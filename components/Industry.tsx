@@ -40,9 +40,9 @@ const Industry = () => {
       <Reveal width="100%">
         <div className=" p-4 sm:p-6 md:p-8 py-16  w-full">
           <motion.div className="max-w-7xl mx-auto w-full h-full">
-            <h1 className=" text-2xl sm:text-3xl text-black lg:text-5xl capitalize">
-              Popular Destinations
-            </h1>
+            <h2 className=" text-2xl sm:text-3xl text-black lg:text-5xl capitalize">
+              Victoria Falls &amp; Southern Africa Destinations
+            </h2>
             <div className="mt-4 w-full">
               <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 font-medium w-full">
                 {destinations.map((item: any) => (
@@ -53,7 +53,7 @@ const Industry = () => {
                   >
                     <img
                       src={item.mainImage.src}
-                      alt={item.name}
+                      alt={`${item.name} tours and safaris with Musasa Travel`}
                       width={item.mainImage.width}
                       height={item.mainImage.height}
                       className="absolute inset-0 h-full w-full object-cover transition-all duration-300 group-hover:scale-150"

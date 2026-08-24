@@ -69,8 +69,8 @@ export default function Service() {
               What We Offer
             </p>
             <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
-              A Full Covering for the{" "}
-              <span className="text-amber-400">Modern Traveller</span>
+              A Full Covering for{" "}
+              <span className="text-amber-400">Victoria Falls Travel</span>
             </h2>
           </div>
           <p className="text-white/40 text-sm max-w-xs md:text-right leading-relaxed">

@@ -1,33 +1,47 @@
 import PackagesClient from "./components/PackagesClient";
-import type { Metadata } from "next";
+import JsonLd from "../../../components/JsonLd";
 import { getTravelPackages } from "@/lib/travel-packages";
+import { breadcrumbsJsonLd, itemListJsonLd, pageMeta } from "@/lib/seo";
 
 export const revalidate = 300;
 
-export const metadata: Metadata = {
-  title: "African Travel Packages",
+export const metadata = pageMeta({
+  title: "Victoria Falls Safari Packages",
   description:
-    "Hand-crafted African travel packages spanning Victoria Falls, Cape Town, Namibia, Botswana, Mozambique and Mauritius — curated by Musasa Travel & Tours. Every detail included, nothing left to chance.",
+    "Book Victoria Falls safari packages with Musasa Travel — curated trips covering the Falls, Hwange, Botswana, Zambia and beach extensions across Southern Africa.",
+  path: "/packages",
   keywords: [
-    "africa travel packages",
-    "victoria falls travel package",
-    "cape town tour package",
-    "namibia desert safari package",
-    "botswana safari package",
-    "mozambique beach package",
-    "mauritius holiday package",
-    "hwange safari package",
-    "musasa travel packages",
+    "Victoria Falls safari packages",
+    "Victoria Falls travel package",
+    "Zimbabwe safari package",
+    "Hwange safari package",
+    "Botswana safari package",
+    "Musasa Travel packages",
   ],
-  openGraph: {
-    title: "African Travel Packages | Musasa Travel & Tours",
-    description:
-      "Curated African packages — Victoria Falls, Cape Town, Namibia, Botswana, Mozambique and Mauritius.",
-    url: "/packages",
-  },
-};
+});
 
 export default async function PackagesPage() {
   const packages = await getTravelPackages();
-  return <PackagesClient packages={packages} />;
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbsJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Victoria Falls safari packages", path: "/packages" },
+        ])}
+      />
+      {packages.length > 0 && (
+        <JsonLd
+          data={itemListJsonLd(
+            "Victoria Falls safari packages",
+            packages.map((pkg) => ({
+              name: pkg.name,
+              path: `/packages/${pkg.slug}`,
+            }))
+          )}
+        />
+      )}
+      <PackagesClient packages={packages} />
+    </>
+  );
 }

@@ -69,14 +69,14 @@ function Hero({ activeFilter, setActiveFilter }: { activeFilter: ServiceType; se
       <div className="relative z-10 px-6 md:px-16 pb-16 max-w-7xl mx-auto w-full">
         <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6">
-          <span className="block">Move Through</span>
-          <span className="block text-amber-400">Africa</span>
-          <span className="block">With Ease.</span>
+          <span className="block">Victoria Falls</span>
+          <span className="block text-amber-400">Airport Transfers</span>
+          <span className="block">&amp; Shuttles</span>
         </motion.h1>
 
         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.6 }}
           className="text-white/70 text-lg md:text-xl max-w-xl mb-10 leading-relaxed">
-          From airport pickups to cross-border adventures, our professional transfer network covers every kilometre of your southern African journey.
+          From Victoria Falls Airport pickups to Livingstone and Kasane shuttles, our transfer network covers every kilometre of your southern African journey.
         </motion.p>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.6 }} className="flex flex-wrap gap-8 mb-12">

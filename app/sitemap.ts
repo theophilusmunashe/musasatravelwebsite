@@ -1,9 +1,7 @@
 import { MetadataRoute } from "next";
 import { getTravelPackageSlugs } from "@/lib/travel-packages";
 import { getStaySlugs } from "@/lib/services-cms";
-
-const BASE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL || "https://www.musasatravelandtours.com";
+import { SITE } from "@/lib/site";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let packageEntries: MetadataRoute.Sitemap = [];
@@ -12,10 +10,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const slugs = await getTravelPackageSlugs();
     packageEntries = slugs.map((slug) => ({
-      url: `${BASE_URL}/packages/${slug}`,
+      url: `${SITE.url}/packages/${slug}`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
-      priority: 0.8,
+      priority: 0.85,
     }));
   } catch {
     // skip
@@ -24,10 +22,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const slugs = await getStaySlugs();
     stayEntries = slugs.map((slug) => ({
-      url: `${BASE_URL}/services/accommodation/${slug}`,
+      url: `${SITE.url}/services/accommodation/${slug}`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
-      priority: 0.7,
+      priority: 0.8,
     }));
   } catch {
     // skip
@@ -37,82 +35,82 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     {
-      url: BASE_URL,
+      url: SITE.url,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: `${BASE_URL}/about`,
+      url: `${SITE.url}/bookings`,
       lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.8,
+      changeFrequency: "weekly",
+      priority: 0.95,
     },
     {
-      url: `${BASE_URL}/services`,
+      url: `${SITE.url}/packages`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
+      url: `${SITE.url}/services/activities`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${BASE_URL}/services/activities`,
+      url: `${SITE.url}/services/accommodation`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${BASE_URL}/services/accommodation`,
+      url: `${SITE.url}/services`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${BASE_URL}/services/customized-itinerary`,
+      url: `${SITE.url}/services/shuttle-services`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE.url}/services/customized-itinerary`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/services/tour-guides`,
+      url: `${SITE.url}/services/tour-guides`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/services/shuttle-services`,
+      url: `${SITE.url}/about`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
-      url: `${BASE_URL}/packages`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/bookings`,
+      url: `${SITE.url}/contact`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/contact`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${BASE_URL}/privacy-policy`,
+      url: `${SITE.url}/privacy-policy`,
       lastModified: now,
       changeFrequency: "yearly",
-      priority: 0.3,
+      priority: 0.2,
     },
     {
-      url: `${BASE_URL}/terms-and-conditions`,
+      url: `${SITE.url}/terms-and-conditions`,
       lastModified: now,
       changeFrequency: "yearly",
-      priority: 0.3,
+      priority: 0.2,
     },
     ...packageEntries,
     ...stayEntries,

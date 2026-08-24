@@ -1,15 +1,15 @@
 import React from "react";
-import type { Metadata } from "next";
 import PageHeader from "../../../components/PageHeader";
 import { client } from "../../../sanity/lib/client";
 import PortableBody from "../../../components/portable";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: "Privacy Policy",
   description:
-    "Read Musasa Travel & Tours' Privacy Policy to understand how we collect, use, and protect your personal information in compliance with POPIA, GDPR, and the Zimbabwe Data Protection Act.",
-  robots: { index: true, follow: false },
-};
+    "Read how Musasa Travel & Tours collects and protects personal information when you book Victoria Falls tours and travel services.",
+  path: "/privacy-policy",
+});
 
 async function getData() {
   const query = `

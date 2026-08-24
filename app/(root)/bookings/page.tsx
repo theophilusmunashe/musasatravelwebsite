@@ -1,31 +1,32 @@
 import type { Metadata } from "next";
 import BookingsPageClient from "./BookingsPageClient";
+import JsonLd from "../../../components/JsonLd";
+import { breadcrumbsJsonLd, pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Book Your Trip",
+export const metadata: Metadata = pageMeta({
+  title: "Book Victoria Falls Tours Online",
   description:
-    "Plan Victoria Falls, Cape Town, Namibia, Botswana, Zambia, or Mauritius with Musasa Travel & Tours. Choose your destination, build your itinerary, then send your enquiry by email and WhatsApp.",
+    "Book Victoria Falls tours, safari packages, lodges and transfers online with Musasa Travel. Choose your destination, build your trip, then confirm by email or WhatsApp.",
+  path: "/bookings",
   keywords: [
-    "book safari zimbabwe",
-    "victoria falls booking",
-    "cape town travel booking",
-    "botswana safari booking",
-    "musasa travel booking",
-    "african trip reservation",
-    "safari booking online",
+    "book Victoria Falls",
+    "Victoria Falls booking",
+    "book safari Zimbabwe",
+    "Musasa Travel booking",
+    "Victoria Falls tour reservation",
   ],
-  openGraph: {
-    title: "Book Your Trip | Musasa Travel & Tours",
-    description:
-      "Review your cart and complete your African safari booking with Musasa Travel & Tours.",
-    url: "/bookings",
-  },
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
+});
 
 export default function BookingsPage() {
-  return <BookingsPageClient />;
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbsJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Book Victoria Falls tours", path: "/bookings" },
+        ])}
+      />
+      <BookingsPageClient />
+    </>
+  );
 }

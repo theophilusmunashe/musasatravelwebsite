@@ -4,25 +4,37 @@ import Stats from "./components/Stats";
 import About from "./components/About";
 import Smart from "./components/Smart";
 import Other from "./components/Other";
-import type { Metadata } from "next";
+import JsonLd from "../../../components/JsonLd";
 import { getTravelPackages } from "@/lib/travel-packages";
+import { breadcrumbsJsonLd, pageMeta } from "@/lib/seo";
 
 export const revalidate = 300;
 
-export const metadata: Metadata = {
-  title: "About - Musasa",
+export const metadata = pageMeta({
+  title: "About Musasa Travel in Victoria Falls",
   description:
-    "Musasa Travel & Tours is your premier African travel partner, offering curated journeys through Victoria Falls, Zimbabwe, and beyond. Experience authentic adventures with local expertise and global reach.",
+    "Musasa Travel & Tours is a Victoria Falls travel agency offering safari tours, lodges, licensed guides and airport transfers across Zimbabwe and Southern Africa.",
+  path: "/about",
   keywords: [
-    "about musasa travel, about musasa tours, about victoria falls, about zimbabwe travel, about african safari, about african adventure, about travel packages, about luxury travel, about guided tours, about musasa travel and tours, victoria falls tours, zimbabwe safari, african travel experiences",
+    "Musasa Travel",
+    "Victoria Falls travel agency",
+    "about Musasa Travel",
+    "Zimbabwe safari company",
+    "Victoria Falls tours",
   ],
-};
+});
 
 const Page = async () => {
   const packages = (await getTravelPackages()).slice(0, 3);
 
   return (
     <div>
+      <JsonLd
+        data={breadcrumbsJsonLd([
+          { name: "Home", path: "/" },
+          { name: "About Musasa Travel", path: "/about" },
+        ])}
+      />
       <Hero />
       <Stats />
       <About />

@@ -2,7 +2,6 @@ import Script from "next/script";
 
 import type { Metadata } from "next";
 import "../globals.css";
-// import "../globals.scss";
 
 import { Inter as FontSans } from "next/font/google";
 
@@ -16,68 +15,66 @@ import CartDrawer from "../../components/CartDrawer";
 import FloatingCart from "../../components/FloatingCart";
 import WhatsAppButton from "./bookings/components/WhatsAppButton";
 import ConsentBanner from "../../components/ConsentBanner";
+import JsonLd from "../../components/JsonLd";
+import { SITE } from "../../lib/site";
+import { organizationJsonLd } from "../../lib/seo";
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.musasatravelandtours.com";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(BASE_URL),
+  metadataBase: new URL(SITE.url),
   title: {
-    default: "Musasa Travel & Tours — Rooted in Africa, Reaching the World",
+    default: "Victoria Falls Tours & Safari Bookings | Musasa Travel & Tours",
     template: "%s | Musasa Travel & Tours",
   },
-  applicationName: "Musasa Travel & Tours",
+  applicationName: SITE.name,
   description:
-    "Musasa Travel & Tours offers world-class African travel experiences — from Victoria Falls safaris and luxury accommodation to custom itineraries, expert tour guides, and seamless transfers. Book your dream African adventure today.",
+    "Book Victoria Falls tours, safari packages, lodges and airport transfers with Musasa Travel — a local travel agency based in Victoria Falls, Zimbabwe.",
   keywords: [
-    "musasa travel",
-    "musasa tours",
-    "victoria falls tours",
-    "zimbabwe safari",
-    "african travel packages",
-    "victoria falls accommodation",
-    "zambezi safari",
-    "hwange national park",
-    "african tour guides",
-    "custom itinerary africa",
-    "shuttle services victoria falls",
-    "luxury safari zimbabwe",
-    "botswana safari",
-    "zambia tours",
-    "travel agency zimbabwe",
+    "Victoria Falls tours",
+    "book Victoria Falls",
+    "Victoria Falls safari",
+    "Musasa Travel",
+    "Victoria Falls travel agency",
+    "Victoria Falls activities",
+    "Victoria Falls accommodation",
+    "Victoria Falls airport transfer",
+    "Zimbabwe safari packages",
+    "Zambezi tours",
+    "Hwange National Park safari",
+    "Livingstone tours",
   ],
-  authors: [{ name: "Musasa Travel & Tours" }],
-  creator: "Musasa Travel & Tours",
-  publisher: "Musasa Travel & Tours",
+  authors: [{ name: SITE.name }],
+  creator: SITE.name,
+  publisher: SITE.name,
   referrer: "origin-when-cross-origin",
-  generator: "Next.js",
+  category: "travel",
   openGraph: {
     type: "website",
     locale: "en_ZW",
-    url: BASE_URL,
-    siteName: "Musasa Travel & Tours",
-    title: "Musasa Travel & Tours — Rooted in Africa, Reaching the World",
+    url: SITE.url,
+    siteName: SITE.name,
+    title: "Victoria Falls Tours & Safari Bookings | Musasa Travel",
     description:
-      "Discover Africa's finest experiences with Musasa Travel & Tours. Victoria Falls safaris, luxury lodges, custom itineraries and more.",
+      "Local Victoria Falls travel agency for tours, safaris, lodges, guides and airport transfers. Book with Musasa Travel & Tours.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: SITE.ogImage,
         width: 1200,
         height: 630,
-        alt: "Musasa Travel & Tours — Victoria Falls, Zimbabwe",
+        alt: "Victoria Falls, Zimbabwe — Musasa Travel tours and safari bookings",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Musasa Travel & Tours",
+    title: "Victoria Falls Tours & Safari Bookings | Musasa Travel",
     description:
-      "World-class African travel experiences — Victoria Falls safaris, luxury lodges, custom itineraries.",
-    images: ["/og-image.jpg"],
+      "Book Victoria Falls tours, safaris, lodges and transfers with a local Zimbabwe travel agency.",
+    images: [SITE.ogImage],
   },
   robots: {
     index: true,
@@ -95,6 +92,7 @@ export const metadata: Metadata = {
     shortcut: "/image/favicon.png",
     apple: "/image/favicon.png",
   },
+  manifest: "/manifest.webmanifest",
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
   },
@@ -106,7 +104,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en-ZW">
       <head>
         <Script
           async
@@ -123,63 +121,7 @@ export default async function RootLayout({
       <body
         className={cn("min-h-screen font-sans antialiased", fontSans.className)}
       >
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "TravelAgency",
-              name: "Musasa Travel & Tours",
-              url: BASE_URL,
-              logo: `${BASE_URL}/image/logo.svg`,
-              description:
-                "World-class African travel experiences — Victoria Falls safaris, luxury lodges, custom itineraries, expert guides and seamless transfers.",
-              telephone: "+263776093268",
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Victoria Falls",
-                addressCountry: "ZW",
-              },
-              geo: {
-                "@type": "GeoCoordinates",
-                latitude: -17.9243,
-                longitude: 25.8572,
-              },
-              openingHoursSpecification: {
-                "@type": "OpeningHoursSpecification",
-                dayOfWeek: [
-                  "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday",
-                ],
-                opens: "08:00",
-                closes: "18:00",
-              },
-              sameAs: [
-                "https://www.instagram.com/musasatravelandtours/",
-                "https://www.facebook.com/profile.php?id=61587802886735",
-              ],
-              areaServed: [
-                { "@type": "Country", name: "Zimbabwe" },
-                { "@type": "Country", name: "Botswana" },
-                { "@type": "Country", name: "Zambia" },
-                { "@type": "Country", name: "South Africa" },
-                { "@type": "Country", name: "Namibia" },
-                { "@type": "Country", name: "Mozambique" },
-              ],
-              hasOfferCatalog: {
-                "@type": "OfferCatalog",
-                name: "African Travel Services",
-                itemListElement: [
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Safari Activities" } },
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Luxury Accommodation" } },
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Customized Itineraries" } },
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Expert Tour Guides" } },
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Shuttle & Transfer Services" } },
-                  { "@type": "Offer", itemOffered: { "@type": "Service", name: "Travel Packages" } },
-                ],
-              },
-            }),
-          }}
-        />
+        <JsonLd data={organizationJsonLd()} />
         <Preloader />
         <Navbar />
 
