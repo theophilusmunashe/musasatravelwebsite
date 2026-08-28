@@ -1,9 +1,18 @@
 /** @type {import('next').NextConfig} */
+import path from "path";
+import { fileURLToPath } from "url";
+
 const isVercel = process.env.VERCEL === "1";
+const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig = {
-  // cPanel zip deploy needs standalone. Vercel provides its own output.
-  ...(!isVercel ? { output: "standalone" } : {}),
+  // cPanel zip/FTP deploy needs standalone. Vercel provides its own output.
+  ...(!isVercel
+    ? {
+        output: "standalone",
+        outputFileTracingRoot: projectRoot,
+      }
+    : {}),
   typescript: {
     // Sanity schema typings fail under TypeScript 5.9 and block `next build`.
     ignoreBuildErrors: true,

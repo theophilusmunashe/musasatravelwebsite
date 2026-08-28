@@ -8,7 +8,7 @@ on:
 
 jobs:
   web-deploy:
-    name: Deploy React App
+    name: Deploy Next.js App
     runs-on: ubuntu-latest
     steps:
       - name: Get latest code
@@ -18,18 +18,27 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Build project
+      - name: Build Next.js standalone for cPanel
         run: npm run build:cpanel
         env:
+          NODE_ENV: production
           NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
           NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
           NEXT_PUBLIC_SANITY_API_VERSION: ${{ secrets.NEXT_PUBLIC_SANITY_API_VERSION }}
           NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
           NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ secrets.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }}
+
+      - name: Confirm deploy bundle
+        run: |
+          test -f deploy-cpanel/server.js
+          test -d deploy-cpanel/.next
+          test -d deploy-cpanel/public
+          ls -la deploy-cpanel | head -40
 
       - name: Sync files to cPanel
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -37,8 +46,9 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./.next/standalone/
+          local-dir: ./deploy-cpanel/
           server-dir: ./
           exclude: |
             **/.git*
             **/.git*/**
+            **/.htaccess

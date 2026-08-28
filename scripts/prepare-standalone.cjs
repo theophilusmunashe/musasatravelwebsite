@@ -1,6 +1,6 @@
 /**
- * After `npm run build` with output: "standalone", copies `public` and
- * `.next/static` into `.next/standalone` so you can zip that folder for cPanel.
+ * After `npm run build` with output: "standalone", assemble a cPanel-ready
+ * folder with server.js at the root (Passenger), plus public + .next/static.
  */
 const fs = require("fs");
 const path = require("path");
@@ -8,9 +8,9 @@ const path = require("path");
 const root = path.join(__dirname, "..");
 const standalone = path.join(root, ".next", "standalone");
 const staticSrc = path.join(root, ".next", "static");
-const staticDest = path.join(standalone, ".next", "static");
 const publicSrc = path.join(root, "public");
-const publicDest = path.join(standalone, "public");
+const passengerServer = path.join(root, "scripts", "cpanel-server.js");
+const deployDir = path.join(root, "deploy-cpanel");
 
 if (!fs.existsSync(standalone)) {
   console.error("Missing .next/standalone — run npm run build first.");
@@ -27,8 +27,64 @@ function copyDir(src, dest) {
   console.log("Copied:", path.relative(root, src), "→", path.relative(root, dest));
 }
 
-copyDir(staticSrc, staticDest);
-copyDir(publicSrc, publicDest);
+function findAppRoot(dir, depth = 0) {
+  if (depth > 10) return null;
+  const serverJs = path.join(dir, "server.js");
+  const nextDir = path.join(dir, ".next");
+  if (fs.existsSync(serverJs) && fs.existsSync(nextDir)) {
+    return dir;
+  }
+  if (!fs.existsSync(dir)) return null;
+  for (const name of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (!name.isDirectory()) continue;
+    if (name.name === "node_modules") continue;
+    const found = findAppRoot(path.join(dir, name.name), depth + 1);
+    if (found) return found;
+  }
+  return null;
+}
+
+const appRoot = findAppRoot(standalone) || standalone;
+console.log("Standalone app root:", path.relative(root, appRoot) || ".next/standalone");
+
+if (fs.existsSync(deployDir)) {
+  fs.rmSync(deployDir, { recursive: true, force: true });
+}
+copyDir(appRoot, deployDir);
+
+const outerModules = path.join(standalone, "node_modules");
+const deployModules = path.join(deployDir, "node_modules");
+if (fs.existsSync(outerModules) && appRoot !== standalone) {
+  copyDir(outerModules, deployModules);
+}
+
+copyDir(staticSrc, path.join(deployDir, ".next", "static"));
+copyDir(publicSrc, path.join(deployDir, "public"));
+
+const generatedServer = path.join(deployDir, "server.js");
+if (fs.existsSync(generatedServer)) {
+  fs.copyFileSync(generatedServer, path.join(deployDir, "next-standalone-server.js"));
+}
+if (!fs.existsSync(passengerServer)) {
+  console.error("Missing scripts/cpanel-server.js");
+  process.exit(1);
+}
+fs.copyFileSync(passengerServer, generatedServer);
+console.log("Installed Passenger-compatible server.js");
+
+const pkgPath = path.join(deployDir, "package.json");
+if (fs.existsSync(pkgPath)) {
+  const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf8"));
+  pkg.scripts = { ...(pkg.scripts || {}), start: "node server.js" };
+  fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
+}
+
+const tmpDir = path.join(deployDir, "tmp");
+fs.mkdirSync(tmpDir, { recursive: true });
+fs.writeFileSync(
+  path.join(tmpDir, "restart.txt"),
+  `restart ${new Date().toISOString()}\n`
+);
 
 function countFiles(dir) {
   if (!fs.existsSync(dir)) return 0;
@@ -44,26 +100,31 @@ function countFiles(dir) {
   return n;
 }
 
-const staticN = countFiles(staticDest);
-const publicN = countFiles(publicDest);
+const staticN = countFiles(path.join(deployDir, ".next", "static"));
+const publicN = countFiles(path.join(deployDir, "public"));
 if (staticN < 5) {
   console.error(
-    "\nERROR: .next/standalone/.next/static looks empty or missing.",
-    "\nLocal images (next/image imports, chunks) will 404 on the server.",
-    "\nRun from project root: npm run build && node scripts/prepare-standalone.cjs\n"
+    "\nERROR: deploy-cpanel/.next/static looks empty or missing.",
+    "\nLocal images and JS chunks will 404 on the server.\n"
   );
   process.exit(1);
 }
 if (publicN < 1) {
   console.error(
-    "\nERROR: .next/standalone/public is missing or empty.",
-    "\nURLs like /image/... will 404. Ensure ./public exists before build.\n"
+    "\nERROR: deploy-cpanel/public is missing or empty.",
+    "\nURLs like /image/... will 404.\n"
   );
   process.exit(1);
 }
+if (!fs.existsSync(path.join(deployDir, "server.js"))) {
+  console.error("\nERROR: deploy-cpanel/server.js is missing.\n");
+  process.exit(1);
+}
 
-console.log(`Verified: ${staticN} files under standalone/.next/static, ${publicN} under standalone/public`);
-console.log("\nReady to zip the CONTENTS of: .next/standalone/");
-console.log("cPanel startup file: server.js (inside that folder)");
-console.log("Set application root to the folder that contains server.js");
-console.log("Upload ALL of: server.js, node_modules/, .next/, public/ (no parent-only upload).\n");
+console.log(
+  `Verified: ${staticN} files under deploy-cpanel/.next/static, ${publicN} under deploy-cpanel/public`
+);
+console.log("\nReady to upload the CONTENTS of: deploy-cpanel/");
+console.log("cPanel startup file: server.js");
+console.log("cPanel application root: the folder that contains server.js");
+console.log("Application mode: Production, Node.js 20\n");

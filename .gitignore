@@ -18,6 +18,7 @@
 
 # production
 /build
+/deploy-cpanel/
 
 # misc
 .DS_Store
