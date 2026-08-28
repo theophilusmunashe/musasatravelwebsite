@@ -96,7 +96,11 @@ if (!fs.existsSync(passengerServer)) {
   process.exit(1);
 }
 fs.copyFileSync(passengerServer, generatedServer);
-console.log("Installed Passenger-compatible server.js");
+fs.writeFileSync(
+  path.join(deployDir, "app.js"),
+  'require("./server.js");\n'
+);
+console.log("Installed Passenger-compatible server.js (and app.js alias)");
 
 const pkgPath = path.join(deployDir, "package.json");
 if (fs.existsSync(pkgPath)) {
