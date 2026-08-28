@@ -36,9 +36,14 @@ jobs:
       - name: Confirm deploy bundle
         run: |
           test -f deploy-cpanel/server.js
-          test -d deploy-cpanel/.next
+          test -d deploy-cpanel/.next/static
+          test -d deploy-cpanel/public/_next/static
+          test -d deploy-cpanel/_next/static
           test -d deploy-cpanel/public
+          echo "Top-level deploy files:"
           ls -la deploy-cpanel | head -40
+          echo "Static CSS sample:"
+          ls deploy-cpanel/.next/static/css | head -10
 
       - name: Sync files to cPanel
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5

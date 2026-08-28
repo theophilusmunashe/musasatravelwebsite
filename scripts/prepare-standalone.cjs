@@ -60,6 +60,8 @@ if (fs.existsSync(outerModules) && appRoot !== standalone) {
 
 copyDir(staticSrc, path.join(deployDir, ".next", "static"));
 copyDir(publicSrc, path.join(deployDir, "public"));
+copyDir(staticSrc, path.join(deployDir, "public", "_next", "static"));
+copyDir(staticSrc, path.join(deployDir, "_next", "static"));
 
 const generatedServer = path.join(deployDir, "server.js");
 if (fs.existsSync(generatedServer)) {
