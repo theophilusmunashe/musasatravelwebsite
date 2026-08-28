@@ -36,6 +36,8 @@ jobs:
       - name: Confirm deploy bundle
         run: |
           test -f deploy-cpanel/server.js
+          test -f deploy-cpanel/tmp/restart.txt
+          test -f deploy-cpanel/image/favicon.png
           test -d deploy-cpanel/.next/static
           test -d deploy-cpanel/public/_next/static
           test -d deploy-cpanel/_next/static
@@ -43,7 +45,9 @@ jobs:
           echo "Top-level deploy files:"
           ls -la deploy-cpanel | head -40
           echo "Static CSS sample:"
-          ls deploy-cpanel/.next/static/css | head -10
+          ls deploy-cpanel/_next/static/css | head -10
+          echo "Passenger restart token:"
+          cat deploy-cpanel/tmp/restart.txt
 
       - name: Sync files to cPanel
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5

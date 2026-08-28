@@ -1,7 +1,9 @@
 /**
  * cPanel / CloudLinux Passenger entry for the Next.js standalone build.
- * Serves /_next/static and public files from disk first so LiteSpeed/Passenger
- * cannot 400 them when the public Host header is www.musasatravel.com.
+ *
+ * LiteSpeed serves files that exist at the document root. Next must not be
+ * given a hostname of 127.0.0.1 / 0.0.0.0 — that 400s CSS and images when
+ * the browser Host header is www.musasatravel.com.
  */
 process.env.NODE_ENV = "production";
 process.chdir(__dirname);
@@ -17,7 +19,6 @@ const { parse } = require("url");
 const next = require("next");
 
 const port = parseInt(process.env.PORT, 10) || 3000;
-const hostname = "0.0.0.0";
 const MIME = {
   ".css": "text/css; charset=utf-8",
   ".js": "application/javascript; charset=utf-8",
@@ -38,6 +39,15 @@ const MIME = {
   ".xml": "application/xml; charset=utf-8",
   ".webmanifest": "application/manifest+json; charset=utf-8",
 };
+const BLOCKED_ROOT = new Set([
+  "server.js",
+  "package.json",
+  "package-lock.json",
+  "node_modules",
+  ".next",
+  "tmp",
+  "next-standalone-server.js",
+]);
 
 function resolveUnder(rootDir, rel) {
   const root = path.resolve(rootDir);
@@ -55,6 +65,18 @@ function resolveUnder(rootDir, rel) {
   return null;
 }
 
+function pathnameFrom(req) {
+  const raw = req.url || "/";
+  try {
+    if (/^https?:\/\//i.test(raw)) {
+      return new URL(raw).pathname || "/";
+    }
+  } catch {
+    // fall through to url.parse
+  }
+  return parse(raw, true).pathname || "/";
+}
+
 function fileForUrl(pathname) {
   let decoded = pathname;
   try {
@@ -64,32 +86,41 @@ function fileForUrl(pathname) {
   }
   if (!decoded || decoded.includes("\0")) return null;
   const rel = decoded.replace(/^\/+/, "");
-  if (rel.split(/[/\\]/).includes("..")) return null;
+  if (!rel || rel.split(/[/\\]/).includes("..")) return null;
+  if (BLOCKED_ROOT.has(rel.split(/[/\\]/)[0])) return null;
 
   if (decoded.startsWith("/_next/static/")) {
     const staticRel = decoded.slice("/_next/static/".length);
     return (
+      resolveUnder(path.join(__dirname, "_next", "static"), staticRel) ||
       resolveUnder(path.join(__dirname, ".next", "static"), staticRel) ||
-      resolveUnder(path.join(__dirname, "public", "_next", "static"), staticRel) ||
-      resolveUnder(path.join(__dirname, "_next", "static"), staticRel)
+      resolveUnder(path.join(__dirname, "public", "_next", "static"), staticRel)
     );
   }
 
-  return resolveUnder(path.join(__dirname, "public"), rel);
+  return (
+    resolveUnder(__dirname, rel) ||
+    resolveUnder(path.join(__dirname, "public"), rel)
+  );
 }
 
 function sendFile(res, filePath) {
   const ext = path.extname(filePath).toLowerCase();
+  res.statusCode = 200;
   res.setHeader("Content-Type", MIME[ext] || "application/octet-stream");
   res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
   fs.createReadStream(filePath).pipe(res);
 }
 
+function sendMissing(res) {
+  res.statusCode = 404;
+  res.setHeader("Content-Type", "text/plain; charset=utf-8");
+  res.end("Not Found");
+}
+
 const app = next({
   dev: false,
   dir: __dirname,
-  hostname,
-  port,
 });
 const handle = app.getRequestHandler();
 
@@ -97,13 +128,17 @@ app
   .prepare()
   .then(() => {
     const server = createServer((req, res) => {
-      const parsedUrl = parse(req.url || "/", true);
-      const filePath = fileForUrl(parsedUrl.pathname || "/");
+      const pathname = pathnameFrom(req);
+      const filePath = fileForUrl(pathname);
       if (filePath) {
         sendFile(res, filePath);
         return;
       }
-      handle(req, res, parsedUrl);
+      if (pathname.startsWith("/_next/static/") || pathname.startsWith("/image/")) {
+        sendMissing(res);
+        return;
+      }
+      handle(req, res, parse(req.url || "/", true));
     });
 
     if (typeof PhusionPassenger !== "undefined") {
@@ -113,8 +148,8 @@ app
       return;
     }
 
-    server.listen(port, hostname, () => {
-      console.log(`Musasa Next.js ready on ${hostname}:${port}`);
+    server.listen(port, "0.0.0.0", () => {
+      console.log(`Musasa Next.js ready on 0.0.0.0:${port}`);
     });
   })
   .catch((error) => {

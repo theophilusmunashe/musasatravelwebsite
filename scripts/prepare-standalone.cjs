@@ -63,6 +63,30 @@ copyDir(publicSrc, path.join(deployDir, "public"));
 copyDir(staticSrc, path.join(deployDir, "public", "_next", "static"));
 copyDir(staticSrc, path.join(deployDir, "_next", "static"));
 
+// LiteSpeed serves files from the document root, not Next's public/ folder.
+// /image/favicon.png must exist as deploy-cpanel/image/favicon.png.
+const skipWebRoot = new Set([
+  "server.js",
+  "package.json",
+  "package-lock.json",
+  "node_modules",
+  ".next",
+  "tmp",
+  "next-standalone-server.js",
+]);
+if (fs.existsSync(publicSrc)) {
+  for (const name of fs.readdirSync(publicSrc, { withFileTypes: true })) {
+    if (skipWebRoot.has(name.name)) continue;
+    const from = path.join(publicSrc, name.name);
+    const to = path.join(deployDir, name.name);
+    if (name.isDirectory()) copyDir(from, to);
+    else {
+      fs.copyFileSync(from, to);
+      console.log("Copied:", path.relative(root, from), "→", path.relative(root, to));
+    }
+  }
+}
+
 const generatedServer = path.join(deployDir, "server.js");
 if (fs.existsSync(generatedServer)) {
   fs.copyFileSync(generatedServer, path.join(deployDir, "next-standalone-server.js"));
@@ -85,7 +109,7 @@ const tmpDir = path.join(deployDir, "tmp");
 fs.mkdirSync(tmpDir, { recursive: true });
 fs.writeFileSync(
   path.join(tmpDir, "restart.txt"),
-  `restart ${new Date().toISOString()}\n`
+  `restart ${new Date().toISOString()} ${Date.now()}\n`
 );
 
 function countFiles(dir) {
