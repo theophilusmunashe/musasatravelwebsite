@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { useCartStore } from "@/lib/cartStore";
 import toast from "react-hot-toast";
+import CardPhoto from "@/components/CardPhoto";
 
 /* ─── Types ──────────────────────────────────────────────────────────── */
 type ServiceType = "all" | "airport" | "cross-border" | "private" | "group";
@@ -31,6 +32,7 @@ interface TransferService {
   tagline: string;
   type: Exclude<ServiceType, "all">;
   image: string;
+  gallery?: string[];
   price: string;
   priceNum: number;
   duration: string;
@@ -130,16 +132,24 @@ function ServiceCard({ service }: { service: TransferService }) {
       className="group bg-[#111] rounded-2xl overflow-hidden border border-white/5 hover:border-amber-500/30 transition-all duration-500">
       <div className="relative h-56 overflow-hidden">
         <motion.div animate={{ scale: hovered ? 1.07 : 1 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="absolute inset-0">
-          <Image src={service.image} alt={service.name} fill className="object-cover" sizes="(max-width:768px) 100vw, 50vw" unoptimized />
+          <CardPhoto
+            src={service.image}
+            gallery={service.gallery}
+            alt={service.name}
+            title={service.name}
+            subtitle={service.tagline}
+            sizes="(max-width:768px) 100vw, 50vw"
+          >
+            <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/10 to-transparent" />
+            <div className="absolute top-3 left-3 flex gap-2">
+              {service.badge && <span className="bg-amber-500 text-black text-xs font-bold px-3 py-1 rounded-full">{service.badge}</span>}
+            </div>
+            <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+              <span className="bg-black/60 backdrop-blur-sm text-white/60 text-xs px-2.5 py-1 rounded-full border border-white/10 capitalize">{service.type.replace("-", " ")}</span>
+              <span className="bg-black/60 backdrop-blur-sm text-white/60 text-xs px-2.5 py-1 rounded-full border border-white/10 flex items-center gap-1"><Clock className="w-3 h-3" />{service.duration}</span>
+            </div>
+          </CardPhoto>
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/10 to-transparent" />
-        <div className="absolute top-3 left-3 flex gap-2">
-          {service.badge && <span className="bg-amber-500 text-black text-xs font-bold px-3 py-1 rounded-full">{service.badge}</span>}
-        </div>
-        <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-          <span className="bg-black/60 backdrop-blur-sm text-white/60 text-xs px-2.5 py-1 rounded-full border border-white/10 capitalize">{service.type.replace("-", " ")}</span>
-          <span className="bg-black/60 backdrop-blur-sm text-white/60 text-xs px-2.5 py-1 rounded-full border border-white/10 flex items-center gap-1"><Clock className="w-3 h-3" />{service.duration}</span>
-        </div>
       </div>
 
       <div className="p-5">

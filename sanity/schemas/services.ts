@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { galleryField } from "./galleryField";
 
 const stringList = (name: string, title: string, required = true) =>
   defineField({
@@ -49,13 +50,7 @@ export const activity = defineType({
       validation: (Rule) => Rule.required(),
     }),
     imageField,
-    defineField({
-      name: "gallery",
-      title: "Gallery",
-      type: "array",
-      // @ts-ignore
-      of: [{ type: "image", options: { hotspot: true } }],
-    }),
+    galleryField,
     defineField({ name: "duration", title: "Duration", type: "string", validation: (Rule) => Rule.required() }),
     defineField({ name: "groupSize", title: "Group size", type: "string", validation: (Rule) => Rule.required() }),
     defineField({ name: "price", title: "Price label", type: "string", validation: (Rule) => Rule.required() }),
@@ -112,6 +107,7 @@ export const stay = defineType({
       validation: (Rule) => Rule.required(),
     }),
     imageField,
+    galleryField,
     defineField({ name: "location", title: "Location", type: "string", validation: (Rule) => Rule.required() }),
     defineField({ name: "country", title: "Country", type: "string", validation: (Rule) => Rule.required() }),
     defineField({ name: "price", title: "Price label", type: "string", validation: (Rule) => Rule.required() }),
@@ -139,6 +135,7 @@ export const itinerary = defineType({
     defineField({ name: "slug", title: "Slug", type: "slug", options: { source: "name", maxLength: 96 }, validation: (Rule) => Rule.required() }),
     defineField({ name: "tagline", title: "Tagline", type: "string", validation: (Rule) => Rule.required() }),
     imageField,
+    galleryField,
     defineField({ name: "days", title: "Days", type: "number", validation: (Rule) => Rule.required().integer().positive() }),
     defineField({
       name: "filter",
@@ -190,6 +187,7 @@ export const tourGuide = defineType({
       validation: (Rule) => Rule.required(),
     }),
     imageField,
+    galleryField,
     defineField({ name: "experience", title: "Experience", type: "string" }),
     stringList("languages", "Languages"),
     defineField({ name: "rating", title: "Rating", type: "number", initialValue: 4.9 }),
@@ -228,6 +226,7 @@ export const transfer = defineType({
       validation: (Rule) => Rule.required(),
     }),
     imageField,
+    galleryField,
     defineField({ name: "price", title: "Price label", type: "string", validation: (Rule) => Rule.required() }),
     defineField({ name: "priceNum", title: "Price (number)", type: "number", validation: (Rule) => Rule.required().min(0) }),
     defineField({ name: "duration", title: "Duration", type: "string" }),

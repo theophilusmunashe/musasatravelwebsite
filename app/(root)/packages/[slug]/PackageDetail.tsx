@@ -9,6 +9,7 @@ import {
   ArrowRight,
   Check,
   Clock,
+  Camera,
   MapPin,
   ShoppingBag,
   Sparkles,
@@ -20,6 +21,9 @@ import { useCartStore } from "@/lib/cartStore";
 import type { TravelPackage } from "@/lib/travel-packages";
 import { packageHasPricing, packagePriceLabel } from "@/lib/travel-packages";
 import { useLiveTravelPackage } from "@/lib/use-live-packages";
+import { contentImages } from "@/lib/content-images";
+import ImageLightbox from "@/components/ImageLightbox";
+import CardPhoto from "@/components/CardPhoto";
 
 export default function PackageDetail({
   pkg,
@@ -30,8 +34,16 @@ export default function PackageDetail({
 }) {
   const live = useLiveTravelPackage(pkg);
   const [added, setAdded] = useState(false);
+  const [photosOpen, setPhotosOpen] = useState(false);
+  const [photoIndex, setPhotoIndex] = useState(0);
   const { addItem, items, openCart } = useCartStore();
   const isInCart = items.some((i) => i.id === live.id);
+  const photos = contentImages(live.image, live.gallery);
+
+  const openPhotos = (index = 0) => {
+    setPhotoIndex(index);
+    setPhotosOpen(true);
+  };
 
   const handleAdd = () => {
     addItem({
@@ -65,6 +77,14 @@ export default function PackageDetail({
           unoptimized
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-black/50 to-black/20" />
+        <button
+          type="button"
+          onClick={() => openPhotos(0)}
+          className="absolute bottom-28 right-6 md:right-16 z-20 flex items-center gap-2 rounded-full bg-black/60 px-4 py-2 text-sm font-semibold text-white backdrop-blur-sm border border-white/15 hover:border-amber-400 hover:text-amber-400"
+        >
+          <Camera className="w-4 h-4" />
+          {photos.length > 1 ? `View photos (${photos.length})` : "View photo"}
+        </button>
         <div className="relative z-10 px-6 md:px-16 pb-14 max-w-7xl mx-auto w-full">
           <Link
             href="/packages"
@@ -116,6 +136,22 @@ export default function PackageDetail({
             ))}
           </div>
           <p className="text-white/70 text-lg leading-relaxed mb-12">{live.description}</p>
+
+          {photos.length > 1 && (
+            <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 mb-12">
+              {photos.map((photo, i) => (
+                <button
+                  key={photo}
+                  type="button"
+                  onClick={() => openPhotos(i)}
+                  className="relative h-20 sm:h-24 rounded-xl overflow-hidden border border-white/10 hover:border-amber-400"
+                  aria-label={`Open photo ${i + 1}`}
+                >
+                  <Image src={photo} alt="" fill className="object-cover" sizes="20vw" unoptimized />
+                </button>
+              ))}
+            </div>
+          )}
 
           <h2 className="text-2xl font-bold mb-4">Highlights</h2>
           <ul className="grid sm:grid-cols-2 gap-3 mb-12">
@@ -207,22 +243,21 @@ export default function PackageDetail({
           <h2 className="text-2xl font-black mb-6">You might also like</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {related.map((item) => (
-              <Link
+              <div
                 key={item.id}
-                href={`/packages/${item.slug}`}
                 className="group bg-[#111] rounded-2xl overflow-hidden border border-white/5 hover:border-amber-500/30"
               >
                 <div className="relative h-40">
-                  <Image
+                  <CardPhoto
                     src={item.image}
+                    gallery={item.gallery}
                     alt={item.imageAlt || item.name}
-                    fill
-                    className="object-cover"
+                    title={item.name}
+                    subtitle={item.tagline}
                     sizes="33vw"
-                    unoptimized
                   />
                 </div>
-                <div className="p-4">
+                <Link href={`/packages/${item.slug}`} className="block p-4">
                   <p className="text-amber-400/70 text-xs uppercase tracking-widest mb-1">
                     {item.tagline}
                   </p>
@@ -230,12 +265,20 @@ export default function PackageDetail({
                   <p className="text-white/40 text-sm mt-2 flex items-center gap-1">
                     View package <ArrowRight className="w-3.5 h-3.5" />
                   </p>
-                </div>
-              </Link>
+                </Link>
+              </div>
             ))}
           </div>
         </section>
       )}
+      <ImageLightbox
+        open={photosOpen}
+        onClose={() => setPhotosOpen(false)}
+        images={photos}
+        title={live.name}
+        subtitle={live.tagline}
+        startIndex={photoIndex}
+      />
     </div>
   );
 }

@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { useCartStore } from "@/lib/cartStore";
 import toast from "react-hot-toast";
+import CardPhoto from "@/components/CardPhoto";
 
 /* ─── Types ──────────────────────────────────────────────────────────── */
 type Category = "all" | "adventure" | "wildlife" | "culture" | "water" | "aerial";
@@ -240,44 +241,39 @@ function ActivityCard({ activity }: { activity: Activity }) {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="absolute inset-0"
         >
-          <Image
+          <CardPhoto
             src={activity.image}
+            gallery={activity.gallery}
             alt={activity.name}
-            fill
-            className="object-cover"
+            title={activity.name}
+            subtitle={activity.tagline}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            unoptimized
-          />
-        </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/20 to-transparent" />
-
-        {/* Badges */}
-        <div className="absolute top-3 left-3 flex flex-col gap-2">
-          {activity.badge && (
-            <span className="bg-amber-500 text-black text-xs font-bold px-3 py-1 rounded-full">
-              {activity.badge}
-            </span>
-          )}
-          <span
-            className={`bg-black/60 backdrop-blur-sm text-xs font-semibold px-2.5 py-1 rounded-full border border-white/10 ${activity.difficulty.color}`}
           >
-            {activity.difficulty.label}
-          </span>
-        </div>
-
-        {/* Rating */}
-        <div className="absolute top-3 right-3 flex items-center gap-1 bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10">
-          <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
-          <span className="text-white text-xs font-bold">{activity.rating}</span>
-          <span className="text-white/40 text-xs">({activity.reviews.toLocaleString()})</span>
-        </div>
-
-        {/* Category tag */}
-        <div className="absolute bottom-3 left-3">
-          <span className="text-white/60 text-xs uppercase tracking-widest">
-            {activity.category}
-          </span>
-        </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/20 to-transparent" />
+            <div className="absolute top-3 left-3 flex flex-col gap-2">
+              {activity.badge && (
+                <span className="bg-amber-500 text-black text-xs font-bold px-3 py-1 rounded-full">
+                  {activity.badge}
+                </span>
+              )}
+              <span
+                className={`bg-black/60 backdrop-blur-sm text-xs font-semibold px-2.5 py-1 rounded-full border border-white/10 ${activity.difficulty.color}`}
+              >
+                {activity.difficulty.label}
+              </span>
+            </div>
+            <div className="absolute top-3 right-3 flex items-center gap-1 bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10">
+              <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
+              <span className="text-white text-xs font-bold">{activity.rating}</span>
+              <span className="text-white/40 text-xs">({activity.reviews.toLocaleString()})</span>
+            </div>
+            <div className="absolute bottom-3 left-3">
+              <span className="text-white/60 text-xs uppercase tracking-widest">
+                {activity.category}
+              </span>
+            </div>
+          </CardPhoto>
+        </motion.div>
       </div>
 
       {/* Content */}

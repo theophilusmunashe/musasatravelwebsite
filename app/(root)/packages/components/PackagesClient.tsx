@@ -24,6 +24,7 @@ import toast from "react-hot-toast";
 import type { TravelPackage, TravelPackageRegion } from "@/lib/travel-packages";
 import { packagePriceLabel } from "@/lib/travel-packages";
 import { useLiveTravelPackages } from "@/lib/use-live-packages";
+import CardPhoto from "@/components/CardPhoto";
 
 type Region = "all" | TravelPackageRegion;
 
@@ -179,41 +180,40 @@ function PackageCard({ pkg }: { pkg: TravelPackage }) {
       onMouseLeave={() => setHovered(false)}
       className="group bg-[#111] rounded-2xl overflow-hidden border border-white/5 hover:border-amber-500/30 transition-all duration-500"
     >
-      <Link href={`/packages/${pkg.slug}`} className="block">
-        <div className="relative h-60 overflow-hidden">
-          <motion.div
-            animate={{ scale: hovered ? 1.07 : 1 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-0"
+      <div className="relative h-60 overflow-hidden">
+        <motion.div
+          animate={{ scale: hovered ? 1.07 : 1 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-0"
+        >
+          <CardPhoto
+            src={pkg.image}
+            gallery={pkg.gallery}
+            alt={pkg.imageAlt || pkg.name}
+            title={pkg.name}
+            subtitle={pkg.tagline}
+            sizes="(max-width:768px) 100vw, 50vw"
           >
-            <Image
-              src={pkg.image}
-              alt={pkg.imageAlt || pkg.name}
-              fill
-              className="object-cover"
-              sizes="(max-width:768px) 100vw, 50vw"
-              unoptimized
-            />
-          </motion.div>
-          <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/10 to-transparent" />
-          <div className="absolute top-3 left-3 flex gap-2">
-            {pkg.badge && (
-              <span className="bg-amber-500 text-black text-xs font-bold px-3 py-1 rounded-full">
-                {pkg.badge}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/10 to-transparent" />
+            <div className="absolute top-3 left-3 flex gap-2">
+              {pkg.badge && (
+                <span className="bg-amber-500 text-black text-xs font-bold px-3 py-1 rounded-full">
+                  {pkg.badge}
+                </span>
+              )}
+              <span className="bg-black/60 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-full border border-white/10">
+                {pkg.days} Days
               </span>
-            )}
-            <span className="bg-black/60 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-full border border-white/10">
-              {pkg.days} Days
-            </span>
-          </div>
-          <div className="absolute bottom-3 right-3">
-            <div className="flex items-center gap-1 bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10">
-              <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
-              <span className="text-white text-xs font-bold">{pkg.rating}</span>
             </div>
-          </div>
-        </div>
-      </Link>
+            <div className="absolute bottom-3 right-3">
+              <div className="flex items-center gap-1 bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10">
+                <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
+                <span className="text-white text-xs font-bold">{pkg.rating}</span>
+              </div>
+            </div>
+          </CardPhoto>
+        </motion.div>
+      </div>
 
       <div className="p-5">
         <p className="text-amber-400/70 text-xs uppercase tracking-widest mb-1">{pkg.tagline}</p>

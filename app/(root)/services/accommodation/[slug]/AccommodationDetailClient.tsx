@@ -12,6 +12,7 @@ export type AccommodationDetailData = {
   _id: string;
   title: string;
   mainImage: string;
+  images?: string[];
   location: string;
   price: string;
   rating?: number;
@@ -63,6 +64,7 @@ export default function AccommodationDetailClient({
         <AccommodationGallery
           mainImage={accommodation.mainImage}
           title={accommodation.title}
+          images={accommodation.images}
         />
       </motion.div>
 

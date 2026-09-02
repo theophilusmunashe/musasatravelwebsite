@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { galleryField } from "./galleryField";
 
 export default defineType({
   name: "travelPackage",
@@ -27,7 +28,7 @@ export default defineType({
       },
       description: "URL path. Use lowercase letters, numbers and hyphens only — no spaces (e.g. tanzania-safari).",
       validation: (Rule) =>
-        Rule.required().custom((value) => {
+        Rule.required().custom((value: { current?: string } | undefined) => {
           const current = value?.current?.trim() || "";
           if (!current) return "Slug is required";
           if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(current)) {
@@ -72,6 +73,7 @@ export default defineType({
       ],
       validation: (Rule) => Rule.required(),
     }),
+    galleryField,
     defineField({
       name: "days",
       title: "Duration (days)",

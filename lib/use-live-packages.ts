@@ -20,7 +20,7 @@ export function useLiveTravelPackage(initial: TravelPackage) {
         const next = Array.isArray(rows)
           ? rows
               .map(parseTravelPackage)
-              .find((p): p is TravelPackage => Boolean(p) && p.slug === initial.slug)
+              .find((p): p is TravelPackage => p != null && p.slug === initial.slug)
           : null;
         if (!cancelled && next) setPkg(next);
       })

@@ -58,6 +58,7 @@ export interface ServiceStay {
   tagline: string;
   category: StayCategory;
   image: string;
+  gallery: string[];
   location: string;
   country: string;
   price: string;
@@ -77,6 +78,7 @@ export interface ServiceItinerary {
   name: string;
   tagline: string;
   image: string;
+  gallery: string[];
   days: number;
   filter: "short" | "medium" | "extended";
   destinations: string[];
@@ -94,6 +96,7 @@ export interface ServiceGuide {
   role: string;
   specialty: "wildlife" | "adventure" | "culture";
   image: string;
+  gallery: string[];
   experience: string;
   languages: string[];
   rating: number;
@@ -110,6 +113,7 @@ export interface ServiceTransfer {
   tagline: string;
   type: "airport" | "cross-border" | "private" | "group";
   image: string;
+  gallery: string[];
   price: string;
   priceNum: number;
   duration: string;
@@ -141,6 +145,7 @@ const stayProjection = groq`{
   "id": slug.current,
   name, tagline, category,
   "image": image.asset->url,
+  "gallery": coalesce(gallery[].asset->url, []),
   location, country, price, priceNum,
   "rating": coalesce(rating, 4.9),
   "reviews": coalesce(reviews, 0),
@@ -154,6 +159,7 @@ const itineraryProjection = groq`{
   "id": slug.current,
   name, tagline,
   "image": image.asset->url,
+  "gallery": coalesce(gallery[].asset->url, []),
   days, filter,
   "destinations": coalesce(destinations, []),
   price, priceNum, groupSize, badge,
@@ -165,6 +171,7 @@ const guideProjection = groq`{
   "id": slug.current,
   name, role, specialty,
   "image": image.asset->url,
+  "gallery": coalesce(gallery[].asset->url, []),
   experience,
   "languages": coalesce(languages, []),
   "rating": coalesce(rating, 4.9),
@@ -179,6 +186,7 @@ const transferProjection = groq`{
   "id": slug.current,
   name, tagline, type,
   "image": image.asset->url,
+  "gallery": coalesce(gallery[].asset->url, []),
   price, priceNum, duration, capacity, badge,
   "amenities": coalesce(amenities, []),
   "routes": coalesce(routes, []),

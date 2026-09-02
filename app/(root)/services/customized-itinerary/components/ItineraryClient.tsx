@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { useCartStore } from "@/lib/cartStore";
 import toast from "react-hot-toast";
+import CardPhoto from "@/components/CardPhoto";
 
 /* ─── Types ──────────────────────────────────────────────────────────── */
 type Filter = "all" | "short" | "medium" | "extended";
@@ -28,6 +29,7 @@ interface Itinerary {
   name: string;
   tagline: string;
   image: string;
+  gallery?: string[];
   days: number;
   filter: Exclude<Filter, "all">;
   destinations: string[];
@@ -159,13 +161,21 @@ function ItineraryCard({ item }: { item: Itinerary }) {
       className="group bg-[#111] rounded-2xl overflow-hidden border border-white/5 hover:border-amber-500/30 transition-all duration-500">
       <div className="relative h-56 overflow-hidden">
         <motion.div animate={{ scale: hovered ? 1.07 : 1 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="absolute inset-0">
-          <Image src={item.image} alt={item.name} fill className="object-cover" sizes="(max-width:768px) 100vw, 50vw" unoptimized />
+          <CardPhoto
+            src={item.image}
+            gallery={item.gallery}
+            alt={item.name}
+            title={item.name}
+            subtitle={item.tagline}
+            sizes="(max-width:768px) 100vw, 50vw"
+          >
+            <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/10 to-transparent" />
+            <div className="absolute top-3 left-3 flex gap-2">
+              {item.badge && <span className="bg-amber-500 text-black text-xs font-bold px-3 py-1 rounded-full">{item.badge}</span>}
+              <span className="bg-black/60 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-full border border-white/10">{item.days} Days</span>
+            </div>
+          </CardPhoto>
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/10 to-transparent" />
-        <div className="absolute top-3 left-3 flex gap-2">
-          {item.badge && <span className="bg-amber-500 text-black text-xs font-bold px-3 py-1 rounded-full">{item.badge}</span>}
-          <span className="bg-black/60 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-full border border-white/10">{item.days} Days</span>
-        </div>
       </div>
 
       <div className="p-5">

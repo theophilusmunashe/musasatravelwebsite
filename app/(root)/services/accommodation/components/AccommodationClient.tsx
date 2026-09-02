@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import { useCartStore } from "@/lib/cartStore";
 import toast from "react-hot-toast";
+import CardPhoto from "@/components/CardPhoto";
 
 /* ─── Types ──────────────────────────────────────────────────────────── */
 type Category =
@@ -45,6 +46,7 @@ interface Accommodation {
   tagline: string;
   category: Exclude<Category, "all">;
   image: string;
+  gallery?: string[];
   location: string;
   country: string;
   price: string;
@@ -248,61 +250,54 @@ function AccommodationCard({ property }: { property: Accommodation }) {
       className="group relative bg-[#111] rounded-2xl overflow-hidden border border-white/5 hover:border-amber-500/30 transition-all duration-500"
     >
       {/* Image */}
-      <Link href={`/services/accommodation/${property.id}`} className="relative h-64 md:h-72 overflow-hidden block">
+      <div className="relative h-64 md:h-72 overflow-hidden">
         <motion.div
           animate={{ scale: hovered ? 1.07 : 1 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="absolute inset-0"
         >
-          <Image
+          <CardPhoto
             src={property.image}
+            gallery={property.gallery}
             alt={property.name}
-            fill
-            className="object-cover"
+            title={property.name}
+            subtitle={property.tagline}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            unoptimized
-          />
+          >
+            <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/10 to-transparent" />
+            <div className="absolute top-3 left-3 flex flex-col gap-2">
+              {property.badge && (
+                property.badge === "Musasa Exclusive" ? (
+                  <span className="flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-amber-400 text-black text-xs font-black px-3 py-1 rounded-full shadow-lg shadow-amber-500/40">
+                    <Sparkles className="w-3 h-3" />
+                    {property.badge}
+                  </span>
+                ) : (
+                  <span className="bg-amber-500 text-black text-xs font-bold px-3 py-1 rounded-full">
+                    {property.badge}
+                  </span>
+                )
+              )}
+            </div>
+            <div className="absolute top-3 right-3 flex items-center gap-1 bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10">
+              <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
+              <span className="text-white text-xs font-bold">{property.rating}</span>
+              <span className="text-white/40 text-xs">({property.reviews.toLocaleString()})</span>
+            </div>
+            <div className="absolute bottom-3 left-3 flex items-center gap-1.5">
+              <MapPin className="w-3 h-3 text-amber-400" />
+              <span className="text-white/70 text-xs">
+                {property.location}, {property.country}
+              </span>
+            </div>
+            <div className="absolute bottom-3 right-3">
+              <span className="bg-black/60 backdrop-blur-sm text-white/60 text-xs px-2.5 py-1 rounded-full border border-white/10 capitalize">
+                {property.category.replace("-", " ")}
+              </span>
+            </div>
+          </CardPhoto>
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/10 to-transparent" />
-
-        {/* Badges */}
-        <div className="absolute top-3 left-3 flex flex-col gap-2">
-          {property.badge && (
-            property.badge === "Musasa Exclusive" ? (
-              <span className="flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-amber-400 text-black text-xs font-black px-3 py-1 rounded-full shadow-lg shadow-amber-500/40">
-                <Sparkles className="w-3 h-3" />
-                {property.badge}
-              </span>
-            ) : (
-              <span className="bg-amber-500 text-black text-xs font-bold px-3 py-1 rounded-full">
-                {property.badge}
-              </span>
-            )
-          )}
-        </div>
-
-        {/* Rating */}
-        <div className="absolute top-3 right-3 flex items-center gap-1 bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10">
-          <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
-          <span className="text-white text-xs font-bold">{property.rating}</span>
-          <span className="text-white/40 text-xs">({property.reviews.toLocaleString()})</span>
-        </div>
-
-        {/* Location */}
-        <div className="absolute bottom-3 left-3 flex items-center gap-1.5">
-          <MapPin className="w-3 h-3 text-amber-400" />
-          <span className="text-white/70 text-xs">
-            {property.location}, {property.country}
-          </span>
-        </div>
-
-        {/* Category chip */}
-        <div className="absolute bottom-3 right-3">
-          <span className="bg-black/60 backdrop-blur-sm text-white/60 text-xs px-2.5 py-1 rounded-full border border-white/10 capitalize">
-            {property.category.replace("-", " ")}
-          </span>
-        </div>
-      </Link>
+      </div>
       <div className="p-5">
         <div className="mb-3">
           <p className="text-amber-400/70 text-xs uppercase tracking-widest mb-1">

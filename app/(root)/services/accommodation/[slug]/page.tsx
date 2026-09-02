@@ -62,6 +62,7 @@ export default async function AccommodationDetailPage({ params }: Props) {
           _id: stay.id,
           title: stay.name,
           mainImage: stay.image,
+          images: stay.gallery,
           location: `${stay.location}, ${stay.country}`,
           price: stay.price,
           rating: stay.rating,

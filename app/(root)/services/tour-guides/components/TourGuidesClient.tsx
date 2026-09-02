@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { useCartStore } from "@/lib/cartStore";
 import toast from "react-hot-toast";
+import CardPhoto from "@/components/CardPhoto";
 
 /* ─── Types ──────────────────────────────────────────────────────────── */
 type Specialty = "all" | "wildlife" | "adventure" | "culture";
@@ -29,6 +30,7 @@ interface Guide {
   role: string;
   specialty: Exclude<Specialty, "all">;
   image: string;
+  gallery?: string[];
   experience: string;
   languages: string[];
   rating: number;
@@ -126,20 +128,29 @@ function GuideCard({ guide }: { guide: Guide }) {
       className="group bg-[#111] rounded-2xl overflow-hidden border border-white/5 hover:border-amber-500/30 transition-all duration-500">
       <div className="relative h-72 overflow-hidden">
         <motion.div animate={{ scale: hovered ? 1.05 : 1 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className="absolute inset-0">
-          <Image src={guide.image} alt={guide.name} fill className="object-cover object-top" sizes="(max-width:768px) 100vw, 33vw" unoptimized />
+          <CardPhoto
+            src={guide.image}
+            gallery={guide.gallery}
+            alt={guide.name}
+            title={guide.name}
+            subtitle={guide.role}
+            sizes="(max-width:768px) 100vw, 33vw"
+            objectClass="object-cover object-top"
+          >
+            <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/20 to-transparent" />
+            <div className="absolute top-3 left-3 flex gap-2">
+              {guide.badge && <span className="bg-amber-500 text-black text-xs font-bold px-3 py-1 rounded-full">{guide.badge}</span>}
+            </div>
+            <div className="absolute top-3 right-3 flex items-center gap-1 bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10">
+              <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
+              <span className="text-white text-xs font-bold">{guide.rating}</span>
+              <span className="text-white/40 text-xs">({guide.reviews})</span>
+            </div>
+            <div className="absolute bottom-3 left-3">
+              <span className="bg-black/60 backdrop-blur-sm text-white/60 text-xs px-2.5 py-1 rounded-full border border-white/10 capitalize">{guide.specialty}</span>
+            </div>
+          </CardPhoto>
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/20 to-transparent" />
-        <div className="absolute top-3 left-3 flex gap-2">
-          {guide.badge && <span className="bg-amber-500 text-black text-xs font-bold px-3 py-1 rounded-full">{guide.badge}</span>}
-        </div>
-        <div className="absolute top-3 right-3 flex items-center gap-1 bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10">
-          <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
-          <span className="text-white text-xs font-bold">{guide.rating}</span>
-          <span className="text-white/40 text-xs">({guide.reviews})</span>
-        </div>
-        <div className="absolute bottom-3 left-3">
-          <span className="bg-black/60 backdrop-blur-sm text-white/60 text-xs px-2.5 py-1 rounded-full border border-white/10 capitalize">{guide.specialty}</span>
-        </div>
       </div>
 
       <div className="p-5">

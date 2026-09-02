@@ -16,6 +16,7 @@ export interface TravelPackage {
   region: TravelPackageRegion;
   image: string;
   imageAlt: string;
+  gallery?: string[];
   days: number;
   destinations: string[];
   groupSize: string;
@@ -39,6 +40,7 @@ const packageProjection = groq`{
   region,
   "image": image.asset->url,
   "imageAlt": coalesce(image.alt, name),
+  "gallery": coalesce(gallery[].asset->url, []),
   days,
   destinations,
   groupSize,
@@ -119,7 +121,11 @@ export async function getTravelPackageSlugs(): Promise<string[]> {
 
 export function parseTravelPackage(value: unknown): TravelPackage | null {
   if (!isTravelPackage(value)) return null;
-  return withSafeSlug(value);
+  const raw = value as TravelPackage & { gallery?: unknown };
+  const gallery = Array.isArray(raw.gallery)
+    ? raw.gallery.filter((url): url is string => typeof url === "string" && Boolean(url))
+    : [];
+  return withSafeSlug({ ...raw, gallery });
 }
 
 export function packageHasPricing(pkg: Pick<TravelPackage, "pricing" | "pricingNote">): boolean {

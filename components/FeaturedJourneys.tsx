@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import type { TravelPackage } from "@/lib/travel-packages";
 import { useLiveTravelPackages } from "@/lib/use-live-packages";
+import CardPhoto from "@/components/CardPhoto";
 
 export default function FeaturedJourneys({
   packages: initialPackages,
@@ -25,21 +25,24 @@ export default function FeaturedJourneys({
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {packages.map((pkg) => (
-            <Link
+            <div
               key={pkg.id}
-              href={`/packages/${pkg.slug}`}
               className="group relative h-96 overflow-hidden rounded-2xl border border-white/5 hover:border-amber-500/30 transition-colors"
             >
-              <Image
+              <CardPhoto
                 src={pkg.image}
+                gallery={pkg.gallery}
                 alt={pkg.imageAlt || pkg.name}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                title={pkg.name}
+                subtitle={pkg.tagline}
                 sizes="(max-width: 768px) 100vw, 33vw"
-                unoptimized
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
-              <div className="absolute bottom-0 p-5">
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+              </CardPhoto>
+              <Link
+                href={`/packages/${pkg.slug}`}
+                className="absolute bottom-0 left-0 right-0 z-[4] p-5"
+              >
                 {pkg.badge && (
                   <span className="inline-block bg-amber-500 text-black text-xs font-bold px-2.5 py-1 rounded-full mb-2">
                     {pkg.badge}
@@ -49,8 +52,8 @@ export default function FeaturedJourneys({
                   {pkg.name}
                 </h3>
                 <p className="text-white/60 text-sm mt-1">{pkg.tagline}</p>
-              </div>
-            </Link>
+              </Link>
+            </div>
           ))}
         </div>
         <div className="mt-10 flex justify-center">
