@@ -18,6 +18,8 @@ import {
 import toast from "react-hot-toast";
 import { useCartStore } from "@/lib/cartStore";
 import type { TravelPackage } from "@/lib/travel-packages";
+import { packageHasPricing, packagePriceLabel } from "@/lib/travel-packages";
+import { useLiveTravelPackage } from "@/lib/use-live-packages";
 
 export default function PackageDetail({
   pkg,
@@ -26,24 +28,25 @@ export default function PackageDetail({
   pkg: TravelPackage;
   related: TravelPackage[];
 }) {
+  const live = useLiveTravelPackage(pkg);
   const [added, setAdded] = useState(false);
   const { addItem, items, openCart } = useCartStore();
-  const isInCart = items.some((i) => i.id === pkg.id);
+  const isInCart = items.some((i) => i.id === live.id);
 
   const handleAdd = () => {
     addItem({
-      id: pkg.id,
-      name: pkg.name,
+      id: live.id,
+      name: live.name,
       category: "activity",
-      price: "Price on request",
+      price: packagePriceLabel(live),
       priceNum: 0,
-      image: pkg.image,
-      duration: `${pkg.days} days`,
-      description: pkg.tagline,
+      image: live.image,
+      duration: `${live.days} days`,
+      description: live.tagline,
     });
     setAdded(true);
     setTimeout(() => setAdded(false), 2500);
-    toast.success(`${pkg.name} added to your trip!`, {
+    toast.success(`${live.name} added to your trip!`, {
       icon: "✈️",
       style: { background: "#1a1a1a", color: "#fff", border: "1px solid #F59E0B", borderRadius: "12px" },
     });
@@ -53,8 +56,8 @@ export default function PackageDetail({
     <div className="bg-[#0a0a0a] min-h-screen text-white">
       <section className="relative min-h-[70vh] flex flex-col justify-end overflow-hidden">
         <Image
-          src={pkg.image}
-          alt={pkg.imageAlt || pkg.name}
+          src={live.image}
+          alt={live.imageAlt || live.name}
           fill
           priority
           className="object-cover"
@@ -71,21 +74,21 @@ export default function PackageDetail({
             All packages
           </Link>
           <div className="flex flex-wrap gap-2 mb-4">
-            {pkg.badge && (
+            {live.badge && (
               <span className="bg-amber-500 text-black text-xs font-bold px-3 py-1 rounded-full">
-                {pkg.badge}
+                {live.badge}
               </span>
             )}
             <span className="bg-black/50 border border-white/10 text-xs font-bold px-3 py-1 rounded-full">
-              {pkg.days} days
+              {live.days} days
             </span>
             <span className="flex items-center gap-1 bg-black/50 border border-white/10 text-xs font-bold px-3 py-1 rounded-full">
               <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
-              {pkg.rating}
+              {live.rating}
             </span>
           </div>
-          <p className="text-amber-400/80 text-sm uppercase tracking-[0.25em] mb-3">{pkg.tagline}</p>
-          <h1 className="text-4xl md:text-6xl font-black leading-tight max-w-4xl">{pkg.name}</h1>
+          <p className="text-amber-400/80 text-sm uppercase tracking-[0.25em] mb-3">{live.tagline}</p>
+          <h1 className="text-4xl md:text-6xl font-black leading-tight max-w-4xl">{live.name}</h1>
         </div>
       </section>
 
@@ -94,15 +97,15 @@ export default function PackageDetail({
           <div className="flex flex-wrap gap-6 text-white/60 text-sm mb-8">
             <span className="flex items-center gap-2">
               <Clock className="w-4 h-4 text-amber-400" />
-              {pkg.days} days
+              {live.days} days
             </span>
             <span className="flex items-center gap-2">
               <Users className="w-4 h-4 text-amber-400" />
-              Group {pkg.groupSize}
+              Group {live.groupSize}
             </span>
           </div>
           <div className="flex flex-wrap gap-2 mb-10">
-            {pkg.destinations.map((d) => (
+            {live.destinations.map((d) => (
               <span
                 key={d}
                 className="flex items-center gap-1 bg-white/5 border border-white/10 text-white/70 text-sm px-3 py-1.5 rounded-full"
@@ -112,11 +115,11 @@ export default function PackageDetail({
               </span>
             ))}
           </div>
-          <p className="text-white/70 text-lg leading-relaxed mb-12">{pkg.description}</p>
+          <p className="text-white/70 text-lg leading-relaxed mb-12">{live.description}</p>
 
           <h2 className="text-2xl font-bold mb-4">Highlights</h2>
           <ul className="grid sm:grid-cols-2 gap-3 mb-12">
-            {pkg.highlights.map((h) => (
+            {live.highlights.map((h) => (
               <li key={h} className="flex items-start gap-2 text-white/70">
                 <Check className="w-4 h-4 text-amber-400 mt-1 flex-shrink-0" />
                 {h}
@@ -126,7 +129,7 @@ export default function PackageDetail({
 
           <h2 className="text-2xl font-bold mb-4">Included</h2>
           <div className="flex flex-wrap gap-2 mb-4">
-            {pkg.includes.map((inc) => (
+            {live.includes.map((inc) => (
               <span
                 key={inc}
                 className="bg-amber-500/10 border border-amber-500/20 text-amber-400 text-sm px-3 py-1 rounded-full"
@@ -135,11 +138,25 @@ export default function PackageDetail({
               </span>
             ))}
           </div>
+
+          {packageHasPricing(live) && (
+            <section className="mt-12 pt-10 border-t border-white/10">
+              <h2 className="text-2xl font-bold mb-4">Pricing</h2>
+              {live.pricing?.trim() && (
+                <p className="text-3xl font-black text-amber-400 mb-3">{live.pricing.trim()}</p>
+              )}
+              {live.pricingNote?.trim() && (
+                <p className="text-white/60 leading-relaxed whitespace-pre-line">
+                  {live.pricingNote.trim()}
+                </p>
+              )}
+            </section>
+          )}
         </div>
 
         <aside className="lg:sticky lg:top-28 h-fit bg-[#111] border border-white/10 rounded-2xl p-6">
           <p className="text-white/50 text-sm mb-1">From Musasa Travel</p>
-          <p className="text-2xl font-black mb-6">Price on request</p>
+          <p className="text-2xl font-black mb-6">{packagePriceLabel(live)}</p>
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.96 }}
@@ -178,8 +195,9 @@ export default function PackageDetail({
             Customise this journey
           </Link>
           <p className="text-white/40 text-xs mt-4 leading-relaxed">
-            Final pricing is confirmed when you book. Add this package and send an enquiry — we
-            typically reply within 24 hours.
+            {packageHasPricing(live)
+              ? "Indicative pricing. Confirm dates and a final quote when you enquire — we typically reply within 24 hours."
+              : "Final pricing is confirmed when you book. Add this package and send an enquiry — we typically reply within 24 hours."}
           </p>
         </aside>
       </section>

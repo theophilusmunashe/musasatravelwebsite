@@ -105,6 +105,22 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "pricing",
+      title: "Price",
+      type: "string",
+      description:
+        "Optional. Shown on the package page, e.g. “From USD 2,450 per person sharing”. Leave empty to hide pricing.",
+    }),
+    defineField({
+      name: "pricingNote",
+      title: "Pricing notes",
+      type: "text",
+      // @ts-ignore
+      rows: 3,
+      description:
+        "Optional extra detail under the price (season, what is included, per person vs per vehicle, etc.).",
+    }),
+    defineField({
       name: "rating",
       title: "Rating",
       type: "number",

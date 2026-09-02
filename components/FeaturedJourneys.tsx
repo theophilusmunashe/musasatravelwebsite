@@ -4,12 +4,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import type { TravelPackage } from "@/lib/travel-packages";
+import { useLiveTravelPackages } from "@/lib/use-live-packages";
 
 export default function FeaturedJourneys({
-  packages,
+  packages: initialPackages,
 }: {
   packages: TravelPackage[];
 }) {
+  const packages = useLiveTravelPackages(initialPackages);
   if (!packages.length) return null;
 
   return (

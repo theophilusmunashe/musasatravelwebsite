@@ -22,6 +22,8 @@ export interface TravelPackage {
   includes: string[];
   highlights: string[];
   description: string;
+  pricing?: string;
+  pricingNote?: string;
   rating: number;
   displayOrder: number;
 }
@@ -43,6 +45,8 @@ const packageProjection = groq`{
   includes,
   highlights,
   description,
+  pricing,
+  pricingNote,
   "rating": coalesce(rating, 4.9),
   displayOrder
 }`;
@@ -97,6 +101,20 @@ export async function getTravelPackageSlugs(): Promise<string[]> {
     return [];
   }
 }
+
+export function parseTravelPackage(value: unknown): TravelPackage | null {
+  return isTravelPackage(value) ? value : null;
+}
+
+export function packageHasPricing(pkg: Pick<TravelPackage, "pricing" | "pricingNote">): boolean {
+  return Boolean(pkg.pricing?.trim() || pkg.pricingNote?.trim());
+}
+
+export function packagePriceLabel(pkg: Pick<TravelPackage, "pricing">): string {
+  return pkg.pricing?.trim() || "Price on request";
+}
+
+export { listQuery, bySlugQuery };
 
 export async function getRelatedTravelPackages(
   slug: string,

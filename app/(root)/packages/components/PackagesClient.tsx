@@ -22,6 +22,8 @@ import {
 import { useCartStore } from "@/lib/cartStore";
 import toast from "react-hot-toast";
 import type { TravelPackage, TravelPackageRegion } from "@/lib/travel-packages";
+import { packagePriceLabel } from "@/lib/travel-packages";
+import { useLiveTravelPackages } from "@/lib/use-live-packages";
 
 type Region = "all" | TravelPackageRegion;
 
@@ -153,7 +155,7 @@ function PackageCard({ pkg }: { pkg: TravelPackage }) {
       id: pkg.id,
       name: pkg.name,
       category: "activity",
-      price: "Price on request",
+      price: packagePriceLabel(pkg),
       priceNum: 0,
       image: pkg.image,
       duration: `${pkg.days} days`,
@@ -268,6 +270,9 @@ function PackageCard({ pkg }: { pkg: TravelPackage }) {
             Group: {pkg.groupSize}
           </span>
         </div>
+        {pkg.pricing?.trim() && (
+          <p className="text-amber-400 font-semibold text-sm mb-5">{pkg.pricing.trim()}</p>
+        )}
 
         <div className="pt-4 border-t border-white/10 grid grid-cols-1 gap-2">
           <Link
@@ -366,7 +371,8 @@ function CtaBanner() {
   );
 }
 
-export default function PackagesClient({ packages }: { packages: TravelPackage[] }) {
+export default function PackagesClient({ packages: initialPackages }: { packages: TravelPackage[] }) {
+  const packages = useLiveTravelPackages(initialPackages);
   const [active, setActive] = useState<Region>("all");
   const filtered = active === "all" ? packages : packages.filter((p) => p.region === active);
   const days = packages.map((p) => p.days);
