@@ -15,8 +15,26 @@ export default defineType({
       name: "slug",
       title: "Slug",
       type: "slug",
-      options: { source: "name", maxLength: 96 },
-      validation: (Rule) => Rule.required(),
+      options: {
+        source: "name",
+        maxLength: 96,
+        slugify: (input: string) =>
+          input
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, ""),
+      },
+      description: "URL path. Use lowercase letters, numbers and hyphens only — no spaces (e.g. tanzania-safari).",
+      validation: (Rule) =>
+        Rule.required().custom((value) => {
+          const current = value?.current?.trim() || "";
+          if (!current) return "Slug is required";
+          if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(current)) {
+            return "Use lowercase letters, numbers and hyphens only. Example: tanzania-safari";
+          }
+          return true;
+        }),
     }),
     defineField({
       name: "tagline",

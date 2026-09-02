@@ -52,6 +52,11 @@ jobs:
           test -f out/api/bookings/enquiry/index.php
           echo "Top-level out files:"
           ls -la out | head -40
+          if find out -type d -name '* *' | grep -q .; then
+            echo "Unsafe folder names with spaces would break FTP:"
+            find out -type d -name '* *'
+            exit 1
+          fi
 
       - name: Sync files to cPanel
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5

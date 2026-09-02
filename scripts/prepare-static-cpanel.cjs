@@ -64,6 +64,35 @@ if (!mailConfig.resend_key) {
   );
 }
 
+function safeDirName(name) {
+  return name
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9._-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function sanitizeExportDirs(dir) {
+  if (!fs.existsSync(dir)) return;
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    const from = path.join(dir, entry.name);
+    sanitizeExportDirs(from);
+    const next = safeDirName(entry.name);
+    if (!next || next === entry.name) continue;
+    const to = path.join(dir, next);
+    if (fs.existsSync(to)) {
+      console.warn(`Skipping rename of "${entry.name}" — "${next}" already exists`);
+      continue;
+    }
+    fs.renameSync(from, to);
+    console.log(`Renamed unsafe export folder "${entry.name}" → "${next}"`);
+  }
+}
+
+sanitizeExportDirs(path.join(outDir, "packages"));
+sanitizeExportDirs(path.join(outDir, "services"));
+
 const favicon = path.join(outDir, "image", "favicon.png");
 if (!fs.existsSync(favicon)) {
   console.error("Missing out/image/favicon.png");

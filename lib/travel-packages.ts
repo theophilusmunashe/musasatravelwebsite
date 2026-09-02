@@ -1,5 +1,6 @@
 import { groq } from "next-sanity";
 import { client } from "@/sanity/lib/client";
+import { safeUrlSlug } from "@/lib/safe-slug";
 
 export type TravelPackageRegion =
   | "zimbabwe"
@@ -71,10 +72,16 @@ function isTravelPackage(value: unknown): value is TravelPackage {
   return typeof v.id === "string" && typeof v.name === "string" && typeof v.image === "string";
 }
 
+export const safePackageSlug = safeUrlSlug;
+
+function withSafeSlug(pkg: TravelPackage): TravelPackage {
+  return { ...pkg, slug: safePackageSlug(pkg.slug) || safePackageSlug(pkg.id) || pkg.slug };
+}
+
 export async function getTravelPackages(): Promise<TravelPackage[]> {
   try {
     const rows = await client.fetch<unknown[]>(listQuery, {}, fetchOptions);
-    return (rows ?? []).filter(isTravelPackage);
+    return (rows ?? []).map(parseTravelPackage).filter((p): p is TravelPackage => Boolean(p));
   } catch (error) {
     console.error("Failed to fetch travel packages:", error);
     return [];
@@ -84,9 +91,14 @@ export async function getTravelPackages(): Promise<TravelPackage[]> {
 export async function getTravelPackageBySlug(
   slug: string
 ): Promise<TravelPackage | null> {
+  const want = safePackageSlug(slug);
+  if (!want) return null;
   try {
-    const row = await client.fetch<unknown>(bySlugQuery, { slug }, fetchOptions);
-    return isTravelPackage(row) ? row : null;
+    const exact = await client.fetch<unknown>(bySlugQuery, { slug }, fetchOptions);
+    const parsedExact = parseTravelPackage(exact);
+    if (parsedExact && parsedExact.slug === want) return parsedExact;
+    const all = await getTravelPackages();
+    return all.find((p) => p.slug === want) ?? null;
   } catch (error) {
     console.error("Failed to fetch travel package:", error);
     return null;
@@ -96,14 +108,18 @@ export async function getTravelPackageBySlug(
 export async function getTravelPackageSlugs(): Promise<string[]> {
   try {
     const rows = await client.fetch<{ slug?: string }[]>(slugsQuery, {}, fetchOptions);
-    return (rows ?? []).map((r) => r.slug).filter((s): s is string => Boolean(s));
+    const slugs = (rows ?? [])
+      .map((r) => safePackageSlug(r.slug))
+      .filter((s): s is string => Boolean(s));
+    return [...new Set(slugs)];
   } catch {
     return [];
   }
 }
 
 export function parseTravelPackage(value: unknown): TravelPackage | null {
-  return isTravelPackage(value) ? value : null;
+  if (!isTravelPackage(value)) return null;
+  return withSafeSlug(value);
 }
 
 export function packageHasPricing(pkg: Pick<TravelPackage, "pricing" | "pricingNote">): boolean {

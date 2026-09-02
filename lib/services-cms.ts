@@ -1,5 +1,6 @@
 import { groq } from "next-sanity";
 import { client } from "@/sanity/lib/client";
+import { safeUrlSlug } from "@/lib/safe-slug";
 
 const fetchOptions = { next: { revalidate: 300, tags: ["services-cms"] } };
 
@@ -190,22 +191,34 @@ export const getActivities = () =>
     groq`*[_type == "activity" && defined(slug.current) && defined(image.asset)] | order(displayOrder asc, name asc) ${activityProjection}`
   );
 
-export const getStays = () =>
-  fetchList<ServiceStay>(
+function withSafeStayId(stay: ServiceStay): ServiceStay {
+  return { ...stay, id: safeUrlSlug(stay.id) || stay.id };
+}
+
+export const getStays = async () => {
+  const rows = await fetchList<ServiceStay>(
     groq`*[_type == "stay" && defined(slug.current) && defined(image.asset)] | order(displayOrder asc, name asc) ${stayProjection}`
   );
+  return rows.map(withSafeStayId);
+};
 
-export const getStayBySlug = (slug: string) =>
-  fetchOne<ServiceStay>(
+export const getStayBySlug = async (slug: string) => {
+  const want = safeUrlSlug(slug);
+  if (!want) return null;
+  const exact = await fetchOne<ServiceStay>(
     groq`*[_type == "stay" && slug.current == $slug && defined(image.asset)][0] ${stayProjection}`,
     slug
   );
+  if (exact && safeUrlSlug(exact.id) === want) return withSafeStayId(exact);
+  const all = await getStays();
+  return all.find((s) => s.id === want) ?? null;
+};
 
 export const getStaySlugs = async () => {
   const rows = await fetchList<{ id: string }>(
     groq`*[_type == "stay" && defined(slug.current)]{ "id": slug.current }`
   );
-  return rows.map((r) => r.id).filter(Boolean);
+  return [...new Set(rows.map((r) => safeUrlSlug(r.id)).filter(Boolean))];
 };
 
 export const getItineraries = () =>

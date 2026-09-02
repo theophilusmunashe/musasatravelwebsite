@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { getBrowserSanityClient } from "@/lib/sanity-browser";
 import {
-  bySlugQuery,
   listQuery,
   parseTravelPackage,
   type TravelPackage,
@@ -16,9 +15,13 @@ export function useLiveTravelPackage(initial: TravelPackage) {
     setPkg(initial);
     let cancelled = false;
     getBrowserSanityClient()
-      .fetch(bySlugQuery, { slug: initial.slug })
-      .then((row) => {
-        const next = parseTravelPackage(row);
+      .fetch(listQuery)
+      .then((rows: unknown) => {
+        const next = Array.isArray(rows)
+          ? rows
+              .map(parseTravelPackage)
+              .find((p): p is TravelPackage => Boolean(p) && p.slug === initial.slug)
+          : null;
         if (!cancelled && next) setPkg(next);
       })
       .catch(() => undefined);
