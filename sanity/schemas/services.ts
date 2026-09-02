@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { galleryField } from "./galleryField";
+import { InstantImageInput } from "../components/InstantImageInput";
 
 const stringList = (name: string, title: string, required = true) =>
   defineField({
@@ -15,9 +16,8 @@ const imageField = defineField({
   name: "image",
   title: "Image",
   type: "image",
-  options: { hotspot: true },
-  // @ts-ignore
-  fields: [{ name: "alt", title: "Alt text", type: "string" }],
+  options: { hotspot: false },
+  components: { input: InstantImageInput },
   validation: (Rule) => Rule.required(),
 });
 

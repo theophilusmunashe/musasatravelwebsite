@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { galleryField } from "./galleryField";
+import { InstantImageInput } from "../components/InstantImageInput";
 
 export default defineType({
   name: "travelPackage",
@@ -62,15 +63,8 @@ export default defineType({
       name: "image",
       title: "Image",
       type: "image",
-      options: { hotspot: true },
-      // @ts-ignore — Sanity image alt field
-      fields: [
-        defineField({
-          name: "alt",
-          title: "Alt text",
-          type: "string",
-        }),
-      ],
+      options: { hotspot: false },
+      components: { input: InstantImageInput },
       validation: (Rule) => Rule.required(),
     }),
     galleryField,

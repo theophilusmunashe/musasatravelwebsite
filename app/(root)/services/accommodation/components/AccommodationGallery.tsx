@@ -57,18 +57,26 @@ export default function AccommodationGallery({ mainImage, title, images = [] }: 
         {hasMany && (
           <>
             <button
-              onClick={goToPrevious}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-900 p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110 z-10 backdrop-blur-sm"
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                goToPrevious();
+              }}
+              className="absolute left-3 top-1/2 z-10 -translate-y-1/2 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-black/70 text-white shadow-xl hover:bg-amber-500 hover:text-black"
               aria-label="Previous image"
             >
-              <ChevronLeft className="w-6 h-6" />
+              <ChevronLeft className="w-7 h-7" />
             </button>
             <button
-              onClick={goToNext}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-900 p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110 z-10 backdrop-blur-sm"
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                goToNext();
+              }}
+              className="absolute right-3 top-1/2 z-10 -translate-y-1/2 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-black/70 text-white shadow-xl hover:bg-amber-500 hover:text-black"
               aria-label="Next image"
             >
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="w-7 h-7" />
             </button>
             <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm font-semibold pointer-events-none">
               {selectedImageIndex + 1} / {galleryImages.length}
