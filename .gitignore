@@ -19,6 +19,7 @@
 # production
 /build
 /deploy-cpanel/
+/.api-stash/
 
 # misc
 .DS_Store

@@ -8,7 +8,7 @@ on:
 
 jobs:
   web-deploy:
-    name: Deploy Next.js App
+    name: Deploy static site to cPanel
     runs-on: ubuntu-latest
     steps:
       - name: Get latest code
@@ -23,31 +23,32 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Next.js standalone for cPanel
+      - name: Build static HTML for cPanel
         run: npm run build:cpanel
         env:
           NODE_ENV: production
+          CPANEL_STATIC: "1"
           NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
           NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
           NEXT_PUBLIC_SANITY_API_VERSION: ${{ secrets.NEXT_PUBLIC_SANITY_API_VERSION }}
           NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
           NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ secrets.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_FROM: ${{ secrets.RESEND_FROM }}
+          BOOKINGS_EMAIL_TO: ${{ secrets.BOOKINGS_EMAIL_TO }}
+          CONTACT_EMAIL_TO: ${{ secrets.CONTACT_EMAIL_TO }}
+          ENQUIRIES_EMAIL_TO: ${{ secrets.ENQUIRIES_EMAIL_TO }}
 
-      - name: Confirm deploy bundle
+      - name: Confirm static bundle
         run: |
-          test -f deploy-cpanel/server.js
-          test -f deploy-cpanel/tmp/restart.txt
-          test -f deploy-cpanel/image/favicon.png
-          test -d deploy-cpanel/.next/static
-          test -d deploy-cpanel/public/_next/static
-          test -d deploy-cpanel/_next/static
-          test -d deploy-cpanel/public
-          echo "Top-level deploy files:"
-          ls -la deploy-cpanel | head -40
-          echo "Static CSS sample:"
-          ls deploy-cpanel/_next/static/css | head -10
-          echo "Passenger restart token:"
-          cat deploy-cpanel/tmp/restart.txt
+          test -f out/index.html
+          test -f out/.htaccess
+          test -f out/image/favicon.png
+          test -d out/_next/static
+          test -f out/api/contact/index.php
+          test -f out/api/bookings/enquiry/index.php
+          echo "Top-level out files:"
+          ls -la out | head -40
 
       - name: Sync files to cPanel
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -55,9 +56,8 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./deploy-cpanel/
+          local-dir: ./out/
           server-dir: ./
           exclude: |
             **/.git*
             **/.git*/**
-            **/.htaccess

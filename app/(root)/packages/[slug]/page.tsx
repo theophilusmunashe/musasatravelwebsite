@@ -12,8 +12,9 @@ import {
   pageMeta,
   truncateMeta,
 } from "@/lib/seo";
+import { pageRevalidate } from "@/lib/page-revalidate";
 
-export const revalidate = 300;
+export const revalidate = pageRevalidate;
 
 type Props = { params: { slug: string } };
 

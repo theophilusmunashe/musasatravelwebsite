@@ -1,20 +1,20 @@
 /** @type {import('next').NextConfig} */
-import path from "path";
-import { fileURLToPath } from "url";
 
 const isVercel = process.env.VERCEL === "1";
-const projectRoot = path.dirname(fileURLToPath(import.meta.url));
+const isCpanelStatic = process.env.CPANEL_STATIC === "1";
 
 const nextConfig = {
-  // cPanel zip/FTP deploy needs standalone. Vercel provides its own output.
-  ...(!isVercel
+  env: {
+    CPANEL_STATIC: process.env.CPANEL_STATIC || "",
+  },
+  // Vercel: default Node hosting. cPanel: static HTML (no Setup Node.js App).
+  ...(isCpanelStatic
     ? {
-        output: "standalone",
-        outputFileTracingRoot: projectRoot,
+        output: "export",
+        trailingSlash: true,
       }
     : {}),
   typescript: {
-    // Sanity schema typings fail under TypeScript 5.9 and block `next build`.
     ignoreBuildErrors: true,
   },
   eslint: {
@@ -25,6 +25,7 @@ const nextConfig = {
       ? {
           loader: "custom",
           loaderFile: "./image-loader.ts",
+          unoptimized: true,
         }
       : {}),
     remotePatterns: [

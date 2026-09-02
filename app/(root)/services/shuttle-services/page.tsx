@@ -2,8 +2,9 @@ import ShuttleClient from "./components/ShuttleClient";
 import JsonLd from "../../../../components/JsonLd";
 import { getTransfers } from "@/lib/services-cms";
 import { breadcrumbsJsonLd, itemListJsonLd, pageMeta } from "@/lib/seo";
+import { pageRevalidate } from "@/lib/page-revalidate";
 
-export const revalidate = 300;
+export const revalidate = pageRevalidate;
 
 export const metadata = pageMeta({
   title: "Victoria Falls Airport Transfers & Shuttles",

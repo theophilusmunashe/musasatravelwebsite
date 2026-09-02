@@ -6,7 +6,7 @@ import {
   Mail, Phone, MapPin, MessageSquare, Send,
   Clock, Check, ChevronDown, Instagram, Facebook,
 } from "lucide-react";
-import { sendEmail } from "@/actions/sendEmail";
+import { submitContact } from "@/lib/submit-contact";
 import toast from "react-hot-toast";
 
 /* ─── Contact Info Cards ─────────────────────────────────────────────── */
@@ -162,11 +162,22 @@ function ContactForm() {
 
       <form
         className="space-y-5"
-        action={async (formData) => {
+        onSubmit={async (e) => {
+          e.preventDefault();
           setLoading(true);
-          const { error } = await sendEmail(formData);
+          const form = e.currentTarget;
+          const formData = new FormData(form);
+          const { error } = await submitContact({
+            firstName: String(formData.get("firstName") || ""),
+            senderEmail: String(formData.get("senderEmail") || ""),
+            phoneNumber: String(formData.get("phoneNumber") || ""),
+            message: String(formData.get("message") || ""),
+          });
           setLoading(false);
-          if (error) { toast.error(error); return; }
+          if (error) {
+            toast.error(error);
+            return;
+          }
           setSent(true);
         }}
       >

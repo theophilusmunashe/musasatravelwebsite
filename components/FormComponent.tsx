@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Input } from "./ui/input";
-import { sendEmail } from "../actions/sendEmail";
+import { submitContact } from "@/lib/submit-contact";
 import toast from "react-hot-toast";
 import Reveal from "./Reveal";
 
@@ -25,7 +25,12 @@ const FormComponent = () => {
     const phoneNumber = formData.get("phoneNumber") as string;
     const message = formData.get("message") as string;
 
-    const { error } = await sendEmail(formData);
+    const { error } = await submitContact({
+      firstName,
+      senderEmail,
+      phoneNumber,
+      message,
+    });
     if (error) {
       toast.error(error);
       setIsLoading(false);

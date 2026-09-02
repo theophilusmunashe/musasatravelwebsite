@@ -7,8 +7,9 @@ import Service from "../../components/Services";
 import JsonLd from "../../components/JsonLd";
 import { getTravelPackages } from "@/lib/travel-packages";
 import { breadcrumbsJsonLd, itemListJsonLd, pageMeta } from "@/lib/seo";
+import { pageRevalidate } from "@/lib/page-revalidate";
 
-export const revalidate = 300;
+export const revalidate = pageRevalidate;
 
 export const metadata = {
   ...pageMeta({

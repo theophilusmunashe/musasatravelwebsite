@@ -7,8 +7,9 @@ import Other from "./components/Other";
 import JsonLd from "../../../components/JsonLd";
 import { getTravelPackages } from "@/lib/travel-packages";
 import { breadcrumbsJsonLd, pageMeta } from "@/lib/seo";
+import { pageRevalidate } from "@/lib/page-revalidate";
 
-export const revalidate = 300;
+export const revalidate = pageRevalidate;
 
 export const metadata = pageMeta({
   title: "About Musasa Travel in Victoria Falls",

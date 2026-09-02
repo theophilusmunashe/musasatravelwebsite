@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:cpanel": "next build && node scripts/prepare-standalone.cjs",
+    "build:cpanel": "node scripts/build-cpanel-static.cjs",
     "start": "next start",
     "lint": "next lint",
     "sanity:seed-packages": "node scripts/seed-travel-packages.mjs",

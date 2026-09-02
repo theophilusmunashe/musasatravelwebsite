@@ -3,6 +3,7 @@ import PageHeader from "../../../components/PageHeader";
 import { client } from "../../../sanity/lib/client";
 import PortableBody from "../../../components/portable";
 import { pageMeta } from "@/lib/seo";
+import { legalRevalidate } from "@/lib/page-revalidate";
 
 export const metadata = pageMeta({
   title: "Terms & Conditions",
@@ -21,7 +22,7 @@ async function getData() {
   return data;
 }
 
-export const revalidate = 360000;
+export const revalidate = legalRevalidate;
 
 const Page = async () => {
   const data = await getData();
